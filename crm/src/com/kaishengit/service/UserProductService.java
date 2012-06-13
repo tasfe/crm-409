@@ -17,7 +17,7 @@ public class UserProductService extends BaseService{
 	
 	
 	/**
-	 * 通过user获取userproducts
+	 * 通鍚岃繃鐢ㄦ埛鑾峰彇浜у搧
 	 * @param session
 	 * @return
 	 */
@@ -27,7 +27,7 @@ public class UserProductService extends BaseService{
 	}
 
 	/**
-	 * 通过uid和pid查找角色
+	 * 通閫氳繃uid鍜宲id鑾峰彇鏉冮檺
 	 * @param pid
 	 * @param uid
 	 * @return

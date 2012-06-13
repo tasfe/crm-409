@@ -4,7 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 public class MD5Util {
 
-	private static final String mykey = "ÕâÊÇÎÒµÄÃÜÂë£º";
+	private static final String mykey = "æˆ‘çš„å¯†ç ï¼š";
 	public static String getMD5(String pwd){
 		String p = DigestUtils.md5Hex(pwd + mykey);
 		return p;
