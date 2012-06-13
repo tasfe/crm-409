@@ -20,8 +20,8 @@ public class UserService extends BaseService{
 	 * @return
 	 */
 	public User findByNameAndPassword(String username,String password) {
-		System.out.println(password);
-		System.out.println(MD5Util.getMD5(password));
+		/*System.out.println(password);
+		System.out.println(MD5Util.getMD5(password));*/
 		User user = getUserDao().findByUsernameAndPassword(username, MD5Util.getMD5(password));
 		return user;
 	}

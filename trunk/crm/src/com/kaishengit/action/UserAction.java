@@ -38,6 +38,8 @@ public class UserAction extends BaseAction{
 	private File headfile;
 	private String headfileFileName;
 	private String headfileContentType;
+	private String password;
+	
 	
 	public static List<String> fileTypeList = new ArrayList<String>();
 	static{
@@ -115,6 +117,7 @@ public class UserAction extends BaseAction{
 		BufferedOutputStream bos = null;
 		String headname = UUIDUTil.getUUID();
 		String extName = null;
+		if(headfile != null) {
 		if(!fileTypeList.contains(headfileContentType)) {
 			return ERROR;
 		} else {
@@ -141,15 +144,32 @@ public class UserAction extends BaseAction{
 				e.printStackTrace();
 			}
 		}
+			user.setHead(headname + extName);
+		} else {
+			user.setHead(((User)getSession("user")).getHead());
+		}
 		if(user.getPassword() == null || "".equals(user.getPassword())) {
 			user.setPassword(MD5Util.getMD5(((User)getSession("user")).getPassword()));
 		} else {
 			user.setPassword(MD5Util.getMD5(user.getPassword()));
 		}
-		user.setHead(headname + extName);
 		getUserService().saveOrUpdate(user);
 		putSession("user", user);
 		return SUCCESS;
+	}
+	
+	//判断输入的密码是否正确
+	@Action("passwordValidate")
+	public String passwordValidate() {
+		boolean temp;
+		//判断传入的密码跟当前session中的是否相同
+		if(((User)getSession("user")).getPassword().equals(MD5Util.getMD5(password))) {
+			temp = true;
+		} else {
+			temp = false;
+		}
+		sendJson(temp);
+		return null;
 	}
 	
 	//get set
@@ -190,6 +210,14 @@ public class UserAction extends BaseAction{
 
 	public void setHeadfileContentType(String headfileContentType) {
 		this.headfileContentType = headfileContentType;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

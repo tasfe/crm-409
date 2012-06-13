@@ -134,10 +134,10 @@
 			<div class="span4">
 				<div class="control-group string optional"><label for="user_name" class="string optional control-label"> 姓名</label><div class="controls"><input type="text" value="${sessionScope.user.username }" size="50" name="user.username" id="username" class="string optional"></div></div>
 				  <div class="control-group password optional"><label for="user_password" class="password optional control-label"> 密码</label><div class="controls"><input type="password" size="50" name="user.password" id="password" class="password optional"><p class="help-block">如果不想修改密码，则留空。</p></div></div>
-				  <div class="control-group password optional"><label for="user_password_confirmation" class="password optional control-label"> 确认密码</label><div class="controls"><input type="password" size="50" name="confirm" id="confirm" class="password optional"></div></div>
-				  <div class="control-group password optional"><label for="user_current_password" class="password optional control-label"> 当前密码</label><div class="controls"><input type="password" size="50" name="user[current_password]" id="user_current_password" class="password optional"><p class="help-block">输入密码以确认修改</p></div></div>
+				  <div class="control-group password optional"><label for="user_password_confirmation" class="password optional control-label"> 确认密码</label><div class="controls"><input type="password" size="50" name="confirm" id="confirm" class="password optional"><p style="color:red;display:none" id="pwdhelp" class="help-block">两次输入的密码不同</p></div></div>
+				  <div class="control-group password optional"><label for="user_current_password" class="password optional control-label"> 当前密码</label><div class="controls"><input type="password" size="50" name="user[current_password]" id="currentpassword" class="password optional"><p id="current" class="help-block">输入密码以确认修改</p></div></div>
 		
-				  <input type="submit" id="btn" value="保存修改" name="commit" class="btn btn-warning">
+				  <input type="button" id="btn" value="保存修改" name="commit" class="btn btn-warning">
 			</div>
 			<div class="span8">
 				<p>
@@ -158,6 +158,42 @@
   	$(document).ready(function(){
   		$("#headmodify").click(function(){
   			$("#avatar_field").show(500);
+  		});
+  		
+  		var index = 0;
+  		$("#currentpassword").blur(function(){
+  			$.post("passwordValidate.action",{
+  				"password":$("#currentpassword").val()
+  			},function(date) {
+  				if(date) {
+  					index = 1;
+  					$("#current").css("color","#333");
+  					$("#current").text("密码输入正确");
+  				} else {
+  					index = 2;
+  					$("#current").css("color","red");
+  					$("#current").text("密码输入不正确");
+  				}
+  			  }
+  			);
+  		});
+  		
+  		$("#pwdhelp").keydown(function(){
+  			$("#pwdhelp").hide(300);
+  		});
+  		
+  		$("#btn").click(function(){
+  			if($("#password").val() != $("#confirm").val()) {
+  				$("#pwdhelp").show(500);
+  			} else if(index == 0){
+  				$("#current").css("color","red");
+  				$("#current").text("请输入你的原始密码");
+  			} else if(index == 2) {
+  				$("#current").css("color","red");
+				$("#current").text("密码输入不正确");
+  			} else {
+  				$("#modify").submit();
+  			}
   		});
   		
   	});
