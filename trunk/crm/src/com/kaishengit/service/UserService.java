@@ -15,16 +15,18 @@ import com.kaishengit.util.MD5Util;
 public class UserService extends BaseService{
 	
 	/**
-	 * Í¨¹ıÓÃ»§ÃûºÍÃÜÂë²éÕÒÓÃ»§¶ÔÏó
+	 * Í¨æ ¹æ®ç”¨æˆ·åå’Œå¯†ç ç™»å½•
 	 * @param username
 	 * @return
 	 */
 	public User findByNameAndPassword(String username,String password) {
+		System.out.println(password);
+		System.out.println(MD5Util.getMD5(password));
 		User user = getUserDao().findByUsernameAndPassword(username, MD5Util.getMD5(password));
 		return user;
 	}
 	/**
-	 * Í¨¹ıÓÃ»§Ãû²éÕÒÓÃ»§¶ÔÏó
+	 * Í¨åˆ¤æ–­è¯¥ç”¨æˆ·æ˜¯å¦å­˜åœ¨
 	 * @param username
 	 * @return
 	 */
@@ -33,7 +35,7 @@ public class UserService extends BaseService{
 		return user!=null;
 	}
 	/**
-	 * ĞÂÌí¼ÓÒ»¸öÓÃ»§
+	 * ä¿å­˜ç”¨æˆ·
 	 * @param user
 	 * @param product
 	 */
@@ -55,7 +57,7 @@ public class UserService extends BaseService{
 		return user.getId();
 	}
 	/**
-	 * ±£´æ»òÕß¸üĞÂuser
+	 * æ›´æ–°ç”¨æˆ·
 	 * @param user
 	 */
 	public void saveOrUpdate(User user) {
