@@ -19,6 +19,7 @@ public class WelcomeAction extends BaseAction{
 	public String execute() throws Exception {
 		role = getUserProductService().findByUidAndPid(id,((User)getSession("user")).getId());
 		putSession("role", role);
+		putSession("productid",id);
 		return super.execute();
 	}
 
