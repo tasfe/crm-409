@@ -32,7 +32,7 @@ public class HeadAction extends BaseAction{
 	public String getHead() {
 		return SUCCESS;
 	}
-	//这个documentStream与配置文件中的result中inputName应该相同
+	//璇ュ悕绉颁笌action涓殑input鍚嶇О鐩稿悓
 		public InputStream getDocumentStream() throws Exception{
 			User user = (User) getSession("user");
 			String head = user.getHead();

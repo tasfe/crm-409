@@ -22,7 +22,7 @@ import com.kaishengit.pojo.User;
 import com.kaishengit.util.MD5Util;
 import com.kaishengit.util.UUIDUTil;
 /**
- * µÇÂ¼ÅĞ¶Ï
+ * ç”¨æˆ·actionå¢åˆ æ”¹æŸ¥
  * @author lulu
  *
  */
@@ -54,7 +54,7 @@ public class UserAction extends BaseAction{
 		return super.execute();
 	}
 	
-	//µÇÂ¼
+	//ç™»å½•
 	@Action(value="login",results={
 		@Result(name="error",type="redirectAction",params={"actionName","tologin","code","10000"}),
 		@Result(name="success",type="redirectAction",location="main.action")
@@ -62,7 +62,7 @@ public class UserAction extends BaseAction{
 	public String login(){
 		user = getUserService().findByNameAndPassword(user.getUsername(),user.getPassword());
 		if(user != null) {
-			//µÇÂ½³É¹¦,°Ñuser¶ÔÏó´æÈësessionÖĞ
+			//ï¿½ï¿½Â½ï¿½É¹ï¿½,ï¿½ï¿½userï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sessionï¿½ï¿½
 			putSession("user", user);
 			return "success";
 		} else {
@@ -71,7 +71,7 @@ public class UserAction extends BaseAction{
 	}
 	
 	
-	//×¢²á
+	//æ³¨å†Œ
 	@Action(value="regist",results={
 			@Result(name="success",type="redirectAction",location="main.action"),
 			@Result(name="error",type="redirectAction",params={"actionName","tologin","state","10001"})
@@ -79,10 +79,10 @@ public class UserAction extends BaseAction{
 	public String regist(){
 		boolean result = getUserService().findByName(user.getUsername());
 		if(result) {
-			//ÓÃ»§ÒÑ´æÔÚ
+			//ç”¨æˆ·å·²å­˜åœ¨
 			return ERROR;
 		} else {
-			//userÎª¿Õ,¿ÉÒÔ×¢²á
+			//userå¯ä»¥æ³¨å†Œ
 			int id = getUserService().save(user,product);
 			user.setId(id);
 			putSession("user",user);
@@ -99,12 +99,12 @@ public class UserAction extends BaseAction{
 		}
 		return "tologin";
 	}
-	//user±à¼­Ò³Ãæ
+	//userç¼–è¾‘
 	@Action("useredit")
 	public String edit() {
 		return SUCCESS;
 	}
-	//ĞŞ¸Ä
+	//ä¿®æ”¹ç”¨æˆ·
 	@Action(value="modify",results={
 			@Result(name="error",type="redirectAction",location="useredit.action?code=10001"),
 			@Result(name="input",type="redirectAction",location="useredit.action?code=10002"),
