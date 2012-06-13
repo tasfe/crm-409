@@ -111,7 +111,7 @@
 			</div>
 		</div>
 		<div class="right">
-			<div class="right-top "><span style="float:left;font-size:24px;">从这里开始</span><a href="#" style="float:right;" >不要显示此向导页面</a></div>
+			<div class="right-top "><span style="float:left;font-size:24px;">从这里开始</span><a href="message.action?pid=${productid }&i=2" style="float:right;" >不要显示此向导页面</a></div>
 			<div class="right-center "><h3><a href="">添加联系人 »</a></h3><p>我们的工作是以人为本</p></div>
 			<div class="right-center2"><h3>维系客户关系，提升客户关怀</h3><p>把事情变得简单</p>
 				<table width="100%">

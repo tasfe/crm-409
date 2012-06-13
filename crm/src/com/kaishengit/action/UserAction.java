@@ -66,6 +66,7 @@ public class UserAction extends BaseAction{
 		if(user != null) {
 			//登录成功存入session中
 			putSession("user", user);
+			putSession("welcomeindex",1);
 			return "success";
 		} else {
 			return "error";
@@ -88,6 +89,7 @@ public class UserAction extends BaseAction{
 			int id = getUserService().save(user,product);
 			user.setId(id);
 			putSession("user",user);
+			putSession("welcomeindex",2);
 			return SUCCESS;
 		}
 	}
@@ -148,8 +150,8 @@ public class UserAction extends BaseAction{
 		} else {
 			user.setHead(((User)getSession("user")).getHead());
 		}
-		if(user.getPassword() == null || "".equals(user.getPassword())) {
-			user.setPassword(MD5Util.getMD5(((User)getSession("user")).getPassword()));
+		if(user.getPassword() == null || "".equals(user.getPassword()) || headfile == null) {
+			user.setPassword(((User)getSession("user")).getPassword());
 		} else {
 			user.setPassword(MD5Util.getMD5(user.getPassword()));
 		}

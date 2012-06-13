@@ -3,12 +3,16 @@
 <div class="navbar navbar-fixed-top">
   	<div class="navbar-inner">
 	  	<div class="container-fluid">
-				
-				<a href="welcome.action?id=${param.id }" class="brand" style="margin-left:-10px">Work-CRM</a>
+				<c:if test="${sessionScope.welcomeindex == 1 }">
+					<a href="welcome.action?id=${sessionScope.productid }" class="brand" style="margin-left:-10px">Work-CRM</a>
+				</c:if>
+				<c:if test="${sessionScope.welcomeindex == 2 }">
+					<a href="message.action?id=${sessionScope.productid }" class="brand" style="margin-left:-10px">Work-CRM</a>
+				</c:if>
 				<div class="nav-collapse">
 		  		<ul class="nav">
 						<li class="divider-vertical"></li>
-						<li class=""><a href="/dashboard">最新消息</a></li>
+						<li class=""><a href="message.action?pid=${productid }&i=1">最新消息</a></li>
 						<li class=""><a href="/contacts">通讯录</a></li>
 						<li class=""><a href="/tasks">任务</a></li>
 						
