@@ -67,7 +67,7 @@
 		}
 		.reg {
 		    position: absolute;
-		    right: 31.5%;
+		    right: 35%;
 		    top: 12%;
 		}
 		.reg a{

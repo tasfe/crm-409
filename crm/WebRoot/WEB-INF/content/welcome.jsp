@@ -98,7 +98,7 @@
 					<li class="active"><a href="">欢迎页面</a></li>
 					
 					<li><a href="#">邀请同事</a></li>
-					<li><a href="#">上传头像</a></li>
+					<li><a href="useredit.action">上传头像</a></li>
 				</ul>
 			</div>
 			<div class="sidebar">

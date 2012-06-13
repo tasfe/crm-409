@@ -85,7 +85,12 @@
 	<div class="navbar navbar-fixed-top">
   	<div class="navbar-inner">
 	  	<div class="container-fluid">
-				<a href="main.action" class="brand" style="margin-left:-10px">Work-CRM</a>
+	  			<c:if test="${not empty productid }">
+	  				<a href="welcome.action?id=${productid }" class="brand" style="margin-left:-10px">Work-CRM</a>
+	  			</c:if>
+	  			<c:if test="${empty productid}">
+					<a href="main.action" class="brand" style="margin-left:-10px">Work-CRM</a>
+				</c:if>
 				<div class="nav-collapse">
 		  		<ul class="nav">
 						<li class="divider-vertical"></li>

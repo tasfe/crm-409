@@ -20,23 +20,24 @@ public class Company {
 
 	private int id;
 	private String name;
-	private String email;
-	private String tel;
-	private String im;
-	private String site;
-	private String address;
 	private String weibo;
 	private String content;
 	private String view;
 	private String code;
 	private String createtime;
 	
-	//¹ØÁª¹ØÏµ
+	//å…³è”å…³ç³»
 	private Product product;
 	private User user;
 	private Set<Contact> contacts;
 	private Set<Chance> chances;
 	private Set<Event> events;
+	private Set<Address> addresses;
+	private Set<ContactEmail> contactEmails;
+	private Set<Im> ims;
+	private Set<Site> sites;
+	private Set<Tel> tels;
+	
 	
 	@Id
 	@GeneratedValue
@@ -52,36 +53,7 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-	public String getIm() {
-		return im;
-	}
-	public void setIm(String im) {
-		this.im = im;
-	}
-	public String getSite() {
-		return site;
-	}
-	public void setSite(String site) {
-		this.site = site;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	
 	public String getWeibo() {
 		return weibo;
 	}
@@ -113,7 +85,7 @@ public class Company {
 		this.createtime = createtime;
 	}
 	
-	//¶Ô²úÆ·µÄ¶à¶ÔÒ»
+	//ï¿½Ô²ï¿½Æ·ï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="productid")
 	public Product getProduct() {
@@ -122,7 +94,7 @@ public class Company {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	//¶ÔÓÃ»§µÄ¶à¶ÔÒ»
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="userid")
 	public User getUser() {
@@ -131,7 +103,7 @@ public class Company {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	//¶ÔÁªÏµÈËµÄÒ»¶Ô¶à
+	//ï¿½ï¿½ï¿½ï¿½Ïµï¿½Ëµï¿½Ò»ï¿½Ô¶ï¿½
 	@OneToMany(mappedBy="company")
 	public Set<Contact> getContacts() {
 		return contacts;
@@ -140,7 +112,7 @@ public class Company {
 		this.contacts = contacts;
 	}
 	
-	//¶ÔeventµÄÒ»¶Ô¶à
+	//ï¿½ï¿½eventï¿½ï¿½Ò»ï¿½Ô¶ï¿½
 	@OneToMany(mappedBy="company")
 	public Set<Event> getEvents() {
 		return events;
@@ -148,7 +120,7 @@ public class Company {
 	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}
-	//¶ÔchanceµÄ Ò»¶Ô¶à
+	//ï¿½ï¿½chanceï¿½ï¿½ Ò»ï¿½Ô¶ï¿½
 	@OneToMany(mappedBy="company")
 	public Set<Chance> getChances() {
 		return chances;
@@ -157,5 +129,40 @@ public class Company {
 		this.chances = chances;
 	}
 	
+	@OneToMany(mappedBy="contact")
+	public Set<Address> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(Set<Address> addresses) {
+		this.addresses = addresses;
+	}
+	@OneToMany(mappedBy="contact")
+	public Set<ContactEmail> getContactEmails() {
+		return contactEmails;
+	}
+	public void setContactEmails(Set<ContactEmail> contactEmails) {
+		this.contactEmails = contactEmails;
+	}
+	@OneToMany(mappedBy="contact")
+	public Set<Im> getIms() {
+		return ims;
+	}
+	public void setIms(Set<Im> ims) {
+		this.ims = ims;
+	}
+	@OneToMany(mappedBy="contact")
+	public Set<Site> getSites() {
+		return sites;
+	}
+	public void setSites(Set<Site> sites) {
+		this.sites = sites;
+	}
+	@OneToMany(mappedBy="contact")
+	public Set<Tel> getTels() {
+		return tels;
+	}
+	public void setTels(Set<Tel> tels) {
+		this.tels = tels;
+	}
 	
 }

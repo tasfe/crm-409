@@ -11,7 +11,7 @@ USE `crm` ;
 CREATE  TABLE IF NOT EXISTS `crm`.`t_user` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `username` VARCHAR(50) NULL ,
-  `password` VARCHAR(20) NULL ,
+  `password` VARCHAR(36) NULL ,
   `head` VARCHAR(50) NULL DEFAULT '1.jpg' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -33,11 +33,6 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `crm`.`t_company` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(50) NULL ,
-  `email` VARCHAR(20) NULL ,
-  `tel` VARCHAR(20) NULL ,
-  `im` VARCHAR(20) NULL ,
-  `site` VARCHAR(20) NULL ,
-  `address` VARCHAR(50) NULL ,
   `weibo` VARCHAR(20) NULL ,
   `content` TEXT NULL ,
   `productid` INT NOT NULL ,
@@ -68,11 +63,6 @@ CREATE  TABLE IF NOT EXISTS `crm`.`t_contact` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(50) NULL ,
   `position` VARCHAR(20) NULL ,
-  `tel` VARCHAR(20) NULL ,
-  `email` VARCHAR(20) NULL ,
-  `im` VARCHAR(20) NULL ,
-  `site` VARCHAR(25) NULL ,
-  `address` VARCHAR(50) NULL ,
   `weibo` VARCHAR(20) NULL ,
   `content` TEXT NULL ,
   `companyid` INT NULL ,
@@ -396,15 +386,140 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `crm`.`t_email` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `email` VARCHAR(25) NULL ,
-  `code` VARCHAR(36) NULL ,
-  `enable` TINYINT(1)  NULL DEFAULT false ,
-  `productid` INT NOT NULL ,
+  `email` VARCHAR(20) NULL ,
+  `contactid` INT NULL ,
+  `companyid` INT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_t_email_t_product1` (`productid` ASC) ,
-  CONSTRAINT `fk_t_email_t_product1`
-    FOREIGN KEY (`productid` )
-    REFERENCES `crm`.`t_product` (`id` )
+  INDEX `fk_t_email_t_contact1` (`contactid` ASC) ,
+  INDEX `fk_t_email_t_company1` (`companyid` ASC) ,
+  CONSTRAINT `fk_t_email_t_contact1`
+    FOREIGN KEY (`contactid` )
+    REFERENCES `crm`.`t_contact` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_t_email_t_company1`
+    FOREIGN KEY (`companyid` )
+    REFERENCES `crm`.`t_company` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `crm`.`t_tel`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `crm`.`t_tel` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `tel` VARCHAR(20) NULL ,
+  `contactid` INT NULL ,
+  `companyid` INT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_t_tel_t_contact1` (`contactid` ASC) ,
+  INDEX `fk_t_tel_t_company1` (`companyid` ASC) ,
+  CONSTRAINT `fk_t_tel_t_contact1`
+    FOREIGN KEY (`contactid` )
+    REFERENCES `crm`.`t_contact` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_t_tel_t_company1`
+    FOREIGN KEY (`companyid` )
+    REFERENCES `crm`.`t_company` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `crm`.`t_email`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `crm`.`t_email` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `email` VARCHAR(20) NULL ,
+  `contactid` INT NULL ,
+  `companyid` INT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_t_email_t_contact1` (`contactid` ASC) ,
+  INDEX `fk_t_email_t_company1` (`companyid` ASC) ,
+  CONSTRAINT `fk_t_email_t_contact1`
+    FOREIGN KEY (`contactid` )
+    REFERENCES `crm`.`t_contact` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_t_email_t_company1`
+    FOREIGN KEY (`companyid` )
+    REFERENCES `crm`.`t_company` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `crm`.`t_im`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `crm`.`t_im` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `im` VARCHAR(20) NULL ,
+  `contactid` INT NULL ,
+  `companyid` INT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_t_im_t_contact1` (`contactid` ASC) ,
+  INDEX `fk_t_im_t_company1` (`companyid` ASC) ,
+  CONSTRAINT `fk_t_im_t_contact1`
+    FOREIGN KEY (`contactid` )
+    REFERENCES `crm`.`t_contact` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_t_im_t_company1`
+    FOREIGN KEY (`companyid` )
+    REFERENCES `crm`.`t_company` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `crm`.`t_site`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `crm`.`t_site` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `site` VARCHAR(20) NULL ,
+  `contactid` INT NULL ,
+  `companyid` INT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_t_site_t_contact1` (`contactid` ASC) ,
+  INDEX `fk_t_site_t_company1` (`companyid` ASC) ,
+  CONSTRAINT `fk_t_site_t_contact1`
+    FOREIGN KEY (`contactid` )
+    REFERENCES `crm`.`t_contact` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_t_site_t_company1`
+    FOREIGN KEY (`companyid` )
+    REFERENCES `crm`.`t_company` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `crm`.`t_address`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `crm`.`t_address` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `address` VARCHAR(50) NULL ,
+  `contactid` INT NULL ,
+  `companyid` INT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_t_address_t_contact1` (`contactid` ASC) ,
+  INDEX `fk_t_address_t_company1` (`companyid` ASC) ,
+  CONSTRAINT `fk_t_address_t_contact1`
+    FOREIGN KEY (`contactid` )
+    REFERENCES `crm`.`t_contact` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_t_address_t_company1`
+    FOREIGN KEY (`companyid` )
+    REFERENCES `crm`.`t_company` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
