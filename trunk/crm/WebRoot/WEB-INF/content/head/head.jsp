@@ -13,10 +13,9 @@
 		  		<ul class="nav">
 						<li class="divider-vertical"></li>
 						<li class=""><a href="message.action?pid=${productid }&i=1">最新消息</a></li>
-						<li class=""><a href="/contacts">通讯录</a></li>
-						<li class=""><a href="/tasks">任务</a></li>
-						
-						<li class=""><a href="/chances">机会</a></li>
+						<li class=""><a href="contact.action">通讯录</a></li>
+						<li class=""><a href="task.action">任务</a></li>
+						<li class=""><a href="chance.action">机会</a></li>
 			    </ul>
 					
 					<ul class="nav">
