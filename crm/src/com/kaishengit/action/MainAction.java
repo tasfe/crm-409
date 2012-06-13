@@ -12,7 +12,7 @@ public class MainAction extends BaseAction{
 
 	private static final long serialVersionUID = 1L;
 	private List<UserProduct> userProducts;
-	//跳转到main页面
+	//璺宠浆鍒颁富椤甸潰
 	@Action("main")
 	public String main(){
 		userProducts = getUserProductService().getUserProductByUser((User)getSession("user"));
