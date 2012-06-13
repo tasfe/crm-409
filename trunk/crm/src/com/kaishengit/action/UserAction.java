@@ -62,7 +62,7 @@ public class UserAction extends BaseAction{
 	public String login(){
 		user = getUserService().findByNameAndPassword(user.getUsername(),user.getPassword());
 		if(user != null) {
-			//��½�ɹ�,��user�������session��
+			//登录成功存入session中
 			putSession("user", user);
 			return "success";
 		} else {
