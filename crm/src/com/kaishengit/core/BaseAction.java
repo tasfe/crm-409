@@ -1,5 +1,7 @@
 package com.kaishengit.core;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,6 +14,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.util.ServletContextAware;
 
+import com.google.gson.Gson;
 import com.kaishengit.service.ChanceService;
 import com.kaishengit.service.ChanceSortService;
 import com.kaishengit.service.CompanyService;
@@ -58,18 +61,33 @@ public abstract class BaseAction extends ActionSupport implements SessionAware,S
 	public String execute() throws Exception {
 		return super.execute();
 	}
+	//向前台发送json
+	public void sendJson(Object o) {
+		try {
+			PrintWriter writer = response.getWriter();
+			response.setContentType("application/json;charset=UTF-8");
+			Gson gson = new Gson();
+			writer.print(gson.toJson(o));
+			
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
 	
-	//��ȡsession�е�ֵ
+	
+	//获取session中的值
 	public Object getSession(String key) {
 		return session.get(key);
 	}
-	//����session
+	//向session中存放值
 	public void putSession(String key,Object value){
 		session.put(key, value);
 	}
 	
 	
-	//��ȡsession application servletContext httpSession
+	//获取session application servletContext httpSession
 	public void setServletContext(ServletContext application) {
 		this.application = application;
 	}

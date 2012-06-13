@@ -19,7 +19,7 @@ public class UserProductDao extends BaseDao<UserProduct, Integer>{
 	}
 
 	/**
-	 * 通过uid和pid查找角色
+	 * 通閫氳繃pid he uid
 	 * @param pid
 	 * @param uid
 	 * @return
