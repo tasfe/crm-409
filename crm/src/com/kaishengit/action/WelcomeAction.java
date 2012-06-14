@@ -4,6 +4,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.springframework.stereotype.Controller;
 
 import com.kaishengit.core.BaseAction;
+import com.kaishengit.pojo.Product;
 import com.kaishengit.pojo.User;
 
 @Controller
@@ -18,8 +19,9 @@ public class WelcomeAction extends BaseAction{
 	@Action("welcome")
 	public String execute() throws Exception {
 		role = getUserProductService().findByUidAndPid(id,((User)getSession("user")).getId());
+		Product p = getProductService().findBypid(id);
 		putSession("role", role);
-		putSession("productid",id);
+		putSession("product",p);
 		return super.execute();
 	}
 

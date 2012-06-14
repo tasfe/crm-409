@@ -1,10 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title>欢迎界面</title>
+	<title>同事</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<script type="text/javascript" src ="js/jQuery.js"></script>
 	<script type="text/javascript" src ="js/bootstrap.min.js"></script>
@@ -83,64 +82,77 @@
 		.dropdown a{
 			margin-right:30px;
 		}
+		input, textarea, select, .uneditable-input {
+			background-color: #FFFFFF;
+			border: 1px solid #CCCCCC;
+			border-radius: 3px 3px 3px 3px;
+			color: #555555;
+			
+		}
+		textarea.content {
+			height: 100px;
+			margin: 0;
+			width: 70%;
+		}
+		.main {
+			padding: 0 20px 0;
+			height:470px;
+		}
+		element.style {
+		    display: inline-block;
+		    font-size: 1px;
+		    width: 55px;
+		    padding-top:0px;
+		    
+		  }
+		  .table th, .table td {
+		  	border:none;
+		    border-bottom: 1px solid #DDDDDD;
+		    line-height: 18px;
+		    padding-top: 8px;
+		    text-align: left;
+		    vertical-align: top;
+			}
 	</style>
 </head>
 <body>
-	<%@include file="head/head.jsp"%>
+	<%@include file="head/head.jsp" %>
+
 	<div id="mapp">
 		<div class="left ">
 			<div class="">
 				<div class= "left-top">
-					<h2>公司名</h2>
+					<h2>项目名称</h2>
 				</div>
 				
-				<ul class="nav nav-tabs nav-stacked">
-					<li class="active"><a href="">欢迎页面</a></li>
-					
-					<li><a href="worker.action">邀请同事</a></li>
-					<li><a href="useredit.action">上传头像</a></li>
-				</ul>
 			</div>
 			<div class="sidebar">
 				<div class="well">
-					<div class="title">什么是联系人？</div>
+					<div class="title">用Email邀请同事</div>
 					<p>
-						联系人是一个通用的概念，可以是客户，顾客，合作伙伴，供应商，学生，患者，同学，朋友等。
+						被邀请同事会收到一封邀请邮件。访问邮件中的链接，默认用户名 邮件地址,默认密码000000，就可以开始使用了。
 					</p>
 				</div>
 			</div>
 		</div>
 		<div class="right">
-			<div class="right-top "><span style="float:left;font-size:24px;">从这里开始</span><a href="message.action?pid=${productid }&i=2" style="float:right;" >不要显示此向导页面</a></div>
-			<div class="right-center "><h3><a href="">添加联系人 »</a></h3><p>我们的工作是以人为本</p></div>
-			<div class="right-center2"><h3>维系客户关系，提升客户关怀</h3><p>把事情变得简单</p>
-				<table width="100%">
-					<tbody><tr>
-						<td><img src="img/sliver-people.png"></td>
-						<td><img src="img/sliver-history.png"></td>
-						<td><img src="img/sliver-tasks.png"></td>
-					</tr>
-					<tr>
-						<td>
-							<h4>共享的通讯录</h4>
-							<p>积累客户信息<br>并且在团队内部分享</p>
-						</td>
-						<td>
-							<h4>联系记录</h4>
-							<p>记录所有的联系过程<br>（会议，电话，邮件，面谈...）</p>
-						</td>
-						<td>
-							<h4>任务和提醒</h4>
-							<p>不用再担心忘记任何重要事情</p>
-						</td>
-					</tr>
-					</tbody>
-				</table>
+			<div class="right-top "><span style="font-size:24px;">同事</span><a href="invite.action" style="float:right;">再邀请一个</a></div>
+			
+			<div id="main" style="padding: 20px 20px 0;" class="main">
+				<form  method="post" id="user_form" action="sendMail.action" accept-charset="UTF-8">
+					<input type="hidden" value="${product.id }" name="pid">
+					<div class="control-groupoptional">
+						<div class="controls">
+							<input type="email" size="50" placeholder="请输入同事的Email" name="email" id="" >
+						</div>
+					</div>
+					<div class="form-actions">
+						<input type="submit" value="发送邀请" name="commit" class="btn btn-primary">
+					</div>
+				</form>
 			</div>
-				
-		</div>
-		</div>
 	</div>
+</div>
 	
 </body>
 </html>

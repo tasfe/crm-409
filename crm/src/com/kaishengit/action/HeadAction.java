@@ -19,7 +19,7 @@ public class HeadAction extends BaseAction{
 	private String fileName;
 	private long fileSize;
 	private String mime;
-	
+	private int id;
 	@Action(value="head",results={
 			@Result(name="success",type="stream",params={
 					"contentType","${mime}",
@@ -34,7 +34,7 @@ public class HeadAction extends BaseAction{
 	}
 	//该名称与action中的input名称相同
 		public InputStream getDocumentStream() throws Exception{
-			User user = (User) getSession("user");
+			User user = getUserService().findById(id);
 			String head = user.getHead();
 			File file = new File("c://head//" + head);
 			setFileName(file.getName());
@@ -68,6 +68,12 @@ public class HeadAction extends BaseAction{
 
 		public void setMime(String mime) {
 			this.mime = mime;
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
 		}
 		
 		

@@ -112,7 +112,7 @@
 				<a title="${userProduct.product.name }" class="project_card" href="welcome.action?id=${userProduct.product.id }">
 	              <h5 >${userProduct.product.name }</h5>
 	              <div class="people">
-	                    <img width="40" height="40" title="${sessionScope.user.username }" src="head.action" class="avatar" >
+	                    <img width="40" height="40" title="${sessionScope.user.username }" src="head.action?id=${user.id }" class="avatar" >
 	              </div>
 				</a>
 			</div>

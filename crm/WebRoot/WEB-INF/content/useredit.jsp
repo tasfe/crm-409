@@ -146,7 +146,7 @@
 			</div>
 			<div class="span8">
 				<p>
-					<span style="display: inline-block;width: 55px; padding-top: 55px;font-size:1px"><img src="head.action"/></span> <br>
+					<span style="display: inline-block;width: 55px; padding-top: 55px;font-size:1px"><img src="head.action?id=${user.id }"/></span> <br>
 					<a href="javascript:;" id="headmodify">修改头像</a>
 				</p>
 	
