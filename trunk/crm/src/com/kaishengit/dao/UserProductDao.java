@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.kaishengit.core.BaseDao;
+import com.kaishengit.pojo.Product;
 import com.kaishengit.pojo.User;
 import com.kaishengit.pojo.UserProduct;
 @Repository
@@ -30,6 +31,20 @@ public class UserProductDao extends BaseDao<UserProduct, Integer>{
 		query.setParameter("pid", pid);
 		UserProduct up = (UserProduct) query.uniqueResult();
 		return up;
+	}
+
+	public List<UserProduct> findByProduct(Product product) {
+		Query query = getSession().createQuery("from UserProduct where product=:product");
+		query.setParameter("product", product);
+		
+		return query.list();
+	}
+
+	public UserProduct findByUserAndProduct(User user, Product product) {
+		Query query = getSession().createQuery("from UserProduct where product=:product and user=:user");
+		query.setParameter("product", product);
+		query.setParameter("user", user);
+		return (UserProduct) query.uniqueResult();
 	}
 
 

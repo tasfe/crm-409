@@ -39,7 +39,7 @@ public class UserAction extends BaseAction{
 	private String headfileFileName;
 	private String headfileContentType;
 	private String password;
-	
+
 	public static List<String> fileTypeList = new ArrayList<String>();
 	static{
 		fileTypeList.add("image/png");

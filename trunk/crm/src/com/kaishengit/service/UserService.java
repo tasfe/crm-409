@@ -63,5 +63,23 @@ public class UserService extends BaseService{
 	public void saveOrUpdate(User user) {
 		getUserDao().saveOrUpdate(user);
 	}
+	public User findById(int id) {
+		User user = getUserDao().findById(id);
+		return user;
+	}
+	public User findByUsername(String email) {
+		User user = getUserDao().findByUsername(email);
+		return user;
+	}
+	public int saveUser(User user, Product p) {
+		getUserDao().saveOrUpdate(user);
+		
+		UserProduct up = new UserProduct();
+		up.setProduct(p);
+		up.setRole(3);
+		up.setUser(user);
+		getUserProductDao().saveOrUpdate(up);
+		return user.getId();
+	}
 	
 }

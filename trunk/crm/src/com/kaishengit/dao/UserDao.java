@@ -20,7 +20,7 @@ public class UserDao extends BaseDao<User, Integer>{
 	}
 
 	/**
-	 * Í¨¹ıÓÃ»§Ãû²éÕÒÓÃ»§¶ÔÏó
+	 * Í¨ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param username
 	 * @return
 	 */
@@ -30,6 +30,12 @@ public class UserDao extends BaseDao<User, Integer>{
 		query.setParameter("name", username);
 		User user = (User) query.uniqueResult();
 		return user;
+	}
+
+	public User findByUsername(String email) {
+		Query query = getSession().createQuery("from User where username=:name");
+		query.setParameter("name", email);
+		return (User) query.uniqueResult();
 	}
 
 }

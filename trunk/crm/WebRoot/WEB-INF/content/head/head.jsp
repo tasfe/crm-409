@@ -4,15 +4,15 @@
   	<div class="navbar-inner">
 	  	<div class="container-fluid">
 				<c:if test="${sessionScope.welcomeindex == 1 }">
-					<a href="welcome.action?id=${sessionScope.productid }" class="brand" style="margin-left:-10px">Work-CRM</a>
+					<a href="welcome.action?id=${sessionScope.product.id }" class="brand" style="margin-left:-10px">Work-CRM</a>
 				</c:if>
 				<c:if test="${sessionScope.welcomeindex == 2 }">
-					<a href="message.action?id=${sessionScope.productid }" class="brand" style="margin-left:-10px">Work-CRM</a>
+					<a href="message.action?id=${sessionScope.product.id }" class="brand" style="margin-left:-10px">Work-CRM</a>
 				</c:if>
 				<div class="nav-collapse">
 		  		<ul class="nav">
 						<li class="divider-vertical"></li>
-						<li class=""><a href="message.action?pid=${productid }&i=1">最新消息</a></li>
+						<li class=""><a href="message.action?pid=${product.id }&i=1">最新消息</a></li>
 						<li class=""><a href="contact.action">通讯录</a></li>
 						<li class=""><a href="task.action">任务</a></li>
 						<li class=""><a href="chance.action">机会</a></li>
@@ -41,7 +41,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>帐号 <b class="caret"></b></a>
 							<ul class="dropdown-menu settings">
 								<c:if test="${sessionScope.role == '1'}">
-									<li><a href="/product_users"><i class="icon-user"></i> 同事</a></li>
+									<li><a href="worker.action"><i class="icon-user"></i> 同事</a></li>
 									<li><a href="/groups"><i class="icon-group"><img src="img/user_group.ico"></i> 组</a></li>
 								</c:if>
 								<li><a href="/settings"><i class="icon-cog"></i> 帐号管理</a></li>
