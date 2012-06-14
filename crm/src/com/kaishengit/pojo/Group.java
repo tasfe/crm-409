@@ -6,8 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -20,9 +21,9 @@ public class Group {
 	private int id;
 	private String name;
 	
-	//¹ØÁª¹ØÏµ
+	//å…³è”å…³ç³»
 	private Product product;
-	private Set<UserGroup> userGroups;
+	private Set<User> users;
 	
 	@Id
 	@GeneratedValue
@@ -39,7 +40,7 @@ public class Group {
 		this.name = name;
 	}
 	
-	//¶Ô²úÆ·µÄ¶à¶ÔÒ»
+	//ï¿½Ô²ï¿½Æ·ï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="productid")
 	public Product getProduct() {
@@ -48,16 +49,15 @@ public class Group {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	//¶ÔuserGroupµÄÒ»¶Ô¶à
-	@OneToMany(mappedBy="group")
-	public Set<UserGroup> getUserGroups() {
-		return userGroups;
+	@ManyToMany
+	@JoinTable(name="t_user_group",joinColumns=@JoinColumn(name="groupid"),
+			inverseJoinColumns=@JoinColumn(name="userid")
+	)
+	public Set<User> getUsers() {
+		return users;
 	}
-	public void setUserGroups(Set<UserGroup> userGroups) {
-		this.userGroups = userGroups;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
-	
-	
 	
 }

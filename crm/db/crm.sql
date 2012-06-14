@@ -293,7 +293,7 @@ CREATE  TABLE IF NOT EXISTS `crm`.`t_task` (
     REFERENCES `crm`.`t_tasksort` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
+ENGINE = InnoDB, 
 COMMENT = '\n' ;
 
 
@@ -363,11 +363,9 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `crm`.`t_user_group` (
   `usrid` INT NOT NULL ,
   `groupid` INT NOT NULL ,
-  `role` INT NULL ,
-  `id` INT NOT NULL AUTO_INCREMENT ,
   INDEX `fk_t_user_has_t_group_t_group1` (`groupid` ASC) ,
   INDEX `fk_t_user_has_t_group_t_user1` (`usrid` ASC) ,
-  PRIMARY KEY (`id`) ,
+  PRIMARY KEY (`usrid`, `groupid`) ,
   CONSTRAINT `fk_t_user_has_t_group_t_user1`
     FOREIGN KEY (`usrid` )
     REFERENCES `crm`.`t_user` (`id` )
@@ -389,6 +387,7 @@ CREATE  TABLE IF NOT EXISTS `crm`.`t_email` (
   `email` VARCHAR(20) NULL ,
   `contactid` INT NULL ,
   `companyid` INT NULL ,
+  `type` VARCHAR(10) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_t_email_t_contact1` (`contactid` ASC) ,
   INDEX `fk_t_email_t_company1` (`companyid` ASC) ,
@@ -413,6 +412,7 @@ CREATE  TABLE IF NOT EXISTS `crm`.`t_tel` (
   `tel` VARCHAR(20) NULL ,
   `contactid` INT NULL ,
   `companyid` INT NULL ,
+  `type` VARCHAR(10) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_t_tel_t_contact1` (`contactid` ASC) ,
   INDEX `fk_t_tel_t_company1` (`companyid` ASC) ,
@@ -437,6 +437,7 @@ CREATE  TABLE IF NOT EXISTS `crm`.`t_email` (
   `email` VARCHAR(20) NULL ,
   `contactid` INT NULL ,
   `companyid` INT NULL ,
+  `type` VARCHAR(10) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_t_email_t_contact1` (`contactid` ASC) ,
   INDEX `fk_t_email_t_company1` (`companyid` ASC) ,
@@ -461,6 +462,7 @@ CREATE  TABLE IF NOT EXISTS `crm`.`t_im` (
   `im` VARCHAR(20) NULL ,
   `contactid` INT NULL ,
   `companyid` INT NULL ,
+  `type` VARCHAR(10) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_t_im_t_contact1` (`contactid` ASC) ,
   INDEX `fk_t_im_t_company1` (`companyid` ASC) ,
@@ -485,6 +487,7 @@ CREATE  TABLE IF NOT EXISTS `crm`.`t_site` (
   `site` VARCHAR(20) NULL ,
   `contactid` INT NULL ,
   `companyid` INT NULL ,
+  `type` VARCHAR(10) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_t_site_t_contact1` (`contactid` ASC) ,
   INDEX `fk_t_site_t_company1` (`companyid` ASC) ,
@@ -509,6 +512,7 @@ CREATE  TABLE IF NOT EXISTS `crm`.`t_address` (
   `address` VARCHAR(50) NULL ,
   `contactid` INT NULL ,
   `companyid` INT NULL ,
+  `type` VARCHAR(10) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_t_address_t_contact1` (`contactid` ASC) ,
   INDEX `fk_t_address_t_company1` (`companyid` ASC) ,

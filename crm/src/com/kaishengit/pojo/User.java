@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,16 +22,16 @@ public class User {
 	private String password;
 	private String head;
 	
-	//关联关系
+	//鍏宠仈鍏崇郴
 	private Set<Contact> contacts;
 	private Set<Task> tasks;
 	private Set<Chance> chances;
 	private Set<Event> events;
 	private Set<Message > messages;
 	private Set<UserProduct> userProducts;
-	private Set<UserGroup> userGroups;
 	private Set<EventNote> eventNotes;
 	private Set<Company> companys;
+	private Set<Group> groups;
 	
 	@Id
 	@GeneratedValue
@@ -60,7 +61,7 @@ public class User {
 	}
 	
 	
-	//对联系人的一对多
+	//锟斤拷锟斤拷系锟剿碉拷一锟皆讹拷
 	@OneToMany(mappedBy="user")
 	public Set<Contact> getContacts() {
 		return contacts;
@@ -68,7 +69,7 @@ public class User {
 	public void setContacts(Set<Contact> contacts) {
 		this.contacts = contacts;
 	}
-	//对task一对多
+	//锟斤拷task一锟皆讹拷
 	@OneToMany(mappedBy="user")
 	public Set<Task> getTasks() {
 		return tasks;
@@ -77,7 +78,7 @@ public class User {
 		this.tasks = tasks;
 	}
 	
-	//对chance的一对多
+	//锟斤拷chance锟斤拷一锟皆讹拷
 	@OneToMany(mappedBy="user")
 	public Set<Chance> getChances() {
 		return chances;
@@ -86,7 +87,7 @@ public class User {
 		this.chances = chances;
 	}
 	
-	//对event的一对多
+	//锟斤拷event锟斤拷一锟皆讹拷
 	@OneToMany(mappedBy="user")
 	public Set<Event> getEvents() {
 		return events;
@@ -94,7 +95,7 @@ public class User {
 	public void setEvents(Set<Event> events) {
 		this.events = events;
 	}
-	//对message的一对多
+	//锟斤拷message锟斤拷一锟皆讹拷
 	@OneToMany(mappedBy="user")
 	public Set<Message> getMessages() {
 		return messages;
@@ -103,7 +104,7 @@ public class User {
 		this.messages = messages;
 	}
 	
-	//对userProduct的一对多
+	//锟斤拷userProduct锟斤拷一锟皆讹拷
 	@OneToMany(mappedBy="user")
 	public Set<UserProduct> getUserProducts() {
 		return userProducts;
@@ -111,15 +112,7 @@ public class User {
 	public void setUserProducts(Set<UserProduct> userProducts) {
 		this.userProducts = userProducts;
 	}
-	//对userGroup的一对多
-	@OneToMany(mappedBy="user")
-	public Set<UserGroup> getUserGroups() {
-		return userGroups;
-	}
-	public void setUserGroups(Set<UserGroup> userGroups) {
-		this.userGroups = userGroups;
-	}
-	//对eventNote的一对多
+	//锟斤拷eventNote锟斤拷一锟皆讹拷
 	@OneToMany(mappedBy="user")
 	public Set<EventNote> getEventNotes() {
 		return eventNotes;
@@ -127,13 +120,20 @@ public class User {
 	public void setEventNotes(Set<EventNote> eventNotes) {
 		this.eventNotes = eventNotes;
 	}
-	//对company的一对多
+	//锟斤拷company锟斤拷一锟皆讹拷
 	@OneToMany(mappedBy="user")
 	public Set<Company> getCompanys() {
 		return companys;
 	}
 	public void setCompanys(Set<Company> companys) {
 		this.companys = companys;
+	}
+	@ManyToMany(mappedBy="users")
+	public Set<Group> getGroups() {
+		return groups;
+	}
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
 	}
 	
 	

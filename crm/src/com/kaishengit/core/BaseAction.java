@@ -28,6 +28,7 @@ import com.kaishengit.service.MessageService;
 import com.kaishengit.service.ProductService;
 import com.kaishengit.service.TaskService;
 import com.kaishengit.service.TaskSortService;
+import com.kaishengit.service.UserGroupService;
 import com.kaishengit.service.UserProductService;
 import com.kaishengit.service.UserService;
 import com.opensymphony.xwork2.ActionSupport;
@@ -56,6 +57,7 @@ public abstract class BaseAction extends ActionSupport implements SessionAware,S
 	private TaskSortService taskSortService;
 	private UserProductService userProductService;
 	private UserService userService;
+	private UserGroupService userGroupService;
 	
 	@Override
 	public String execute() throws Exception {
@@ -239,6 +241,13 @@ public abstract class BaseAction extends ActionSupport implements SessionAware,S
 	@Resource
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	public UserGroupService getUserGroupService() {
+		return userGroupService;
+	}
+	@Resource
+	public void setUserGroupService(UserGroupService userGroupService) {
+		this.userGroupService = userGroupService;
 	}
 	
 	

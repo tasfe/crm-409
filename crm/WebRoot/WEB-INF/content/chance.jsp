@@ -81,7 +81,9 @@
 </head>
 <body>
 
-	<%@include file="head/head.jsp" %>
+	<jsp:include page="head/head.jsp">
+			<jsp:param value="chance" name="tag"/>
+	</jsp:include>
 	<div id="mapp">
 		<div class="left ">
 			<div class="">
@@ -202,9 +204,4 @@
 	</div>
 	
 </body>
-</html>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
 </html>
