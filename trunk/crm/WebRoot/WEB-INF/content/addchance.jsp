@@ -204,7 +204,7 @@
 </div></div>		
 		<div class="form-actions">
 			<input type="submit" value="添加这个机会" onclick="$('chance_form').addClassName('progress')" name="commit" class="btn btn-primary">
-			<a class="btn" href="/chances">取消</a>
+			<a class="btn" href="chance.action">取消</a>
 		</div>
 </form></div>
 			</div>
