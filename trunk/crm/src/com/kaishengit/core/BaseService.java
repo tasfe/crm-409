@@ -16,7 +16,6 @@ import com.kaishengit.dao.ProductDao;
 import com.kaishengit.dao.TaskDao;
 import com.kaishengit.dao.TaskSortDao;
 import com.kaishengit.dao.UserDao;
-import com.kaishengit.dao.UserGroupDao;
 import com.kaishengit.dao.UserProductDao;
 
 public class BaseService {
@@ -34,7 +33,6 @@ public class BaseService {
 	private ProductDao productDao;
 	private TaskDao taskDao;
 	private TaskSortDao taskSortDao;
-	private UserGroupDao userGroupDao;
 	private UserProductDao userProductDao;
 	private UserDao userDao;
 	
@@ -49,10 +47,7 @@ public class BaseService {
 		this.userProductDao = userProductDao;
 	}
 	
-	@Resource
-	public void setUserGroupDao(UserGroupDao userGroupDao) {
-		this.userGroupDao = userGroupDao;
-	}
+
 	@Resource
 	public void setTaskSortDao(TaskSortDao taskSortDao) {
 		this.taskSortDao = taskSortDao;
@@ -144,9 +139,7 @@ public class BaseService {
 	public TaskSortDao getTaskSortDao() {
 		return taskSortDao;
 	}
-	public UserGroupDao getUserGroupDao() {
-		return userGroupDao;
-	}
+	
 	public UserProductDao getUserProductDao() {
 		return userProductDao;
 	}

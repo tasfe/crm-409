@@ -145,7 +145,9 @@
 	</style>
 </head>
 <body>
-	<%@include file="head/head.jsp" %>
+	<jsp:include page="head/head.jsp">
+			<jsp:param value="message" name="tag"/>
+	</jsp:include>
 
 	<div id="mapp">
 		<div class="left ">

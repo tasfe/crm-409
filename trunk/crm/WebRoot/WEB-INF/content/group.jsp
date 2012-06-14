@@ -123,6 +123,15 @@
 		    padding: 0;
 		    width: auto;
 		}
+		table td div.name {
+	    font-size: 14px;
+	    font-weight: bold;
+   		 margin-bottom: 5px;
+		}
+		h1 {
+		    font-size: 30px;
+		    line-height: 36px;
+		}
 	</style>
 </head>
 <body>
@@ -138,9 +147,9 @@
 			</div>
 			<div class="sidebar">
 				<div class="well">
-					<div class="title">管理员可以做什么？</div>
+					<div class="title">什么是组？</div>
 					<p>
-						管理员可以删除其它同事的事件，可以修改系统设置，并且拥有一些管理权限。您应该慎重授予管理员权限。
+						组可以用来对事件、联系人、公司或机会设置权限。例如，如果您想让某个事件只对管理人员可见，那么您可以建一个‘管理人员’的组，然后设置该事件的权限只对‘管理人员’组可见。
 					</p>
 				</div>
 				
@@ -148,66 +157,46 @@
 			</div>
 		</div>
 		<div class="right">
-			<div class="right-top "><span style="font-size:24px;">同事</span><a href="invite.action" style="float:right;" >用Email邀请同事</a></div>
-			
+			<div class="right-top "><span style="font-size:24px;">组</span>
+				<form action="addgroup.action" style="float:right">
+					<input style="width:130px;margin-bottom:0px" type="text" name="groupname">
+					<input type="submit" class="btn btn-primary" value="添加组">
+				</form>
+				</div>
 		<div id="main" class="main">
+			<c:if test="${empty groups }">
+				<h1 style="margin-top:10px;">用组来简化权限控制。</h1>
+				组可以用来对事件、联系人、公司或机会设置权限。例如，您想写一个事件只对管理人员可见。您可以建一个“管理人员”组，然后将该事件的权限设置为只对“管理人员组”可见。 
+			</c:if>
+			
 			<table class="table crm-table">
 				<tbody>
+				<c:forEach items="${groups }" var="group">
 				<tr>
-					<td width="65">
-						<span style="display: inline-block;width: 55px;font-size:1px">
-							<img style="margin:0px;" alt="" src="head.action?id=${user.id }">
-						</span>
-					</td>
 					<td>
-						<div class="name">
-							${user.username }
-						</div>
+						<div class="name"><a href="enterGroup.action?id=${group.id }">${group.name }</a></div>
+						<c:forEach items="${group.users }" var="user">
+						${user.username },
+						</c:forEach>
 					</td>
-					<td style="width:100px;">
-							帐号所有者
+					<td class="actions">
+						<a title="删除这个组" id="del" rel="${group.id }" data-method="delete" data-confirm="您确定要删除这个组吗？" class="icon icon-trash" href="javascript:;"></a>
 					</td>
-					<td style="width:110px;">
-						
-					</td>
-					<td style="width:40px;" class="actions">
-						
-					</td>
-					</tr>
-				<c:forEach items="${userProducts }" var="userProduct">
-				<tr>
-					<td width="65">
-						<span style="display: inline-block;width: 55px;font-size:1px">
-							<img style="margin:0px;" alt="" src="head.action?id=${userProduct.user.id }">
-						</span>
-					</td>
-					<td>
-						<div class="name">
-							${userProduct.user.username }
-						</div>
-					</td>
-					<td style="width:100px;">
-							<c:if test="${userProduct.role == 2}">
-								管理员
-							</c:if>
-							<c:if test="${userProduct.role == 3}">
-								<input type="checkbox" value="1" id="admin" data="${userProduct.id }">
-								管理员
-							</c:if>
-					</td>
-					<td style="width:110px;">
-						
-					</td>
-					<td style="width:40px;" class="actions">
-						
-					</td>
-					</tr>
-					</c:forEach>
+				</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>			
 	</div>
 </div>
-	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#del").click(function() {
+				if(confirm("确定要删除吗？")) {
+					return false;
+				}
+			});
+		});
+	</script>
 </body>
 </html>

@@ -12,10 +12,10 @@
 				<div class="nav-collapse">
 		  		<ul class="nav">
 						<li class="divider-vertical"></li>
-						<li class=""><a href="message.action?pid=${product.id }&i=1">最新消息</a></li>
-						<li class=""><a href="contact.action">通讯录</a></li>
-						<li class=""><a href="task.action">任务</a></li>
-						<li class=""><a href="chance.action">机会</a></li>
+						<li class="${param.tag=='message'?'active':'' }"><a href="message.action?pid=${product.id }&i=1">最新消息</a></li>
+						<li class="${param.tag=='contact'?'active':'' }"><a href="contact.action">通讯录</a></li>
+						<li class="${param.tag=='task'?'active':'' }"><a href="task.action">任务</a></li>
+						<li class="${param.tag=='chance'?'active':'' }"><a href="chance.action">机会</a></li>
 			    </ul>
 					
 					<ul class="nav">
@@ -42,7 +42,7 @@
 							<ul class="dropdown-menu settings">
 								<c:if test="${sessionScope.role == '1'}">
 									<li><a href="worker.action"><i class="icon-user"></i> 同事</a></li>
-									<li><a href="/groups"><i class="icon-group"><img src="img/user_group.ico"></i> 组</a></li>
+									<li><a href="group.action"><i class="icon-group"><img src="img/user_group.ico"></i> 组</a></li>
 								</c:if>
 								<li><a href="/settings"><i class="icon-cog"></i> 帐号管理</a></li>
 								<li class="divider"></li>
