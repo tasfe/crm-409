@@ -31,11 +31,12 @@ public class Address {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getSite() {
+	
+	public String getAddress() {
 		return address;
 	}
-	public void setSite(String site) {
-		this.address = site;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getType() {
 		return type;

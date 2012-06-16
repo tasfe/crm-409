@@ -31,11 +31,11 @@ public class Tel {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getSite() {
+	public String getTel() {
 		return tel;
 	}
-	public void setSite(String site) {
-		this.tel = site;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	public String getType() {
 		return type;

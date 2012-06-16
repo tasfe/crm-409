@@ -31,11 +31,12 @@ public class Im {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getSite() {
+	
+	public String getIm() {
 		return im;
 	}
-	public void setSite(String site) {
-		this.im = site;
+	public void setIm(String im) {
+		this.im = im;
 	}
 	public String getType() {
 		return type;

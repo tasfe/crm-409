@@ -132,40 +132,68 @@
 		    font-size: 30px;
 		    line-height: 36px;
 		}
+		legend {
+		    font-size: 14px;
+		    font-weight: bold;
+		    margin-bottom: 10px;
+		    margin-top:20px;
+		}
 	</style>
 </head>
 <body>
 	<%@include file="head/head.jsp" %>
 
 	<div id="mapp">
-		
-		<div class="right">
-			<div class="right-top "><span style="font-size:24px;">${group.name }</span>
-				<a href="javascript:;" style="float:right;" >修改名称</a>
-			<form style="display:none;" method="post" id="group_name_form" class="form-inline" action="/groups/583" accept-charset="UTF-8"><div style="margin:0;padding:0;display:inline"><input type="hidden" value="✓" name="utf8"><input type="hidden" value="put" name="_method"><input type="hidden" value="/xkdCqFohkf+UxQC6eVsexIr6YxNdP2B6GMyaBpasQs=" name="authenticity_token"></div>
-				<input type="text" value="5646" size="30" name="group[name]" id="group_name">
-				<input type="submit" value="重命名" name="commit" class="btn btn-primary">
-				<a  href="javascript:;" class="btn">取消</a>
-			</form>
+		<div class="left ">
+			<div class="">
+				<div class= "left-top">
+					<h2>${product.name }</h2>
 				</div>
+				
+			</div>
+			<ul class="nav nav-tabs nav-stacked">
+					<li >
+					<a href="javascript:;" class="modifygroupname" style="font-size:14px;">修改组名</a></li>
+					
+					<select name="" id="addwo" style="width:100%;">
+						<option value="1">添加一个同事</option>
+						<c:forEach items="${userProducts}" var="userproduct">
+						<option value="${userproduct.user.id }">${userproduct.user.username }</option>
+						</c:forEach>
+					</select>
+				</ul>
+		</div>
+		<div class="right">
+			<div class="right-top "><span style="font-size:24px;" id="nowname">${group.name }</span>
+				<a href="javascript:;" class="modifygroupname" style="float:right;" >修改名称</a>
+				<div id="modifyinput" style="margin:0;padding:0;display:none">
+					<form action="modifyname.action" method="post" id="renameform" >
+						<input type="hidden" name="gid" value="${group.id }">
+						<input style="margin-bottom:0px" type="text" value="${group.name }" size="30" name="groupname" id="groupname">
+						<input type="button" value="重命名" id="rename" class="btn btn-primary">
+						<a  href="javascript:;" id="cancle" class="btn">取消</a>
+					</form>
+				</div>
+			</div>
 		<div id="main" class="main">
-			<c:if test="${empty groups }">
-				<h1 style="margin-top:10px;">用组来简化权限控制。</h1>
-				组可以用来对事件、联系人、公司或机会设置权限。例如，您想写一个事件只对管理人员可见。您可以建一个“管理人员”组，然后将该事件的权限设置为只对“管理人员组”可见。 
-			</c:if>
-			
+			<legend>本组的同事</legend>
 			<table class="table crm-table">
 				<tbody>
-				<c:forEach items="${groups }" var="group">
+				<input type="hidden"  id = "groupid" value="${group.id }"/>
+				<c:forEach items="${group.users }" var="user">
 				<tr>
-					<td>
-						<div class="name"><a href="enterGroup.action?id=${group.id }">${group.name }</a></div>
-						<c:forEach items="${group.users }" var="user">
-						${user.username },
-						</c:forEach>
+					<td width="10%">
+						<span style="display: inline-block; width: 50px; font-size:1px">
+							<img src="head.action?id=${user.id } " style="margin:0px;"/>
+						</span>
+					</td >
+					<td width="80%">
+						<div class="name">${user.username }</div>
+						
 					</td>
+					
 					<td class="actions">
-						<a title="删除这个组" id="del" rel="${group.id }" data-method="delete" data-confirm="您确定要删除这个组吗？" class="icon icon-trash" href="javascript:;"></a>
+						<a title="删除此用户" class="icon icon-trash" href="delWorker.action?uid=${user.id }&gid=${group.id}"></a>
 					</td>
 				</tr>
 				</c:forEach>
@@ -179,6 +207,46 @@
 			$("#del").click(function() {
 				if(confirm("确定要删除吗？")) {
 					return false;
+				}
+			});
+			$("#addwo").change(function(){
+				
+				$.post("addWorker.action",
+					{
+					  "uid":$("#addwo").val(),
+					  "gid":$("#groupid").val()  
+					},function(data){
+						var tr = $("<tr>");
+						$(".table").append(tr);
+						var td1 = $("<td width='10%'></td>");
+						tr.append(td1);
+						var span1 = $("<span style='display: inline-block; width: 50px; font-size:1px'></span>");
+						td1.append(span1);
+						var img = $("<img style='margin:0px;'/>");
+						img.attr("src",'head.action?id=' + data.id);
+						span1.append(img);
+						var td2 = $("<td width='10%'></td>");
+						tr.append(td2);
+						var div = $("<div class='name'></div>");
+						div.text(data.username);
+						td2.append(div);
+						var td3 = $("<td class='actions'></td>");
+						td3.append($("<a title='删除此用户' id='del' class='icon icon-trash' href='javascript:;'></a>").attr("rel",data.id));
+						tr.append(td3);
+					});
+			});
+			
+			$(".modifygroupname").click(function(){
+				$("#modifyinput").css("display","inline");
+			});
+			
+			$("#cancle").click(function(){
+				$("#modifyinput").hide(800);
+			});
+			
+			$("#rename").click(function(){
+				if($("#nowname").text() != $("#groupname").val()) {
+					$("#renameform").submit();
 				}
 			});
 		});

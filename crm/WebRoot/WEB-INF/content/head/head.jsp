@@ -48,7 +48,7 @@
 								<li class="divider"></li>
 								<li><a href="/profiles"><i class="icon-info-sign"></i> 个人信息</a></li>
 								<li class="divider"></li>
-								<li><a href="/users/sign_out"><i class="icon-off"></i> 注销</a></li>
+								<li><a href="loginout.action"><i class="icon-off"></i> 注销</a></li>
 							</ul>
 						</li>
 			    </ul>
