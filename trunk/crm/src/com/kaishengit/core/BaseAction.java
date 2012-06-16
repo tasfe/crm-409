@@ -15,19 +15,24 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.util.ServletContextAware;
 
 import com.google.gson.Gson;
+import com.kaishengit.service.AddressService;
 import com.kaishengit.service.ChanceService;
 import com.kaishengit.service.ChanceSortService;
 import com.kaishengit.service.CompanyService;
+import com.kaishengit.service.ContactEmailService;
 import com.kaishengit.service.ContactService;
 import com.kaishengit.service.EmailService;
 import com.kaishengit.service.EventNoteService;
 import com.kaishengit.service.EventService;
 import com.kaishengit.service.GroupService;
+import com.kaishengit.service.ImService;
 import com.kaishengit.service.ImporyDateService;
 import com.kaishengit.service.MessageService;
 import com.kaishengit.service.ProductService;
+import com.kaishengit.service.SiteService;
 import com.kaishengit.service.TaskService;
 import com.kaishengit.service.TaskSortService;
+import com.kaishengit.service.TelService;
 import com.kaishengit.service.UserGroupService;
 import com.kaishengit.service.UserProductService;
 import com.kaishengit.service.UserService;
@@ -58,6 +63,12 @@ public abstract class BaseAction extends ActionSupport implements SessionAware,S
 	private UserProductService userProductService;
 	private UserService userService;
 	private UserGroupService userGroupService;
+	private ImService imService;
+	private SiteService siteService;
+	private TelService telService;
+	private ContactEmailService contactEmailService;
+	private AddressService  addressService;
+	
 	
 	@Override
 	public String execute() throws Exception {
@@ -248,6 +259,41 @@ public abstract class BaseAction extends ActionSupport implements SessionAware,S
 	@Resource
 	public void setUserGroupService(UserGroupService userGroupService) {
 		this.userGroupService = userGroupService;
+	}
+	public ImService getImService() {
+		return imService;
+	}
+	@Resource
+	public void setImService(ImService imService) {
+		this.imService = imService;
+	}
+	public SiteService getSiteService() {
+		return siteService;
+	}
+	@Resource
+	public void setSiteService(SiteService siteService) {
+		this.siteService = siteService;
+	}
+	public TelService getTelService() {
+		return telService;
+	}
+	@Resource
+	public void setTelService(TelService telService) {
+		this.telService = telService;
+	}
+	public ContactEmailService getContactEmailService() {
+		return contactEmailService;
+	}
+	@Resource
+	public void setContactEmailService(ContactEmailService contactEmailService) {
+		this.contactEmailService = contactEmailService;
+	}
+	public AddressService getAddressService() {
+		return addressService;
+	}
+	@Resource
+	public void setAddressService(AddressService addressService) {
+		this.addressService = addressService;
 	}
 	
 	

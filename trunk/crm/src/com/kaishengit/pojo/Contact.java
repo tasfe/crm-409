@@ -174,7 +174,7 @@ public class Contact {
 	public void setSites(Set<Site> sites) {
 		this.sites = sites;
 	}
-	@OneToMany(mappedBy="contact")
+	@OneToMany
 	public Set<Tel> getTels() {
 		return tels;
 	}

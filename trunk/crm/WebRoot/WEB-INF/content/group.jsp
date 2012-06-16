@@ -158,7 +158,7 @@
 		</div>
 		<div class="right">
 			<div class="right-top "><span style="font-size:24px;">组</span>
-				<form action="addgroup.action" style="float:right">
+				<form action="addgroup.action" method="post" style="float:right">
 					<input style="width:130px;margin-bottom:0px" type="text" name="groupname">
 					<input type="submit" class="btn btn-primary" value="添加组">
 				</form>
@@ -180,7 +180,7 @@
 						</c:forEach>
 					</td>
 					<td class="actions">
-						<a title="删除这个组" id="del" rel="${group.id }" data-method="delete" data-confirm="您确定要删除这个组吗？" class="icon icon-trash" href="javascript:;"></a>
+						<a title="删除这个组" id="del"  class="icon icon-trash" href="delGroup.action?gid=${group.id }"></a>
 					</td>
 				</tr>
 				</c:forEach>
@@ -193,6 +193,8 @@
 		$(document).ready(function(){
 			$("#del").click(function() {
 				if(confirm("确定要删除吗？")) {
+					return true;
+				} else {
 					return false;
 				}
 			});

@@ -4,17 +4,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kaishengit.core.BaseService;
-import com.kaishengit.pojo.Contact;
+import com.kaishengit.pojo.ContactEmail;
 
-
-@Service
 @Transactional
-public class ContactService extends BaseService{
+@Service
+public class ContactEmailService extends BaseService{
 
-	public void saveOrUpdate(Contact contact) {
-		getContactDao().saveOrUpdate(contact);
+	public int saveOrUpdate(ContactEmail ce) {
+		getContactEmailDao().saveOrUpdate(ce);
+		return ce.getId();
 	}
 
-	
-	
 }

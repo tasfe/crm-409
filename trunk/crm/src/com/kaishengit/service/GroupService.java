@@ -43,6 +43,9 @@ public class GroupService extends BaseService{
 		return g;
 	}
 
-	
+	public void delGroup(int gid) {
+		getGroupDao().del(gid);
+	}
+
 	
 }
