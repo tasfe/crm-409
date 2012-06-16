@@ -11,7 +11,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name="t_email")
+@Table(name="t_contactemail")
 @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class ContactEmail {
 

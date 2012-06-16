@@ -11,8 +11,9 @@ import com.kaishengit.pojo.Contact;
 @Transactional
 public class ContactService extends BaseService{
 
-	public void saveOrUpdate(Contact contact) {
+	public int saveOrUpdate(Contact contact) {
 		getContactDao().saveOrUpdate(contact);
+		return contact.getId();
 	}
 
 	

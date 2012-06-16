@@ -369,7 +369,7 @@
 									</select>
 								
 								</div>
-								<div class="add" style="display:none"><a href="javascript:;">添加..</a></div>
+								<div class="addadd" style="display:none"><a href="javascript:;">添加..</a></div>
 							</div>
 						</div>
 					</div>
@@ -378,14 +378,14 @@
 						$(document).ready(function(){
 							$("#add").focus(function(){
 								if(temp == 0) {
-									$(".add").show(500);
+									$(".addadd").show(500);
 									temp = 1;
 								}
 							});
 							$("#add").blur(function(){
 								temp = 0;
 							});
-							$(".add").click(function(){
+							$(".addadd").click(function(){
 								var div = $("<div class='contact_methods'></div>");
 								$("#contact_add_list_company").append(div);
 								$("<input type='text' size='30' name='address' id='add' >").appendTo(div);
