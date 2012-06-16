@@ -1,8 +1,6 @@
 package com.kaishengit.action;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
@@ -60,15 +58,15 @@ public class ContactAction extends BaseAction{
 			@Result(name="success",type="redirectAction",location="contact.action")
 	})
 	public String addContact() {
-		System.out.println("userid"+userid);
-		System.out.println("groupid" + groupid);
+		/*System.out.println("userid"+userid);
+		System.out.println("groupid" + groupid);*/
 		if(company != null){
 			Company c = getCompanyService().findByName(company.getName());
 			if(c == null) {
 				company.setUser(((User)getSession("user")));
 				company.setProduct(((Product)getSession("product")));
-				int companyid = getCompanyService().saveOrUpdate(company);
-				company.setId(companyid);
+				int id = getCompanyService().saveOrUpdate(company);
+				company.setId(id);
 			} else {
 				company = c;
 			}
@@ -82,84 +80,59 @@ public class ContactAction extends BaseAction{
 		} else if("user".equals(role)) {
 			contact.setView("u:" + userid);
 		}
-		Set<Tel> tels = new HashSet<Tel>();
-		Set<Address> addresses = new HashSet<Address>();
-		Set<Im> ims = new HashSet<Im>();
-		Set<ContactEmail> contactEmails = new HashSet<ContactEmail>();
-		Set<Site> sites = new HashSet<Site>();
-		//添加联系人中的多个对象集合
-		for(String s : tel) {
-			if(s != null){ 
-				for(String r : teltype){
-					Tel t = new Tel();
-					t.setTel(s);
-					t.setType(r);
-					int id = getTelService().saveOrUpdate(t);
-					t.setId(id);
-					tels.add(t);
-				}
-			}
-		}
-		for(String s : im) {
-			if(s != null){ 
-				for(String r : imtype){
-					Im i = new Im();
-					i.setIm(s);
-					i.setType(r);
-					int id = getImService().saveOrUpdate(i);
-					i.setId(id);
-					ims.add(i);
-				}
-			}
-		}
-		for(String s : site) {
-			if(s != null){ 
-				for(String r : sitetype){
-					Site si = new Site();
-					si.setSite(s);
-					si.setType(r);
-					int id = getSiteService().saveOrUpdate(si);
-					si.setId(id);
-					sites.add(si);
-				}
-			}
-		}
-		for(String s : email) {
-			if(s != null){ 
-				for(String r : emailtype){
-					ContactEmail ce = new ContactEmail();
-					ce.setEmail(s);
-					ce.setType(r);
-					int id = getContactEmailService().saveOrUpdate(ce);
-					ce.setId(id);
-					contactEmails.add(ce);
-				}
-			}
-		}
-		for(String s : address) {
-			if(s != null){ 
-				for(String r : addresstype){
-					Address a = new Address();
-					a.setAddress(s);
-					a.setType(r);
-					int id = getAddressService().saveOrUpdate(a);
-					a.setId(id);
-					addresses.add(a);
-				}
-			}
-		}
-		//向contact中保存数据
+		//保存联系人信息
 		contact.setCompany(company);
-		contact.setAddresses(addresses);
-		contact.setContactEmails(contactEmails);
-		contact.setIms(ims);
 		contact.setProduct(((Product)getSession("product")));
-		contact.setSites(sites);
-		contact.setTels(tels);
 		contact.setUser(((User)getSession("user")));
 		contact.setCreatetime(TimeUtil.getNow());
 		
-		getContactService().saveOrUpdate(contact);
+		int contactid = getContactService().saveOrUpdate(contact);
+		contact.setId(contactid);
+		/*Set<Tel> tels = new HashSet<Tel>();
+		Set<Address> addresses = new HashSet<Address>();
+		Set<Im> ims = new HashSet<Im>();
+		Set<ContactEmail> contactEmails = new HashSet<ContactEmail>();
+		Set<Site> sites = new HashSet<Site>();*/
+		//添加联系人中的多个对象集合
+		for (int i = 0; i < tel.size(); i++) {
+			Tel t = new Tel();
+			t.setTel(tel.get(i));
+			t.setType(teltype.get(i));
+			t.setContact(contact);
+			getTelService().saveOrUpdate(t);
+		}
+		for (int i = 0; i < im.size(); i++) {
+			Im myim = new Im();
+			myim.setIm(im.get(i));
+			myim.setType(imtype.get(i));
+			myim.setContact(contact);
+			getImService().saveOrUpdate(myim);
+		}
+		for (int i = 0; i < site.size(); i++) {
+			Site si = new Site();
+			si.setSite(site.get(i));
+			si.setType(sitetype.get(i));
+			si.setContact(contact);
+			getSiteService().saveOrUpdate(si);
+		}
+		for (int i = 0; i < email.size(); i++) {
+			ContactEmail ce = new ContactEmail();
+			ce.setEmail(email.get(i));
+			ce.setType(emailtype.get(i));
+			ce.setContact(contact);
+			getContactEmailService().saveOrUpdate(ce);
+		}
+		
+		for (int i = 0; i < address.size(); i++) {
+			Address a = new Address();
+			a.setAddress(address.get(i));
+			a.setType(addresstype.get(i));
+			a.setContact(contact);
+			getAddressService().saveOrUpdate(a);
+		}
+		
+		//向contact中保存数据
+		
 		return SUCCESS;
 	}
 	
