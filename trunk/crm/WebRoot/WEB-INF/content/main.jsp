@@ -57,15 +57,15 @@
 		.card a h5 {
 			font-size: 19px;
 			line-height: 1.1em;
-			width:145px;
-			height:91px;
-			margin:-30px;
+			width:120px;
+			height:90px;
+			margin:-7px;
 			word-wrap: break-word;
 			border-radius:105px ;
 			display:block;
 			background-color:#ccc;
 			padding:15px;
-			padding-top:70px;
+			padding-top:40px;
 			color:#fff;
 			
 		}
@@ -76,8 +76,13 @@
 		}
 		div.people img{
 			position:relative;
-			left:20px;
+			left:18px;
 			border-radius:100px;
+		}
+		div.prodnamelabel{
+			line-height:40px;
+			font-size:20px;
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 		}
 	</style>
 </head>
@@ -107,16 +112,59 @@
 	<div class="container">
 		<h3 style="color:#333;">请选择产品</h3>
 		<hr/>
-		<c:forEach items="${requestScope.userProducts}" var="userProduct">
-			<div class="card">
-				<a title="${userProduct.product.name }" class="project_card" href="welcome.action?id=${userProduct.product.id }">
-	              <h5 >${userProduct.product.name }</h5>
-	              <div class="people">
-	                    <img width="40" height="40" title="${sessionScope.user.username }" src="head.action?id=${user.id }" class="avatar" >
-	              </div>
-				</a>
-			</div>
-		</c:forEach>
+		
+	    <div class="tabbable"> 
+		    <ul class="nav nav-tabs">
+		    <li class="active"><a href="#tab1" data-toggle="tab"> 视  图 </a></li>
+		    <li><a href="#tab2" data-toggle="tab"> 列  表 </a></li>
+		    </ul>
+		    <!-- 视图 -->
+		    <div class="tab-content">
+		    <div class="tab-pane active" id="tab1">
+		    	<c:forEach items="${requestScope.userProducts}" var="userProduct">
+					<div class="card">
+						<a title="${userProduct.product.name }" class="project_card" href="welcome.action?id=${userProduct.product.id }">
+			              <h5 >${userProduct.product.name }</h5>
+			              <div class="people">
+			                    <img width="50" height="50" title="${sessionScope.user.username }" src="head.action?id=${user.id }" class="avatar" >
+			              </div>
+						</a>
+					</div>
+				</c:forEach>
+		    </div>
+		     <!-- 列表哦 -->
+		    <div class="tab-pane" id="tab2">
+	    	    <table class="table">
+				    
+				    <tbody>
+				    <c:forEach items="${requestScope.userProducts}" var="userProduct">
+					 	 
+							<tr>
+							    <td width="10%">
+							    	<a href="welcome.action?id=${userProduct.product.id }"> 
+							   			 <img width="40" height="40" title="${sessionScope.user.username }" src="head.action?id=${user.id }" style="border-radius:5px;">
+							   		</a>	 
+							    </td>
+							    <td width="90%">
+							    	<a href="welcome.action?id=${userProduct.product.id }" > 
+							    		<div class="prodnamelabel" title="${userProduct.product.name }">${userProduct.product.name }</div>
+							    	</a>
+							    </td>
+						    </tr>
+					    
+				    </c:forEach>
+				    </tbody>
+			    </table>
+
+		    	
+		    </div>
+		    </div>
+	    </div>
+		
+		
+		
+		
+		
 	</div>
 </body>
 </html>
