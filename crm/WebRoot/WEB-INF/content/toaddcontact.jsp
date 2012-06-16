@@ -479,8 +479,7 @@
 					</script>
 					<div class="form-actions">
 						<input type="submit" value="保存联系人" name="commit" data-loading-text="处理中.." class="btn btn-primary">
-							<input type="submit" value="保存并继续添加联系人" name="next_action" data-loading-text="处理中.." class="btn btn-success">
-							<a class="btn" href="/contacts">取消</a>
+							<a class="btn" href="contact.action">取消</a>
 					</div>
 				</form>
 			</div>	
