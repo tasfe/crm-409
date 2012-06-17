@@ -1,10 +1,13 @@
 package com.kaishengit.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kaishengit.core.BaseService;
 import com.kaishengit.pojo.Contact;
+import com.kaishengit.pojo.User;
 
 
 @Service
@@ -16,6 +19,27 @@ public class ContactService extends BaseService{
 		return contact.getId();
 	}
 
+	public List<Contact> findByUser(User user) {
+		List<Contact> mycontacts = getContactDao().findByUser(user);
+		return mycontacts;
+	}
+
+	public List<Contact> findByView() {
+		List<Contact> acontacts = getContactDao().findByView();
+		return acontacts;
+	}
+
+	public List<Contact> findByUid(int id) {
+		List<Contact> acontacts = getContactDao().findByUid(id);
+		return acontacts;
+	}
+
+	public List<Contact> findByGid(int gid) {
+		List<Contact> gcontacts = getContactDao().findByGid(gid);
+		return gcontacts;
+	}
+
+	
 	
 	
 }
