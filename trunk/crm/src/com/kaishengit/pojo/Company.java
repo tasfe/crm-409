@@ -25,6 +25,7 @@ public class Company {
 	private String view;
 	private String code;
 	private String createtime;
+	private String head;
 	
 	//关联关系
 	private Product product;
@@ -163,6 +164,12 @@ public class Company {
 	}
 	public void setTels(Set<Tel> tels) {
 		this.tels = tels;
+	}
+	public String getHead() {
+		return head;
+	}
+	public void setHead(String head) {
+		this.head = head;
 	}
 	
 }

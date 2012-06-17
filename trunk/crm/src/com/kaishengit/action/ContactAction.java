@@ -47,8 +47,10 @@ public class ContactAction extends BaseAction{
 	private String role;
 	private String groupid;
 	private String userid;
+	
 	@Override
 	public String execute() throws Exception {
+		
 		return super.execute();
 	}
 	@Action("toaddcontact")
