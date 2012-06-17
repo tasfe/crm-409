@@ -1,11 +1,13 @@
 package com.kaishengit.action;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.stereotype.Controller;
 
+import com.google.zxing.WriterException;
 import com.kaishengit.core.BaseAction;
 import com.kaishengit.pojo.Address;
 import com.kaishengit.pojo.Company;
@@ -19,6 +21,8 @@ import com.kaishengit.pojo.Tel;
 import com.kaishengit.pojo.User;
 import com.kaishengit.pojo.UserProduct;
 import com.kaishengit.util.TimeUtil;
+import com.kaishengit.util.UUIDUTil;
+import com.kaishengit.util.ZxingUtil;
 @Controller
 public class ContactAction extends BaseAction{
 
@@ -85,7 +89,22 @@ public class ContactAction extends BaseAction{
 		contact.setProduct(((Product)getSession("product")));
 		contact.setUser(((User)getSession("user")));
 		contact.setCreatetime(TimeUtil.getNow());
-		
+		StringBuilder sb = new StringBuilder();
+		sb.append("姓名:" + contact.getName() + " ");
+		for (int i = 0; i < tel.size(); i++) {
+			if(tel.get(i) != null) {
+				sb.append(teltype.get(i) + ":" + tel.get(i) + " ");
+			}
+		}
+		String code = UUIDUTil.getUUID();
+		try {
+			ZxingUtil.zxing(sb.toString(), code);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (WriterException e) {
+			e.printStackTrace();
+		}
+		contact.setCode(code + ".png");
 		int contactid = getContactService().saveOrUpdate(contact);
 		contact.setId(contactid);
 		/*Set<Tel> tels = new HashSet<Tel>();
@@ -95,40 +114,50 @@ public class ContactAction extends BaseAction{
 		Set<Site> sites = new HashSet<Site>();*/
 		//添加联系人中的多个对象集合
 		for (int i = 0; i < tel.size(); i++) {
-			Tel t = new Tel();
-			t.setTel(tel.get(i));
-			t.setType(teltype.get(i));
-			t.setContact(contact);
-			getTelService().saveOrUpdate(t);
+			if(tel.get(i) != null) {
+				Tel t = new Tel();
+				t.setTel(tel.get(i));
+				t.setType(teltype.get(i));
+				t.setContact(contact);
+				getTelService().saveOrUpdate(t);
+			}
 		}
 		for (int i = 0; i < im.size(); i++) {
-			Im myim = new Im();
-			myim.setIm(im.get(i));
-			myim.setType(imtype.get(i));
-			myim.setContact(contact);
-			getImService().saveOrUpdate(myim);
+			if(im.get(i) != null) {
+				Im myim = new Im();
+				myim.setIm(im.get(i));
+				myim.setType(imtype.get(i));
+				myim.setContact(contact);
+				getImService().saveOrUpdate(myim);
+			}
 		}
 		for (int i = 0; i < site.size(); i++) {
-			Site si = new Site();
-			si.setSite(site.get(i));
-			si.setType(sitetype.get(i));
-			si.setContact(contact);
-			getSiteService().saveOrUpdate(si);
+			if(site.get(i) != null){
+				Site si = new Site();
+				si.setSite(site.get(i));
+				si.setType(sitetype.get(i));
+				si.setContact(contact);
+				getSiteService().saveOrUpdate(si);
+			}
 		}
 		for (int i = 0; i < email.size(); i++) {
-			ContactEmail ce = new ContactEmail();
-			ce.setEmail(email.get(i));
-			ce.setType(emailtype.get(i));
-			ce.setContact(contact);
-			getContactEmailService().saveOrUpdate(ce);
+			if(email.get(i) != null) {
+				ContactEmail ce = new ContactEmail();
+				ce.setEmail(email.get(i));
+				ce.setType(emailtype.get(i));
+				ce.setContact(contact);
+				getContactEmailService().saveOrUpdate(ce);
+			}
 		}
 		
 		for (int i = 0; i < address.size(); i++) {
-			Address a = new Address();
-			a.setAddress(address.get(i));
-			a.setType(addresstype.get(i));
-			a.setContact(contact);
-			getAddressService().saveOrUpdate(a);
+			if(address.get(i) != null) {
+				Address a = new Address();
+				a.setAddress(address.get(i));
+				a.setType(addresstype.get(i));
+				a.setContact(contact);
+				getAddressService().saveOrUpdate(a);
+			}
 		}
 		
 		//向contact中保存数据
