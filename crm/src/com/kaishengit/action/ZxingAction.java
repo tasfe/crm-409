@@ -9,7 +9,6 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.stereotype.Controller;
 
 import com.kaishengit.core.BaseAction;
-import com.kaishengit.pojo.User;
 
 @Controller
 public class ZxingAction extends BaseAction{
@@ -19,7 +18,7 @@ public class ZxingAction extends BaseAction{
 	private String fileName;
 	private long fileSize;
 	private String mime;
-	private int id;
+	private int code;
 	@Action(value="head",results={
 			@Result(name="success",type="stream",params={
 					"contentType","${mime}",
@@ -34,9 +33,7 @@ public class ZxingAction extends BaseAction{
 	}
 	//该名称与action中的input名称相同
 		public InputStream getDocumentStream() throws Exception{
-			User user = getUserService().findById(id);
-			String head = user.getHead();
-			File file = new File("c://head//" + head);
+			File file = new File("c://2//" + code);
 			setFileName(file.getName());
 			setFileSize(file.length());
 			setMime("img/jpg");
@@ -69,13 +66,11 @@ public class ZxingAction extends BaseAction{
 		public void setMime(String mime) {
 			this.mime = mime;
 		}
-		public int getId() {
-			return id;
+		public int getCode() {
+			return code;
 		}
-		public void setId(int id) {
-			this.id = id;
+		public void setCode(int code) {
+			this.code = code;
 		}
-		
-		
 	
 }

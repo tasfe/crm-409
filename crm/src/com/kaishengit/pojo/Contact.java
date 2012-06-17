@@ -26,7 +26,7 @@ public class Contact {
 	private String view;
 	private String createtime;
 	private String code;
-	
+	private String head;
 	//关联关系
 	private User user;
 	private Product product;
@@ -180,6 +180,12 @@ public class Contact {
 	}
 	public void setTels(Set<Tel> tels) {
 		this.tels = tels;
+	}
+	public String getHead() {
+		return head;
+	}
+	public void setHead(String head) {
+		this.head = head;
 	}
 	
 	
