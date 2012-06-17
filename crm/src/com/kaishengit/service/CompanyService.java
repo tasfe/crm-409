@@ -1,5 +1,7 @@
 package com.kaishengit.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,21 @@ public class CompanyService extends BaseService{
 	public Company findByName(String name) {
 		Company c = getCompanyDao().findByName(name);
 		return c;
+	}
+
+	public List<Company> findByUid(int id) {
+		List<Company> companys = getCompanyDao().findByUid(id);
+		return companys;
+	}
+
+	public List<Company> findByView() {
+		List<Company> acompanys = getCompanyDao().findByView();
+		return acompanys;
+	}
+
+	public List<Company> findByGid(int id) {
+		List<Company> companys = getCompanyDao().findByGid(id);
+		return companys;
 	}
 
 	

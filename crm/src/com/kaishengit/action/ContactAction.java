@@ -2,6 +2,7 @@ package com.kaishengit.action;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
@@ -47,9 +48,31 @@ public class ContactAction extends BaseAction{
 	private String role;
 	private String groupid;
 	private String userid;
-	
+	private List<Contact> mycontacts;
+	private List<Company> mycompanys;
+	private List<Contact> acontacts;
+	private Set<Contact> gcontacts;
+	private List<Company> acompanys;
+	private List<Company> gcompanys;
 	@Override
 	public String execute() throws Exception {
+//		List<Group> groups = getGroupService().findByUser(((User)getSession("user")).getId());
+		User u = getUserService().findById(((User)getSession("user")).getId());
+		Set<Group> groups = u.getGroups();
+		mycontacts = getContactService().findByUid(((User)getSession("user")).getId());
+		acontacts = getContactService().findByView();
+		//循环添加自己所在组能看到的联系人，并且去除重复的
+		
+		for(Group g : groups) {
+			gcontacts.addAll(getContactService().findByGid(g.getId()));
+		}
+		
+		mycompanys = getCompanyService().findByUid(((User)getSession("user")).getId());
+		acompanys = getCompanyService().findByView();
+		//循环添加自己所在组能看到的联系人，并且去除重复的
+		for(Group g : groups) {
+			gcompanys.addAll(getCompanyService().findByGid(g.getId()));
+		}
 		
 		return super.execute();
 	}
@@ -80,7 +103,7 @@ public class ContactAction extends BaseAction{
 		if("all".equals(role)) {
 			contact.setView("a" );
 		} else if("me".equals(role)) {
-			contact.setView("m");
+			contact.setView("m" + ((User)getSession("user")).getId());
 		} else if("group".equals(role)) {
 			contact.setView("g:" + groupid);
 		} else if("user".equals(role)) {
@@ -272,7 +295,42 @@ public class ContactAction extends BaseAction{
 	public void setAddresstype(List<String> addresstype) {
 		this.addresstype = addresstype;
 	}
-	
+	public List<Contact> getMycontacts() {
+		return mycontacts;
+	}
+	public void setMycontacts(List<Contact> mycontacts) {
+		this.mycontacts = mycontacts;
+	}
+	public List<Contact> getAcontacts() {
+		return acontacts;
+	}
+	public void setAcontacts(List<Contact> acontacts) {
+		this.acontacts = acontacts;
+	}
+	public Set<Contact> getGcontacts() {
+		return gcontacts;
+	}
+	public void setGcontacts(Set<Contact> gcontacts) {
+		this.gcontacts = gcontacts;
+	}
+	public List<Company> getMycompanys() {
+		return mycompanys;
+	}
+	public void setMycompanys(List<Company> mycompanys) {
+		this.mycompanys = mycompanys;
+	}
+	public List<Company> getAcompanys() {
+		return acompanys;
+	}
+	public void setAcompanys(List<Company> acompanys) {
+		this.acompanys = acompanys;
+	}
+	public List<Company> getGcompanys() {
+		return gcompanys;
+	}
+	public void setGcompanys(List<Company> gcompanys) {
+		this.gcompanys = gcompanys;
+	}
 	
 	
 }

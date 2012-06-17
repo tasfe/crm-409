@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
@@ -364,14 +365,18 @@
 				<hr />
 				<table id="contacts" class="table crm-table ">
 				<thead>
+				<c:forEach items="${mycontacts }" var="mycontact">
 					<tr class="">
 						<td width="20px"><input type="checkbox" value="485218" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="485218" href="#"><span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat 0px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a></td>
+						<td width="35px"><a class="quick-view" data-id="485218" href="#">
+							<span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat 0px -148px transparent; width: 32px; padding-top: 32px;font-size:1px">
+							</span>
+							</a>
+						</td>
 						<td width="50%">
 							<h3>
-								<a href="https://1339057988.workxp.info/companies/485218">京东商城</a>
-								
-								<span></span>
+								<a href="">${mycontact.name}</a>
+								<span>${mycontact.position }</span>
 							</h3>
 							<div class="info">
 								
@@ -384,6 +389,7 @@
 							</div>
 						</td>
 					</tr>
+					</c:forEach>
 					<tr class="">
 						<td width="20px"><input type="checkbox" value="485219" name="id[]" id="id_"></td>
 						<td width="35px"><a class="quick-view" data-id="485219" href="#"><span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat -112px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a></td>

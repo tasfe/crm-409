@@ -23,4 +23,6 @@ public class GroupDao  extends BaseDao<Group, Integer>{
 		return query.list();
 	}
 
+	
+
 }
