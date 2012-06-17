@@ -91,7 +91,7 @@
 		<div class="left ">
 			<div class="">
 				<div class= "left-top">
-					<h2>公司名</h2>
+					<h3>${sessionScope.product.name} </h3>
 				</div>
 				
 				<ul class="nav nav-tabs nav-stacked">
