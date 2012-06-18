@@ -1,6 +1,8 @@
 package com.kaishengit.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -48,24 +50,33 @@ public class ContactAction extends BaseAction{
 	private String role;
 	private String groupid;
 	private String userid;
+	private Set<Contact> contacts = new HashSet<Contact>();
+	private Set<Company> companys = new HashSet<Company>();
+	
 	private List<Contact> mycontacts;
 	private List<Company> mycompanys;
 	private List<Contact> acontacts;
-	private Set<Contact> gcontacts;
+	private List<Contact> gcontacts = new ArrayList<Contact>();
 	private List<Company> acompanys;
-	private List<Company> gcompanys;
+	private List<Company> gcompanys = new ArrayList<Company>();
+	
 	@Override
 	public String execute() throws Exception {
-//		List<Group> groups = getGroupService().findByUser(((User)getSession("user")).getId());
 		User u = getUserService().findById(((User)getSession("user")).getId());
 		Set<Group> groups = u.getGroups();
 		mycontacts = getContactService().findByUid(((User)getSession("user")).getId());
 		acontacts = getContactService().findByView();
 		//循环添加自己所在组能看到的联系人，并且去除重复的
-		
+		System.out.println(groups.size());
 		for(Group g : groups) {
 			gcontacts.addAll(getContactService().findByGid(g.getId()));
 		}
+		/**
+		 * 把联系人归结到一起，去掉重复的(set无序不可重复)
+		 */
+		contacts.addAll(acontacts);
+		contacts.addAll(gcontacts);
+		contacts.addAll(mycontacts);
 		
 		mycompanys = getCompanyService().findByUid(((User)getSession("user")).getId());
 		acompanys = getCompanyService().findByView();
@@ -73,6 +84,10 @@ public class ContactAction extends BaseAction{
 		for(Group g : groups) {
 			gcompanys.addAll(getCompanyService().findByGid(g.getId()));
 		}
+		
+		companys.addAll(mycompanys);
+		companys.addAll(gcompanys);
+		companys.addAll(acompanys);
 		
 		return super.execute();
 	}
@@ -94,6 +109,7 @@ public class ContactAction extends BaseAction{
 			if(c == null) {
 				company.setUser(((User)getSession("user")));
 				company.setProduct(((Product)getSession("product")));
+				company.setView("m" + ((User)getSession("user")).getId());
 				int id = getCompanyService().saveOrUpdate(company);
 				company.setId(id);
 			} else {
@@ -295,42 +311,19 @@ public class ContactAction extends BaseAction{
 	public void setAddresstype(List<String> addresstype) {
 		this.addresstype = addresstype;
 	}
-	public List<Contact> getMycontacts() {
-		return mycontacts;
+	public Set<Contact> getContacts() {
+		return contacts;
 	}
-	public void setMycontacts(List<Contact> mycontacts) {
-		this.mycontacts = mycontacts;
+	public void setContacts(Set<Contact> contacts) {
+		this.contacts = contacts;
 	}
-	public List<Contact> getAcontacts() {
-		return acontacts;
+	public Set<Company> getCompanys() {
+		return companys;
 	}
-	public void setAcontacts(List<Contact> acontacts) {
-		this.acontacts = acontacts;
+	public void setCompanys(Set<Company> companys) {
+		this.companys = companys;
 	}
-	public Set<Contact> getGcontacts() {
-		return gcontacts;
-	}
-	public void setGcontacts(Set<Contact> gcontacts) {
-		this.gcontacts = gcontacts;
-	}
-	public List<Company> getMycompanys() {
-		return mycompanys;
-	}
-	public void setMycompanys(List<Company> mycompanys) {
-		this.mycompanys = mycompanys;
-	}
-	public List<Company> getAcompanys() {
-		return acompanys;
-	}
-	public void setAcompanys(List<Company> acompanys) {
-		this.acompanys = acompanys;
-	}
-	public List<Company> getGcompanys() {
-		return gcompanys;
-	}
-	public void setGcompanys(List<Company> gcompanys) {
-		this.gcompanys = gcompanys;
-	}
+	
 	
 	
 }
