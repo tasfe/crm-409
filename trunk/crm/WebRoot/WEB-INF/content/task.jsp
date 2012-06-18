@@ -109,6 +109,7 @@
 		}
 		.main {
 			padding: 20px 20px 0;
+			height:550px;
 		}
 		.accordion-inner li a{
 			color:#000;

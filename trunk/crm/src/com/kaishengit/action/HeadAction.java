@@ -30,16 +30,17 @@ public class HeadAction extends BaseAction{
 			})
 	})
 	public String getHead() {
+		System.out.println("......");
 		return SUCCESS;
 	}
 	//该名称与action中的input名称相同
 		public InputStream getDocumentStream() throws Exception{
+			System.out.println("头像显示功能...");
 			User user = getUserService().findById(id);
 			String head = user.getHead();
 			File file = new File("c://head//" + head);
 			setFileName(file.getName());
 			setFileSize(file.length());
-			setMime("img/jpg");
 			
 			InputStream is = new FileInputStream(file); 
 			return is;

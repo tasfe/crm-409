@@ -224,7 +224,7 @@
 					</option></optgroup>
 				</select>
 			</div>
-			<div id="main" class="main">
+			<div id="main" class="main" style="height:550px">
 				<div class="filter-desc">
 					可以通过以下条件来过滤联系人:
 				</div>
@@ -365,171 +365,45 @@
 				<hr />
 				<table id="contacts" class="table crm-table ">
 				<thead>
-				<c:forEach items="${mycontacts }" var="mycontact">
+				<c:forEach items="${contacts }" var="contact">
 					<tr class="">
-						<td width="20px"><input type="checkbox" value="485218" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="485218" href="#">
-							<span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat 0px -148px transparent; width: 32px; padding-top: 32px;font-size:1px">
-							</span>
-							</a>
+						<td width="20px"><input type="checkbox" value="485218" name="" id="id_"></td>
+							<td width="35px"><a class="quick-view" data-id="485215" href="javascript:;">
+							<span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat -112px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a>
 						</td>
 						<td width="50%">
 							<h3>
-								<a href="">${mycontact.name}</a>
-								<span>${mycontact.position }</span>
+								<a href="enterContact.action?cid=${contact.id }">${contact.name}</a>
+								<span>${contact.position }</span>
 							</h3>
 							<div class="info">
-								
 								
 							</div>
 						</td>
 						<td class="description">
-							<h3></h3>
+							<h3><a href="enterCompany.action?cmid=${contact.company.id}">${contact.company.name }</a></h3>
 							<div>
 							</div>
 						</td>
 					</tr>
 					</c:forEach>
-					<tr class="">
-						<td width="20px"><input type="checkbox" value="485219" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="485219" href="#"><span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat -112px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a></td>
-						<td width="50%">
-							<h3>
-								<a href="https://1339057988.workxp.info/people/485219">斯蒂芬森</a>
-								
-								<span>java工程师</span>
-							</h3>
-							<div class="info">
-								
-								
-							</div>
-						</td>
-						<td class="description">
-							<h3><a href="/companies/485218">京东商城</a></h3>
-							<div>
-							</div>
-						</td>
-					</tr>
-					<tr class="">
-						<td width="20px"><input type="checkbox" value="485215" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="485215" href="#"><span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat -112px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a></td>
-						<td width="50%">
-							<h3>
-								<a href="https://1339057988.workxp.info/people/485215">冰洋</a>
-								
-								<span>java工程师</span>
-							</h3>
-							<div class="info">
-								
-								
-							</div>
-						</td>
-						<td class="description">
-							<h3><a href="/companies/480967">凯盛科技</a></h3>
-							<div>
-							</div>
-						</td>
-					</tr>
+					
+					<c:forEach items="${companys }" var="company">
 					<tr class="">
 						<td width="20px"><input type="checkbox" value="480967" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="480967" href="#"><span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat 0px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a></td>
+						<td width="35px"><a class="quick-view" data-id="480967" href="javascript">
+							<span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat 0px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a>
+						</td>
 						<td width="50%">
 							<h3>
-								<a href="https://1339057988.workxp.info/companies/480967">凯盛科技</a>
-								
-								<span></span>
+								<a href="enterCompany.action?cmid=${company.id }">${company.name }</a>
 							</h3>
 							<div class="info">
 								
-								
-							</div>
-						</td>
-						<td class="description">
-							<h3></h3>
-							<div>
 							</div>
 						</td>
 					</tr>
-					<tr class="">
-						<td width="20px"><input type="checkbox" value="481260" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="481260" href="#"><span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat 0px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a></td>
-						<td width="50%">
-							<h3>
-								<a href="https://1339057988.workxp.info/companies/481260">璐天网络</a>
-								
-								<span></span>
-							</h3>
-							<div class="info">
-								
-								
-							</div>
-						</td>
-						<td class="description">
-							<h3></h3>
-							<div>
-							</div>
-						</td>
-					</tr>
-					<tr class="">
-						<td width="20px"><input type="checkbox" value="480968" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="480968" href="#"><span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat -112px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a></td>
-						<td width="50%">
-							<h3>
-								<a href="https://1339057988.workxp.info/people/480968">璐璐</a>
-								
-								<span>软件工程师</span>
-							</h3>
-							<div class="info">
-								<a href="mailto: acyoulu@qq.com?bcc=dropbox%2B1339057988%40workxp.info"> acyoulu@qq.com</a>
-								15037772520
-							</div>
-						</td>
-						<td class="description">
-							<h3><a href="/companies/480967">凯盛科技</a></h3>
-							<div>
-							</div>
-						</td>
-					</tr>
-					<tr class="">
-						<td width="20px"><input type="checkbox" value="480962" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="480962" href="#"><span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat -112px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a></td>
-						<td width="50%">
-							<h3>
-								<a href="https://1339057988.workxp.info/people/480962">盼盼</a>
-								<a rel="tooltip" href="return false" data-original-title="只对我可见"><i class="icon icon-lock"></i></a>
-								<span>gf</span>
-							</h3>
-							<div class="info">
-								
-								
-							</div>
-						</td>
-						<td class="description">
-							<h3></h3>
-							<div>
-							</div>
-						</td>
-					</tr>
-					<tr class="">
-						<td width="20px"><input type="checkbox" value="480960" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="480960" href="#"><span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat 0px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a></td>
-						<td width="50%">
-							<h3>
-								<a href="https://1339057988.workxp.info/companies/480960">WorkXP</a>
-								
-								<span></span>
-							</h3>
-							<div class="info">
-								<a href="mailto:workxp@workxp.info?bcc=dropbox%2B1339057988%40workxp.info">workxp@workxp.info</a>
-								
-							</div>
-						</td>
-						<td class="description">
-							<h3></h3>
-							<div>
-							</div>
-						</td>
-					</tr>
+					</c:forEach>
 				</thead>
 			</table>
 				

@@ -54,6 +54,7 @@
 		}
 		.main {
 			padding: 20px 20px 0;
+			height:550px;
 		}
 		
 		.sidebar{
