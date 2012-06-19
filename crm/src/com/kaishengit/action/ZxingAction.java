@@ -18,8 +18,9 @@ public class ZxingAction extends BaseAction{
 	private String fileName;
 	private long fileSize;
 	private String mime;
-	private int code;
-	@Action(value="head",results={
+	private String code;
+	
+	@Action(value="zxing",results={
 			@Result(name="success",type="stream",params={
 					"contentType","${mime}",
 					"contentLength","${fileSize}",
@@ -28,7 +29,7 @@ public class ZxingAction extends BaseAction{
 					"bufferSize","1024"
 			})
 	})
-	public String getHead() {
+	public String execute() {
 		return SUCCESS;
 	}
 	//该名称与action中的input名称相同
@@ -36,7 +37,7 @@ public class ZxingAction extends BaseAction{
 			File file = new File("c://2//" + code);
 			setFileName(file.getName());
 			setFileSize(file.length());
-			setMime("img/jpg");
+			setMime("img/png");
 			
 			InputStream is = new FileInputStream(file); 
 			return is;
@@ -66,11 +67,12 @@ public class ZxingAction extends BaseAction{
 		public void setMime(String mime) {
 			this.mime = mime;
 		}
-		public int getCode() {
+		public String getCode() {
 			return code;
 		}
-		public void setCode(int code) {
+		public void setCode(String code) {
 			this.code = code;
 		}
-	
+		
+		
 }
