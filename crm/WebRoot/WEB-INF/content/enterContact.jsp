@@ -298,6 +298,7 @@
 				<div class="tab-content" id="myTabContent">
 				 <div id="home" class="tab-pane fade active in">
 		            <form action="addEvent.action" method="post">
+		            	<input type="hidden" name="cid" value="${contact.id }">
 			          		<div class="controls">
 				          		<textarea rows="20" name="event.content" id="" cols="40" class="text required content">
 				          		</textarea>

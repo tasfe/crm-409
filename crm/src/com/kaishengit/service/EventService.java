@@ -19,6 +19,14 @@ public class EventService extends BaseService{
 		return events;
 	}
 
+	/**
+	 * 把event存入数据库中
+	 * @param event
+	 */
+	public void saveOrUpdate(Event event) {
+		getEventDao().saveOrUpdate(event);
+	}
+
 	
 	
 }
