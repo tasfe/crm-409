@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
@@ -227,7 +228,7 @@
 		<div class="left ">
 			<div class="">
 				<div class= "left-top">
-					<h2>联系人姓名</h2>
+					<h2>${contact.name }</h2>
 				</div>
 				<ul class="nav nav-tabs nav-stacked">
 					<li ><a href="addTask.action">添加任务</a></li>
@@ -240,7 +241,7 @@
 			</div>
 			<h3>联系我们把。。。</h3>
 			<span style="width:30px;height:30px">
-				<img alt="" src="zxing.action?code=45e5ad56-8d1b-4ce1-8057-1dc5ec842b07.png"/>
+				<img alt="" src="zxing.action?code=${contact.code }"/>
 			</span>
 		</div>
 		<div class="right" style="width:65%">
@@ -255,13 +256,13 @@
 						</td>
 						<td>
 							<div class="right-links">
-										由 <strong>我</strong> 添加 |
-									<a data-original-title="修改联系人" rel="tooltip" href="">
+										由 <strong>${contact.user.username }</strong> 添加 |
+									<a data-original-title="修改联系人" rel="tooltip" href="modifyContact.action?cid=${contact.id }">
 										<i class="icon icon-edit"></i>
 									</a>
 							</div>
 							
-							<h3>2人小组</h3>
+							<h3>${contact.name }</h3>
 							<span>
 								<div class="tags">
 									<div class="list" id="show_tags">
@@ -295,8 +296,7 @@
 			</div>
 			<div id="main" class="main">
 				<div class="tab-content" id="myTabContent">
-		            <div id="home" class="tab-pane fade active in">
-		            	<form action="" method="post">
+		            <div i56orm action="" method="post">
 			          		<div class="controls">
 				          		<textarea rows="20" name="" id="" cols="40" class="text required content">
 				          		</textarea>
@@ -407,6 +407,44 @@
 								</div>
 							</div>
 		          		</form>
+	          		<table style="margin-bottom: 60px; margin-top: 10px;" class="table top no-hover" id="activities">
+							<tbody>
+							<!-- 事件列表 -->
+							<c:forEach items="${events }" var="event">
+							<tr class="note" data-from="Person" data="781881" id="note-781881">
+									<td style="width:30px;height:50px;">
+									<span ><img src="img/event.jpg"/></span>
+									</td>
+									<td>
+										<div class="note-header">
+											<div style="float:right">
+												 <ul class="nav nav-pills">
+												 	<li><a href="eventNote.action?eid="${event.id }">评论</a></li>
+													<li><a title="编辑" href="eventEdit.action?eid="${event.id }">编辑</a></li>
+										 			<li>
+													<a title="删除" href="eventDel.action?eid="${event.id }">删除</a>
+													</li>
+												 </ul>
+											</div>
+											<div class="subject">
+											<!-- 时间 -->
+											${event.createtime }
+											</div>
+											<div class="meta">
+													${event.user.username } 添加
+											</div>
+											<div class="meta">
+											</div>
+										</div>
+										<div class="content">
+											<p>${event.content }</p>
+										</div>
+									</td>
+								</tr>
+								</c:forEach>
+								<!-- 事件结束 -->
+							</tbody>
+						</table>
 					</div>
 		            <script type="text/javascript">
 		            	$(document).ready(function() {
@@ -471,19 +509,21 @@
 		            <div id="date" class="tab-pane fade">
 						<table id="contact_dates" class="table table-striped crm-table">
 							<tbody>
+							<c:forEach items="${contact.imporyDates }" var="imporyDate">
 								<tr id="contact_date_626">
 									<td>
-										生日
+										${imporyDate.name }
 									</td>
 									<td>
-										1月01日
+										${imporyDate.time }
 									</td>
 									<td>
 									</td>
 									<td class="actions">
-										<a title="删除这个日子" rel="nofollow" data-remote="true" data-method="delete" data-confirm="您确定要删除这个日期吗？" class="icon icon-trash" href="/contacts/498882/contact_dates/626"></a>
+										<a  class="icon icon-trash" href="imporyDateDel.action?id=${imporyDate.id }"></a>
 									</td>
 								</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 						
@@ -492,22 +532,16 @@
 							添加一个日期
 						</a>
 						<div class="modal hide fade in" id="dateModal" style="display: none;">
-					           <form novalidate="novalidate" method="post" id="date_form" data-remote="true" class="simple_form new_contact_date" action="/contacts/498882/contact_dates" accept-charset="UTF-8"><div style="margin:0;padding:0;display:inline"><input type="hidden" value="✓" name="utf8"><input type="hidden" value="3oPBqglDBujG8uAKrLNOxc6kfdh6lIn9Ofipe8afnEQ=" name="authenticity_token"></div>
+					         <form  method="post" id="date_form" data-remote="true" class="simple_form new_contact_date" action="addImporyDate.action" accept-charset="UTF-8">
+								<input type="hidden" value="${contact.id }" name="contactid">
 								<div class="modal-header">
 									<a data-dismiss="modal" class="close">×</a>
-									<h3>添加一个日期</h3>
+									<h3>添加一个重要日期</h3>
 								</div>
 								<div class="modal-body">
 								<div class="control-group string optional">
 									<div class="controls">
-										<select  name="" id="contact_date_occasion" style="width:20%">
-											<option value="生日">生日</option>
-											<option value="周年纪念">周年纪念</option>
-											<option value="第一次见面">第一次见面</option>
-											<option value="雇用">雇用</option>
-											<option value="解雇">解雇</option>
-											<option value="">其它...</option>
-										</select>
+										<input type="text" style="" size="30" name="imporyDate.name" id="">
 									</div>
 								</div>			
 								<div class="control-group integer optional">
@@ -635,21 +669,12 @@
 										</select>
 									</div>
 								</div>			
-											<div class="control-group boolean optional checkbox"><div class="controls">
-												<input type="hidden" value="0" name="contact_date[assign_task]"><input type="checkbox" value="1" onclick="if('true'=='true') $(this).attr('checked') ? $('#task-owner-field').show() : $('#task-owner-field').hide()" name="contact_date[assign_task]" id="contact_date_assign_task">
-												在每年这个日期的前一周创建一个提醒任务
-								</div></div>			
-											<div id="task-owner-field" style="display:none">
-												给
-												<select name="contact_date[task_owner_id]" id="contact_date_task_owner_id"><option value="5863">我</option>
-								<option value="5858">陈路</option></select>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<a data-dismiss="modal" class="btn" href="#">取消</a>
-											<input type="submit" value="添加日期" name="commit" class="btn btn-primary">
-										</div>
-								</form>
+							</div>
+							<div class="modal-footer">
+								<a data-dismiss="modal" class="btn" href="#">取消</a>
+								<input type="submit" value="添加日期"  class="btn btn-primary">
+							</div>
+						</form>
 					     </div>
 					     <!-- 结束 -->
 		            </div>
@@ -672,50 +697,57 @@
 			<!-- 联系信息 -->
 			<div class="well" id="tasks_div" style="background-color: #F5F5F5;">
 				<div class="title" >
-					<span><a data-backdrop="static" href="#taskModal" data-toggle="modal">编辑</a></span>
+					<span><a href="contactEdit.action?cid="${contact.id }">编辑</a></span>
 					联系信息 
 				</div>
 				<ul class="nav nav-list contacts">
 					<li class="nav-header">电话</li>
+					<c:forEach items="${contact.tels }" var="tel">
 					<li>
-							dasfasdf
-						<span>公司</span>
+							${tel.tel }
+						<span>${tel.type }</span>
 					</li>
+					</c:forEach>
 				
 					<li class="nav-header">邮箱</li>
+					<c:forEach items="${contact.contactEmails }" var="email">
 					<li>
-							<a href="mailto:asdfadsfasdf?bcc=dropbox%2B1339070059%40workxp.info">asdfadsfasdf</a>
-						<span>工作</span>
+							<a href="http://${email.email }">${email.email }</a>
+						<span>${email.type }</span>
 					</li>
-				
+					</c:forEach>
 					<li class="nav-header">IM</li>
-					<li>
-							adsfasdfa
-						<span>QQ</span>
-					</li>
-				
+					<c:forEach items="${contact.ims }" var="im">
+						<li>
+								${im.im }
+							<span>${im.type }</span>
+						</li>
+					</c:forEach>
 					<li class="nav-header">网站</li>
-					<li>
-							asdf
-						<span>公司</span>
-					</li>
-			
+					<c:forEach items="${contact.sites }" var="site">
+						<li>
+								${site.site }
+							<span>${site.type }</span>
+						</li>
+					</c:forEach>
+					<c:forEach items="${contact.addresses }" var="address">
 					<li class="nav-header">地址</li>
 					<li>
-							sdaf
-						<span>公司</span>
+							${address.address }
+						<span>${address.type }</span>
 					</li>
+					</c:forEach>
 				</ul>
 			</div>	
 			<!-- 结束 -->
 				<!-- 背景信息 -->
 			<div class="well" id="tasks_div" style="background-color: #F5F5F5;">
 				<div class="title" >
-					<span><a data-backdrop="static" href="#taskModal" data-toggle="modal">编辑</a></span>
+					<span style="display:none"><a data-backdrop="static" href="#taskModal" data-toggle="modal">编辑</a></span>
 					背景信息 
 				</div>
 				<div id="background_info">
-					<p>这是我的背景信息啦。呵呵呵</p>
+					<p>${contact.content }</p>
 				</div>
 			</div>	
 			<!-- 结束 -->				
