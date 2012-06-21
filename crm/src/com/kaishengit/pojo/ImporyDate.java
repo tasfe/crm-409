@@ -17,8 +17,9 @@ public class ImporyDate {
 
 	private int id;
 	private String name;
+	private String time;
 	
-	//关联关系
+	//鍏宠仈
 	private Contact contact;
 
 	@Id
@@ -39,7 +40,7 @@ public class ImporyDate {
 		this.name = name;
 	}
 
-	//和联系人的关联关系
+	//锟斤拷锟斤拷系锟剿的癸拷锟斤拷锟斤拷系
 	@ManyToOne
 	@JoinColumn(name="contactid")
 	public Contact getContact() {
@@ -49,6 +50,13 @@ public class ImporyDate {
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
-	
-	
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 }

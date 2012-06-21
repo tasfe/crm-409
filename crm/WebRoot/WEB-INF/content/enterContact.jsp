@@ -296,16 +296,17 @@
 			</div>
 			<div id="main" class="main">
 				<div class="tab-content" id="myTabContent">
-		            <div i56orm action="" method="post">
+				 <div id="home" class="tab-pane fade active in">
+		            <form action="addEvent.action" method="post">
 			          		<div class="controls">
-				          		<textarea rows="20" name="" id="" cols="40" class="text required content">
+				          		<textarea rows="20" name="event.content" id="" cols="40" class="text required content">
 				          		</textarea>
 			          		</div>
 			          		<div class="options" style="display:none">
 			          			<div class="control-group optional">
 			          			<label for="note_occurred_at_1i" class="optional control-label"> 什么时候发生的？</label>
 			          				<div class="controls">
-				          				<select name="" id="" class="optional" style="width:15%">
+				          				<select name="year" id="" class="optional" style="width:15%">
 										<option value="2007">2007</option>
 										<option value="2008">2008</option>
 										<option value="2009">2009</option>
@@ -318,7 +319,7 @@
 										<option value="2016">2016</option>
 										<option value="2017">2017</option>
 										</select>
-									<select name="" id="" class="optional" style="width:15%">
+									<select name="month" id="" class="optional" style="width:15%">
 										<option value="1">一月</option>
 										<option value="2">二月</option>
 										<option value="3">三月</option>
@@ -332,7 +333,7 @@
 										<option value="11">十一月</option>
 										<option value="12">十二月</option>
 									</select>
-									<select name="" id="" class="optional" style="width:15%">
+									<select name="day" id="" class="optional" style="width:15%">
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -367,36 +368,7 @@
 									</select>
 									</div>
 								</div>
-								<div class="control-group string optional">
-			          		<label for="note_access_policy" class="string optional control-label"> 哪些同事可以看见？</label>
-			          		<div class="controls">
-								<div class="radio scope activated">
-									<input type="radio" value="all" name="role" id="all" checked="checked"> 所有同事
-								</div>
-								<div class="radio scope">
-									<input type="radio" value="me" name="role" id="me"> 只有我能看见
-								</div>
-								<div class="radio scope ">
-									<input type="radio" value="group" name="role" id="groupselect"> 选择一个组...
-									<div class="editor">
-								  	<select name="groupid" id="groupname" class="named_group"  style="width:15%;display:none">
-								  		<option value="">选择一个组</option>
-										<option value="583">5646adsf</option>
-										<option value="584">jlkjlkj</option>
-									</select> 
-									</div>
-								</div>
-								<div class="radio scope  ">
-									<input type="radio" value="user" name="role" id="workerselect"> 选择同事...
-									<div class="editor">
-								  		<select name="" id="workername" class="new_adhoc_group_member" style="width:15%;display:none">
-									  		<option selected="selected" value="">选择一个同事...</option>
-											<option value="5858">陈路</option>
-										</select> 
-									</div>
-								</div>
-							</div>
-						</div>
+							
 			          		</div>
 							<div class="new_note_form_basics" style="margin-top:8px;">
 								<div class="addevent" style="float: right;">
@@ -446,6 +418,7 @@
 							</tbody>
 						</table>
 					</div>
+					
 		            <script type="text/javascript">
 		            	$(document).ready(function() {
 						
@@ -474,7 +447,7 @@
 							});
 						});
 					</script>
-		    <!--         <div id="contact" class="tab-pane fade">
+		    <!--        <div id="contact" class="tab-pane fade">
 		              联系人
 		            </div> -->
 		            <div id="service" class="tab-pane fade">

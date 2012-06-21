@@ -39,6 +39,11 @@ public class ContactService extends BaseService{
 		return gcontacts;
 	}
 
+	public Contact findByCid(int cid) {
+		Contact contact = getContactDao().findById(cid);
+		return contact;
+	}
+
 	
 	
 	
