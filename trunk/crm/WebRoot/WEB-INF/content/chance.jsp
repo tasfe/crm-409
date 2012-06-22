@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
@@ -106,7 +108,8 @@
 					<div class="control-group select optional " >
 						<label class="select optional control-label">状态</label>
 						<div class="controls" >
-							<select onchange="window.location='/chances?filter=on&amp;page=1&amp;state=' + $(this).val()" name="state" id="state" ><option selected="selected" value="">所有状态</option>
+							<select  name="state" id="state" >
+								<option selected="selected" value="">所有状态</option>
 								<option value="pending">跟踪</option>
 								<option value="won">成功</option>
 								<option value="lost">失败</option></select>
@@ -147,61 +150,56 @@
 				</div>
 			</div>
 		</div>
+		<!-- 左边 -->
 		<div class="right">
 			<div class="right-top "><span style="font-size:24px;">业务机会</span>
-				<div>2个机会，价值￥2050.0</div>
+				<div>${length }个机会，价值￥
+				${money }
+				</div>
 			</div>
 			
 			<div id="main" class="main">
 			
-				<table id="chances" class="table ">
-					<tbody><tr>
-						<td>
-							<h4>
-					<a href="/chances/4129">求爱</a>
-					
-				</h4>
-				
-				
-					<div>低的奋斗 </div>
-				<div>
-						<span class="label" style="background:#46647C;">爱</span>
-					￥2000.0
-				</div>
-					<div>由 岳金鹏 负责</div>
-			</td>
-			<td style="width:60px" class="actions">
-				<span class="label label-success">成功</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<h4>
-					<a href="/chances/4130">送我东西</a>
-					
-				</h4>
-				
-					来自
-					<a href="https://1339057988.workxp.info/people/480962">盼盼</a> 
-				
-					<div>仙人球</div>
-				<div>
-						<span class="label" style="background:#46647C;">爱</span>
-					￥50.0
-				</div>
-					<div>由 岳金鹏 负责</div>
-			</td>
-			<td style="width:60px" class="actions">
-				<span class="label label-pending">跟踪</span>
-			</td>
-		</tr>
-	</tbody></table>
-	
-
-					</div>
-				
+		<table id="chances" class="table ">
+			<tbody>	
+			<c:forEach items="${chances }" var="chance">
+				<tr>
+					<td>
+						<h4>
+							<a href="enterChance.action?${chance.id }">${chance.name }</a>
+							
+						</h4>
+						
+							来自
+							<a href="enterContact.action?cid=${chance.contact.id }">${chance.contact.name }</a> 
+						
+							<div>${chance.content }</div>
+						<div>
+								<span class="label" style="background:#46647C;">${chance.chancesorts.name }</span>
+							￥${chance.money }
+						</div>
+							<div>由 ${chance.user.username } 负责</div>
+					</td>
+					<td style="width:60px" class="actions">
+						<span class="label label-pending">
+							<c:if test="${chance.state == 'a'}">
+								跟踪
+							</c:if>
+							<c:if test="${chance.state == 'b'}">
+								成功
+							</c:if>
+							<c:if test="${chance.state == 'c'}">
+								失败
+							</c:if>
+						</span>
+					</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 		</div>
-		</div>
+	</div>
+	</div>
 	</div>
 	
 </body>

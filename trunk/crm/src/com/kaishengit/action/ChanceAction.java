@@ -1,6 +1,8 @@
 package com.kaishengit.action;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
@@ -31,8 +33,34 @@ public class ChanceAction extends BaseAction{
 	private List<UserProduct> userProducts;
 	private List<Group> groups;
 	private List<ChanceSort> chanceSorts;
+	private Set<Chance> chances = new HashSet<Chance>();
+	private int length = 0;
+	private float money = 0f;
 	@Override
 	public String execute() throws Exception {
+		List<Chance> mychance = getChanceService().findByUser(((User)getSession("user")),((Product)getSession("product")));
+		//得到当前用户所在的所有小组
+		User u = getUserService().findById(((User)getSession("user")).getId());
+		Set<Group> groups = u.getGroups();
+		Set<Chance> gchances = new HashSet<Chance>();
+		for(Group g : groups) {
+			gchances.addAll(getChanceService().findByGid(g.getId(),((Product)getSession("product"))));
+		}
+		List<Chance> achance = getChanceService().findByView(((Product)getSession("product")));
+		List<Chance> uchance = getChanceService().findByUAndView(((Product)getSession("product")),((User)getSession("user")).getId());
+		
+		//自己负责的机会
+		List<Chance> fchance =  getChanceService().findByMAndView(((Product)getSession("product")),((User)getSession("user")).getId());
+		//把自己能看到的机会放到一个集合中，取消重复的
+		chances.addAll(mychance);
+		chances.addAll(gchances);
+		chances.addAll(achance);
+		chances.addAll(uchance);
+		chances.addAll(fchance);
+		length = chances.size();
+		for(Chance chance : chances) {
+			money += chance.getMoney();
+		}
 		return super.execute();
 	}
 	@Action("addchance")
@@ -147,6 +175,24 @@ public class ChanceAction extends BaseAction{
 	}
 	public void setChanceSorts(List<ChanceSort> chanceSorts) {
 		this.chanceSorts = chanceSorts;
+	}
+	public Set<Chance> getChances() {
+		return chances;
+	}
+	public void setChances(Set<Chance> chances) {
+		this.chances = chances;
+	}
+	public int getLength() {
+		return length;
+	}
+	public void setLength(int length) {
+		this.length = length;
+	}
+	public float getMoney() {
+		return money;
+	}
+	public void setMoney(float money) {
+		this.money = money;
 	}
 	
 }
