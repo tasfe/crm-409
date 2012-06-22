@@ -44,6 +44,11 @@ public class ContactService extends BaseService{
 		return contact;
 	}
 
+	public Contact findByName(String contact_name) {
+		Contact c = getContactDao().findByName(contact_name);
+		return c;
+	}
+
 	
 	
 	
