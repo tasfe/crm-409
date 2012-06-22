@@ -25,9 +25,9 @@ public class Chance {
 	private String state;
 	private String createtime;
 	private String view;
-	private String managerid;
+	private int managerid;
 	
-	//¹ØÁª¹ØÏµ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµ
 	private Product product;
 	private User user;
 	private Contact contact;
@@ -79,13 +79,14 @@ public class Chance {
 	public void setView(String view) {
 		this.view = view;
 	}
-	public String getManagerid() {
+	
+	public int getManagerid() {
 		return managerid;
 	}
-	public void setManagerid(String managerid) {
+	public void setManagerid(int managerid) {
 		this.managerid = managerid;
 	}
-	//¶Ô²úÆ·µÄ¶à¶ÔÒ»
+	//ï¿½Ô²ï¿½Æ·ï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="productid")
 	public Product getProduct() {
@@ -94,7 +95,7 @@ public class Chance {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	//¶ÔÓÃ»§µÄ¶à¶ÔÒ»
+	//ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="userid")
 	public User getUser() {
@@ -104,7 +105,7 @@ public class Chance {
 		this.user = user;
 	}
 	
-	//¶ÔÁªÏµÈËµÄ¶à¶ÔÒ»
+	//ï¿½ï¿½ï¿½ï¿½Ïµï¿½ËµÄ¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="contactid")
 	public Contact getContact() {
@@ -113,7 +114,7 @@ public class Chance {
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
-	//¶Ô¹«Ë¾µÄ¶à¶ÔÒ»
+	//ï¿½Ô¹ï¿½Ë¾ï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="companyid")
 	public Company getCompany() {
@@ -122,7 +123,7 @@ public class Chance {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-	//¶Ôchancesort µÄ¶à¶ÔÒ»
+	//ï¿½ï¿½chancesort ï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="chancesortid")
 	public ChanceSort getChancesorts() {
@@ -131,7 +132,7 @@ public class Chance {
 	public void setChancesorts(ChanceSort chancesorts) {
 		this.chancesorts = chancesorts;
 	}
-	//¶ÔeventµÄÒ»¶Ô¶à
+	//ï¿½ï¿½eventï¿½ï¿½Ò»ï¿½Ô¶ï¿½
 	@OneToMany(mappedBy="chance")
 	public Set<Event> getEvents() {
 		return events;

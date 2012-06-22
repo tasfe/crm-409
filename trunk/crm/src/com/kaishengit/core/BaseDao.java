@@ -12,12 +12,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.kaishengit.pojo.User;
 public class BaseDao<T,PK extends Serializable> {
 	
 	private SessionFactory sessionFactory;
 	private Class<?> clazz;
-	//»ñÈ¡µ±Ç°´«¹ýÀ´µÄ·ºÐÍµÄclass
+	//ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½Íµï¿½class
 	public BaseDao() {
 		ParameterizedType  t = (ParameterizedType) this.getClass().getGenericSuperclass();
 		Type[] types = t.getActualTypeArguments();
@@ -25,7 +24,7 @@ public class BaseDao<T,PK extends Serializable> {
 	}
 	
 	/**
-	 * »ñÈ¡sessionFactory
+	 * ï¿½ï¿½È¡sessionFactory
 	 * @param sessionFactory
 	 */
 	@Resource
@@ -33,35 +32,35 @@ public class BaseDao<T,PK extends Serializable> {
 		this.sessionFactory = sessionFactory;
 	}
 	/**
-	 * ·µ»ØSession
+	 * ï¿½ï¿½ï¿½ï¿½Session
 	 * @return
 	 */
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
 	/**
-	 * Ö´ÐÐsaveOrUpdate²Ù×÷
+	 * Ö´ï¿½ï¿½saveOrUpdateï¿½ï¿½ï¿½ï¿½
 	 * @param t
 	 */
 	public void saveOrUpdate(T t) throws HibernateException {
 		getSession().saveOrUpdate(t);
 	}  
 	/**
-	 * Ö´ÐÐÉ¾³ý²Ù×÷
+	 * Ö´ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param t
 	 */
 	public void del(T t) throws HibernateException {
 		getSession().delete(t);
 	}
 	/**
-	 * ¸ù¾ÝIdÖ´ÐÐ²Ù×÷
+	 * ï¿½ï¿½ï¿½IdÖ´ï¿½Ð²ï¿½ï¿½ï¿½
 	 * @param id
 	 */
 	public void del(PK id) throws HibernateException {
 		getSession().delete(findById(id));
 	}
 	/**
-	 * ¸ù¾ÝId²éÕÒ¶ÔÏó
+	 * ï¿½ï¿½ï¿½Idï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½
 	 * @param id
 	 * @return
 	 */
@@ -70,12 +69,12 @@ public class BaseDao<T,PK extends Serializable> {
 		return (T) getSession().get(clazz, id);
 	} 
 	/**
-	 * ²éÕÒËùÓÐ¶ÔÏóµÄ¼¯ºÏ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<User> findAll() throws HibernateException {
-		Criteria cri = getSession().createCriteria(User.class);
+	public List<T> findAll() throws HibernateException {
+		Criteria cri = getSession().createCriteria(clazz);
 		return cri.list();
 	}
 }

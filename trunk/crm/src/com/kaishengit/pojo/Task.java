@@ -21,8 +21,8 @@ public class Task {
 	private int state;
 	private boolean enableshow;
 	private int managerid;
-	
-	//¹ØÁª¹ØÏµ
+	private String endtime;
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµ
 	private User user;
 	private Product product;
 	private TaskSort tasksort;
@@ -66,7 +66,7 @@ public class Task {
 	public void setManagerid(int managerid) {
 		this.managerid = managerid;
 	}
-	//¶ÔuserµÄ¶à¶ÔÒ»
+	//ï¿½ï¿½userï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="userid")
 	public User getUser() {
@@ -75,7 +75,7 @@ public class Task {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	//¶ÔproductµÄ¶à¶ÔÒ»
+	//ï¿½ï¿½productï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="productid")
 	public Product getProduct() {
@@ -85,7 +85,7 @@ public class Task {
 		this.product = product;
 	}
 	
-	//¶ÔtasksortµÄ¶à¶ÔÒ»
+	//ï¿½ï¿½tasksortï¿½Ä¶ï¿½ï¿½Ò»
 	@ManyToOne
 	@JoinColumn(name="tasksortid")
 	public TaskSort getTasksort() {
@@ -94,5 +94,12 @@ public class Task {
 	public void setTasksort(TaskSort tasksort) {
 		this.tasksort = tasksort;
 	}
+	public String getEndtime() {
+		return endtime;
+	}
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+	
 	
 }

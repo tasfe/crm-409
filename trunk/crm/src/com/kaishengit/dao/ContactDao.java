@@ -38,4 +38,10 @@ public class ContactDao  extends BaseDao<Contact, Integer>{
 		return query.list();
 	}
 
+	public Contact findByName(String contact_name) {
+		Query query = getSession().createQuery("from Contact where name=:name"); 
+		query.setParameter("name", contact_name);
+		return (Contact) query.uniqueResult();
+	}
+
 }

@@ -89,13 +89,13 @@
 		<div class="left ">
 			<div class="">
 				<div class= "left-top">
-					<h2>公司名</h2>
+					<h2>${product.name }</h2>
 				</div>
 				
 				<ul class="nav nav-tabs nav-stacked">
 					<li class="active"><a href="">业务机会</a></li>
 					
-					<li><a href="#">创建机会</a></li>
+					<li><a href="addchance.action">创建机会</a></li>
 					<li><a href="#">清除过滤显示所有机会</a></li>
 					<li><a href="#">导出机会</a></li>
 				</ul>
