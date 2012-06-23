@@ -47,6 +47,11 @@ public class TaskService extends BaseService{
 		t.setState(2);
 	}
 
+	public List<Task> findByMidAndTime(int id) {
+		List<Task> tasks = getTaskDao().findByMidAndTime(id);
+		return tasks;
+	}
+
 	
 	
 }
