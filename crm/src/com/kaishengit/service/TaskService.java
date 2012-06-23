@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kaishengit.core.BaseService;
+import com.kaishengit.pojo.Message;
+import com.kaishengit.pojo.Product;
 import com.kaishengit.pojo.Task;
 import com.kaishengit.pojo.User;
+import com.kaishengit.util.TimeUtil;
 
 
 @Service
@@ -38,13 +41,25 @@ public class TaskService extends BaseService{
 		return tasks;
 	}
 
-	public void del(int tid) {
+	public void del(int tid, User user, Product product, Task t) {
 		getTaskDao().del(tid);
+		//Message添加
+		Message m = new Message();
+		m.setCreatetime(TimeUtil.getNow());
+		m.setProduct(product);
+		m.setUser(user);
+		m.setSort("task");
+		StringBuilder sb = new StringBuilder();
+		sb.append("<del>" + t.getName() + "</del>");
+		sb.append("<span class='author'> 由 " + user.getUsername() + " 完成</span>");
+		m.setContent(sb.toString());
+		getMessageService().saveOrUpdate(m);
 	}
 
-	public void findById(int tid) {
+	public Task findById(int tid) {
 		Task t = getTaskDao().findById(tid);
 		t.setState(2);
+		return t;
 	}
 
 	public List<Task> findByMidAndTime(int id) {

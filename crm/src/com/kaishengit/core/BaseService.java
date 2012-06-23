@@ -22,6 +22,7 @@ import com.kaishengit.dao.TaskSortDao;
 import com.kaishengit.dao.TelDao;
 import com.kaishengit.dao.UserDao;
 import com.kaishengit.dao.UserProductDao;
+import com.kaishengit.service.MessageService;
 
 public class BaseService {
 
@@ -45,6 +46,16 @@ public class BaseService {
 	private TelDao telDao;
 	private AddressDao addressDao;
 	private ContactEmailDao contactEmailDao;
+	private MessageService messageService;
+	
+	@Resource
+	public void setMessageService(MessageService messageService) {
+		this.messageService = messageService;
+	}
+	public MessageService getMessageService() {
+		return messageService;
+	}
+
 	@Resource
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;

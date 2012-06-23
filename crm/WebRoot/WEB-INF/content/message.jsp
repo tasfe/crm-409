@@ -210,128 +210,30 @@
 						
 					<table class="table crm-table dashboard">
 						<tbody>
+						<c:forEach items="${messages }" var="message">
 							<tr id="activity_783582">
 								<td class="icon"  style="width: 30px">
+									<c:if test="${message.sort == 'event'}">
+									<span><img src="img/event.png" alt="" /></span>
+									</c:if>
+									<c:if test="${message.sort == 'note'}">
+									<span><img src="img/note.png" alt="" /></span>
+									</c:if>
+									<c:if test="${message.sort == 'task'}">
 									<span><img src="img/duigou.png" alt="" /></span>
+									</c:if>
+									<c:if test="${message.sort == 'chance'}">
+									<span><img src="img/chance.png" alt="" /></span>
+									</c:if>
 								</td>
 								<td>
-									<del>陈路的新任务</del><span class="author"> 由 陈路 完成</span><a title="删除这条动态" style="margin-left:5px" rel="nofollow" data-remote="true" data-method="delete" data-confirm="您确定要删除这条动态吗？" class="icon icon-trash" href="/tasks/23097/delete_activity"></a>
+									${message.content }
 								</td>
 								<td class="actions date">
-									<span class="">06-08</span>
+									<span class="">${message.createtime }</span>
 								</td>
 							</tr>
-							<tr id="activity_783578">
-								<td class="icon"  style="width: 30px">
-									<span><img src="img/duigou.png" alt="" /></span>
-								</td>
-								<td>
-									<strong><a href="/chances/4142">大飒飒地方</a></strong><div class="content"><a href="/notes/765301">打三分</a></div><span class="author">由 陈路 添加</span>
-								</td>
-								<td class="actions date">
-									<span class="">06-08</span>
-								</td>
-							</tr>
-							<tr id="activity_781786">
-								<td class="icon">
-									<span class="sprite chance"></span>
-								</td>
-								<td>
-									<strong><a href="/chances/4142">大飒飒地方</a></strong><br>陈路 将机会状态改为 失败
-								</td>
-								<td class="actions date">
-									<span class="">06-08</span>
-								</td>
-							</tr>
-							
-							<tr id="activity_781781">
-								<td class="icon">
-									<span class="sprite note"></span>
-								</td>
-								<td>
-									<strong><a href="/chances/4131">dfsdfsg</a></strong><div class="content"><a href="/notes/763553">你好啊 呵呵呵呵。 </a></div><span class="author">由 陈路 添加</span>
-								</td>
-								<td class="actions date">
-									<span class="">06-08</span>
-								</td>
-							</tr>
-							<tr id="activity_781780">
-								<td class="icon">
-									<span class="sprite chance"></span>
-								</td>
-								<td>
-									<strong><a href="/chances/4142">大飒飒地方</a></strong><br>陈路创建了这个机会
-								</td>
-								<td class="actions date">
-									<span class="">06-08</span>
-								</td>
-							</tr>
-							<tr id="activity_781779">
-								<td class="icon">
-									<span class="sprite task"></span>
-								</td>
-								<td>
-									<del>dasf</del><span class="author"> 由 陈路 完成</span><a title="删除这条动态" style="margin-left:5px" rel="nofollow" data-remote="true" data-method="delete" data-confirm="您确定要删除这条动态吗？" class="icon icon-trash" href="/tasks/23095/delete_activity"></a>
-								</td>
-								<td class="actions date">
-									<span class="">06-08</span>
-								</td>
-							</tr>
-							<tr id="activity_781726">
-								<td class="icon">
-									<span class="sprite comment"></span>
-								</td>
-								<td>
-									<strong><a href="/chances/4131">dfsdfsg</a></strong><div class="content"><a href="/notes/763533">fhfhg</a></div><span class="author">由 陈路 添加</span>
-								</td>
-								<td class="actions date">
-									<span class="">06-08</span>
-								</td>
-							</tr>
-							<tr id="activity_781724">
-								<td class="icon">
-									<span class="sprite note"></span>
-								</td>
-								<td>
-									<strong><a href="/chances/4131">dfsdfsg</a></strong><div class="content"><a href="/notes/763531">hihihu</a></div><span class="author">由 陈路 添加</span>
-								</td>
-								<td class="actions date">
-									<span class="">06-07</span>
-								</td>
-							</tr>
-							<tr id="activity_781725">
-								<td class="icon">
-									<span class="sprite note"></span>
-								</td>
-								<td>
-									<strong><a href="/chances/4131">dfsdfsg</a></strong><div class="content"><a href="/notes/763532">guygu</a></div><span class="author">由 陈路 添加</span>
-								</td>
-								<td class="actions date">
-									<span class="">06-07</span>
-								</td>
-							</tr>
-							<tr id="activity_781723">
-								<td class="icon">
-									<span class="sprite chance"></span>
-								</td>
-								<td>
-									<strong><a href="/chances/4131">dfsdfsg</a></strong><br>陈路创建了这个机会
-								</td>
-								<td class="actions date">
-									<span class="">06-07</span>
-								</td>
-							</tr>
-							<tr id="activity_781697">
-								<td class="icon">
-									<span class="sprite chance"></span>
-								</td>
-								<td>
-									<strong><a href="/chances/4127">有可能买车</a></strong><br>陈路创建了这个机会
-								</td>
-								<td class="actions date">
-									<span class="">06-07</span>
-								</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 			</div>

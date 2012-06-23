@@ -38,6 +38,7 @@ public class ChanceAction extends BaseAction{
 	private Set<Chance> chances = new HashSet<Chance>();
 	private int length = 0;
 	private float money = 0f;
+	
 	@Override
 	public String execute() throws Exception {
 		List<Chance> mychance = getChanceService().findByUser(((User)getSession("user")),((Product)getSession("product")));
@@ -79,11 +80,7 @@ public class ChanceAction extends BaseAction{
 	})
 	public String addc(){
 		Company cm = getCompanyService().findByName(contact_name);
-		Contact c  = null;
-		if(cm == null) {
-			c = getContactService().findByName(contact_name); 
-		}
-		
+		Contact c = getContactService().findByName(contact_name); 
 		if(cm == null && c == null) {
 			//输入的联系人不存在
 			return ERROR;
@@ -110,9 +107,13 @@ public class ChanceAction extends BaseAction{
 			} else if("user".equals(role)) {
 				chance.setView("u:" + userid);
 			}
-			
+			User user = (User)getSession("user");
+			Product product = (Product)getSession("product");
 			//保存
-			getChanceService().saveOrUpdate(chance);
+			getChanceService().saveOrUpdate(chance,user,product);
+//			System.out.println(chance.getId());
+//			System.out.println(chance.getName());
+//			System.out.println(chance.getContact().getName());
 			return SUCCESS;
 		}
 	}
@@ -120,8 +121,10 @@ public class ChanceAction extends BaseAction{
 	@Action("modifyState")
 	public String modifyState() {
 		boolean result = true;
+		User user = (User)getSession("user");
+		Product product = (Product)getSession("product");
 		try {
-			getChanceService().findById(chanceid,state);
+			getChanceService().findById(chanceid,state,user,product);
 		} catch (Exception e) {
 			result = false;
 			e.printStackTrace();
