@@ -23,8 +23,16 @@ public class ChanceSortService extends BaseService{
 		return cs;
 	}
 
-	
+	public ChanceSort findByName(String name) {
+		ChanceSort cs = getChanceSortDao().findByName(name);
+		return cs;
+	}
 
-	
-	
+	public void saveOrUpdate(ChanceSort chanceSort) {
+		getChanceSortDao().saveOrUpdate(chanceSort);
+	}
+
+	public void delById(int id) throws Exception{
+		getChanceSortDao().del(id);
+	}
 }

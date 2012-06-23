@@ -169,7 +169,7 @@
 							<option value="${chanceSort.id }">${chanceSort.name }</option>
 						</c:forEach>	
 					</select>
-					<a href="addchancesort.action">编辑分类</a>
+					<a href="chancesort.action">编辑分类</a>
 					</div>
 				</div>		
 				<!-- 负责人 -->
