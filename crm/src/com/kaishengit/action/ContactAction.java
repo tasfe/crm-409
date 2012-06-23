@@ -91,6 +91,7 @@ public class ContactAction extends BaseAction{
 		
 		return super.execute();
 	}
+	
 	@Action("toaddcontact")
 	public String toAddContact() {
 		userProducts = getUserProductService().findByProduct(((Product)getSession("product")));

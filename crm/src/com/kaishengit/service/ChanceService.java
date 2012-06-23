@@ -50,6 +50,11 @@ public class ChanceService extends BaseService{
 		return gchances;
 	}
 
+	public Chance findById(int id) {
+		Chance chance = getChancedao().findById(id);
+		return chance;
+	}
+
 	
 
 	
