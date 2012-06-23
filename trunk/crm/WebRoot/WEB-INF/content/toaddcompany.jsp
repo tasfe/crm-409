@@ -4,7 +4,7 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title>添加联系人</title>
+	<title>添加公司</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<script type="text/javascript" src ="js/jQuery.js"></script>
 	<script type="text/javascript" src ="js/bootstrap.min.js"></script>
@@ -65,17 +65,7 @@
 			margin:25px;
 			
 		}
-		.sidebar{
-			margin-top:35px;
-		}
-		.sidebar .title {
-			border-bottom: 1px solid #CCCCCC;
-			color: #000000;
-			font-size: 14px;
-			font-weight: bold;
-			margin-bottom: 5px;
-			padding-bottom: 3px;
-		}
+		
 		#search{
 			border-radius: 14px 14px 14px 14px;
 			width:110px;
@@ -98,6 +88,9 @@
 		.main {
 			padding: 20px 20px 0;
 		}
+		select{
+			width:90px;
+		}
 	</style>
 </head>
 <body>
@@ -108,47 +101,29 @@
 		<div class="left ">
 			<div class="">
 				<div class= "left-top">
-					<h3>${sessionScope.product.name} </h3>
+					<h3>${sessionScope.product.name	 }</h3>
 				</div>
 				
 				<ul class="nav nav-tabs nav-stacked">
-					<li class="active"><a href="">添加联系人</a></li>
+					<li class=""><a href="toaddcontact.action">添加联系人</a></li>
 					
-					<li><a href="toaddcompany.action">添加公司</a></li>
+					<li class="active"><a href="#">添加公司</a></li>
 					<li><a href="#">导入联系人</a></li>
 				</ul>
 			</div>
-			<div class="sidebar">
-				<div class="well">
-					<div class="title">什么是联系人？</div>
-					<p>
-						联系人是一个通用的概念，可以是客户，顾客，合作伙伴，供应商，学生，患者，同学，朋友等。
-					</p>
-				</div>
-			</div>
+			
 		</div>
 		<div class="right">
-			<div class="right-top "><span style="font-size:24px;">添加联系人</span></div>
+			<div class="right-top "><span style="font-size:24px;">添加公司</span></div>
 			
 			<div class="main">
-				<form  method="post" id="contact_form" class="simple_form form-horizontal" action="addContact.action" >
-					<div class="control-group string required">
-						<label for="person_name" class="string required control-label">
-							<abbr title="required">*</abbr> 姓名</label>
-						<div class="controls">
-							<input type="text" size="50" name="contact.name" class="string required">
-						</div>
-					</div>
-					<div class="control-group string optional">
-						<label for="person_title" class="string optional control-label"> 职位</label>
-						<div class="controls">
-							<input type="text" size="50" name="contact.position" class="string optional">
-						</div>
-					</div>
+				<form  method="post" id="contact_form" class="simple_form form-horizontal" action="addCompany.action" >
+					
 					<div class="control-group string optional marco_polo_container">
-						<label for="person_company" class="string optional control-label"> 公司</label>
+						<label for="person_company" class="string optional control-label"> 名称</label>
 						<div class="controls">
-							<input type="text" size="50" name="company.name" class="string optional">
+							<input type="text" name="company.name" id="company_name"  class="input-xlarge mp_input" ><ul class="typeahead dropdown-menu mp_list" style="display: none;"></ul>
+							<input type="hidden" name="person[company_id]" id="person_company_id">
 						</div>
 					</div>
 					<div class="control-group string optional marco_polo_container">
@@ -157,9 +132,9 @@
 							<div id="contact_phone_list_company" class="contact_forms contact_phones">
 									
 									<div style="" class="contact_methods">
-										<input type="text" size="30" name="tel" id="tel" >
-											<select name="teltype" id="telsort" style="width:90px">
-												<option value="company">公司</option>
+										<input type="text" size="30" name="tel" id="tel" class="autofocus">
+											<select name="telType" id="telsort">
+												<option value="office">公司</option>
 												<option value="work">工作</option>
 												<option value="mobile">手机</option>
 												<option value="fax">传真</option>
@@ -205,6 +180,8 @@
 							document.getElementById("contact_phone_list_company").removeChild(div);
 						}
 					</script>
+					
+					
 					<div class="control-group email optional">
 						<label for="person_contact_email" class="email optional control-label"> 邮箱</label>
 							<div class="controls">
@@ -214,12 +191,13 @@
 											
 											<div class="contact_method new_contact_method edit_phone" id="contact_email_3e6b5cd0-95a1-012f-f0bf-000c29568e7b">
 									
-												<input type="text" size="30" name="email" id="mail" class="mail">
-												<select name="emailtype" id="mailsort" style="width:90px">
+												<input type="text" size="30" name="email" id="mail" >
+												<select name="emailType" id="mailsort">
 													<option value="work">工作</option>
 													<option value="personal">个人</option>
 													<option value="other">其它</option>
 												</select>
+													
 											</div>
 										<div class="addmail" style="display:none"><a href="javascript:;">添加..</a></div>
 									</div>
@@ -258,6 +236,7 @@
 							document.getElementById("contact_email_list_company").removeChild(div);
 						}
 					</script>
+					
 					<div class="control-group string optional"><label for="person_contact_im" class="string optional control-label"> IM</label>
 						<div class="controls">
 							<div id="contact_im_list_company" class="contact_forms contact_ims">
@@ -404,17 +383,20 @@
 							document.getElementById("contact_add_list_company").removeChild(div);
 						}
 					</script>
+					
+					
+					
 					<div class="control-group string optional">
 						<label for="person_contact_sns_attributes_0_value" class="string optional control-label"> 新浪微博</label>
 						<div class="controls help-block">
-						<input type="text" size="50" name="contact.weibo" class="string optional">
+						<input type="text" size="50" name="company.weibo" id="person_contact_sns_attributes_0_value" class="string optional">
 						输入微博昵称或ID
 						</div>
 					</div>
 					<div class="control-group text optional">
 						<label for="person_others" class="text optional control-label"> 背景信息</label>
 						<div class="controls">
-							<textarea rows="20" name="contact.content" cols="40" class="text optional content">
+							<textarea rows="20" name="company.content" id="person_others" cols="40" class="text optional content">
 							</textarea><p class="help-block">简介，如何认识的等</p>
 						</div>
 					</div>
@@ -423,10 +405,11 @@
 						<label for="person_access_policy" class="string optional control-label"> 谁可以看见？</label>
 						<div class="controls">
 							<div class="radio scope activated">
-								<input type="radio" value="all" name="role" id="all" checked=""> 所有同事
+								<input type="radio" value="all" name="role" id="all" checked="checked"> 所有同事
 							</div>
 							<div class="radio scope ">
-								<input type="radio" value="me" id="me" name="role"> 只有我能看见
+								<input type="radio" value="me" id="me" name="role" > 只有我能看见
+								<input type="hidden" value="5861" name="role" >
 							</div>
 							<div class="radio scope ">
 								<input type="radio" value="group"name="role" id="groupselect"> 选择一个组...
@@ -440,7 +423,7 @@
 								</div>
 							</div>
 							<div class="radio scope  ">
-								<input type="radio" value="user" name="role" id="workerselect"> 选择同事...
+								<input type="radio" value="userid" name="role" id="workerselect"> 选择同事...
 								<div class="editor">
 									<select name="userid" id="workername" class="new_adhoc_group_member" style="width:100px;display:none">
 										<option selected="selected" value="">选择一个同事...</option>
@@ -458,27 +441,28 @@
 					<script type="text/javascript">
 						$(document).ready(function() {
 						
-							$("#groupselect").click(function() {
+							$("input:radio:eq(2)").click(function() {
 								$("#workername").hide();
 								$("#groupname").toggle();
 							});
 							
-							$("#workerselect").click(function() {
+							$("input:radio:eq(3)").click(function() {
 								$("#groupname").hide();
 								$("#workername").toggle();
 							});
-							$("#all").click(function(){
+							$("input:radio:eq(1)").click(function(){
 								$("#groupname").hide();
 								$("#workername").hide();
 							});
-							$("#me").click(function(){
+							$("input:radio:eq(0)").click(function(){
 								$("#groupname").hide();
 								$("#workername").hide();
 							});
 						});
 					</script>
 					<div class="form-actions">
-						<input type="submit" value="保存联系人" name="commit" data-loading-text="处理中.." class="btn btn-primary">
+						<input type="submit" value="保存公司" name="commit" data-loading-text="处理中.." class="btn btn-primary">
+							<input type="submit" value="保存并继续添加公司" name="next_action" data-loading-text="处理中.." class="btn btn-success">
 							<a class="btn" href="contact.action">取消</a>
 					</div>
 				</form>

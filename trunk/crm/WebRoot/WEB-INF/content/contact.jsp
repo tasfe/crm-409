@@ -203,7 +203,7 @@
 				</div>
 				<ul class="nav nav-tabs nav-stacked">
 					<li ><a href="toaddcontact.action">添加联系人</a></li>
-					<li ><a href="#">添加公司</a></li>
+					<li ><a href="toaddcompany.action">添加公司</a></li>
 					<li ><a href="#">导入联系人</a></li>
 					<li><a href="#">导出联系人</a></li>
 				</ul>
