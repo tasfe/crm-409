@@ -72,7 +72,7 @@ public class ChanceAction extends BaseAction{
 	}
 	
 	@Action(value="addc",results={
-			@Result(name="error",type="redirectAction",location="addchance.action？error=10000"),
+			@Result(name="error",type="redirectAction",location="addchance.action?error=10000"),
 			@Result(name="success",type="redirectAction",location="chance.action")
 	})
 	public String addc(){
