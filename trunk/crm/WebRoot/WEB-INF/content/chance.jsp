@@ -166,7 +166,7 @@
 				<tr>
 					<td>
 						<h4>
-							<a href="enterChance.action?${chance.id }">${chance.name }</a>
+							<a href="enterChance.action?id=${chance.id }">${chance.name }</a>
 							
 						</h4>
 						
