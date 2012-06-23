@@ -50,4 +50,16 @@ public class TaskDao  extends BaseDao<Task, Integer>{
 		return query.list();
 	}
 
+	/**
+	 * 查找出自己未完成并且未过期的任务
+	 * @param id
+	 * @return
+	 */
+	public List<Task> findByMidAndTime(int id) {
+		Query query = getSession().createQuery("from Task where managerid=:id and state=1 and endtime>:now");
+		query.setParameter("id", id);
+		query.setParameter("now", TimeUtil.getNow());
+		return query.list();
+	}
+
 }
