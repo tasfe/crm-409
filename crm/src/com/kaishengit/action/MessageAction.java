@@ -6,8 +6,11 @@ import org.apache.struts2.convention.annotation.Action;
 import org.springframework.stereotype.Controller;
 
 import com.kaishengit.core.BaseAction;
+import com.kaishengit.pojo.Group;
+import com.kaishengit.pojo.Product;
 import com.kaishengit.pojo.Task;
 import com.kaishengit.pojo.User;
+import com.kaishengit.pojo.UserProduct;
 
 @Controller
 public class MessageAction extends BaseAction{
@@ -18,7 +21,8 @@ public class MessageAction extends BaseAction{
 	private int i;
 	private List<Task> tasks;
 	private List<Task> passTasks;
-	
+	private List<Group> groups;
+	private List<UserProduct> userProducts;
 	@Action("message")
 	public String message() {
 		if(i == 2) {
@@ -26,7 +30,8 @@ public class MessageAction extends BaseAction{
 		}
 		tasks = getTaskService().findByMidAndTime(((User)getSession("user")).getId());
 		passTasks = getTaskService().findByTime(((User)getSession("user")).getId());
-		
+		groups = getGroupService().findByProduct(((Product)getSession("product")));
+		userProducts = getUserProductService().findByProduct(((Product)getSession("product")));
 		return SUCCESS;
 	}
 	
@@ -59,4 +64,22 @@ public class MessageAction extends BaseAction{
 	public void setPassTasks(List<Task> passTasks) {
 		this.passTasks = passTasks;
 	}
+
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
+
+	public List<UserProduct> getUserProducts() {
+		return userProducts;
+	}
+
+	public void setUserProducts(List<UserProduct> userProducts) {
+		this.userProducts = userProducts;
+	}
+
+	
 }
