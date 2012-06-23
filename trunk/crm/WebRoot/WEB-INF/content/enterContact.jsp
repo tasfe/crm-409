@@ -392,10 +392,10 @@
 										<div class="note-header">
 											<div style="float:right">
 												 <ul class="nav nav-pills">
-												 	<li><a href="eventNote.action?eid="${event.id }">评论</a></li>
-													<li><a title="编辑" href="eventEdit.action?eid="${event.id}">编辑</a></li>
+												 	<li><a href="eventNote.action?eid=${event.id }">评论</a></li>
+													<li><a title="编辑" href="eventEdit.action?eid=${event.id}">编辑</a></li>
 										 			<li>
-													<a title="删除" href="eventDel.action?eid="${ event.id}">删除</a>
+													<a title="删除" href="eventDel.action?eid=${event.id}&cid=${contact.id}">删除</a>
 													</li>
 												 </ul>
 											</div>

@@ -25,11 +25,10 @@
 						    <span class="caret"></span>
 						  </a>
 						  <ul class="dropdown-menu new-actions">
-						    <li><a href="/people/new"><i class="icon-person"><img src="img/contact.ico"/></i> 联系人</a></li>
-								<li><a href="/companies/new"><i class="icon-company"><img src="img/company.ico"/></i> 公司</a></li>
+						    <li><a href="toaddcontact.action"><i class="icon-person"><img src="img/contact.ico"/></i> 联系人</a></li>
+								<li><a href="toaddcompany.action"><i class="icon-company"><img src="img/company.ico"/></i> 公司</a></li>
 								<li class="divider"></li>
-								<li><a href="#taskModal" data-toggle="modal"><i class="icon-ok"></i> 任务</a></li>
-								<li><a href="/chances/new"><i class="icon-dollar"><img src="img/chance.ico"/></i> 机会</a></li>
+								<li><a href="addchance.action"><i class="icon-dollar"><img src="img/chance.ico"/></i> 机会</a></li>
 						  </ul>
 						</li>
 					</ul>
@@ -44,9 +43,9 @@
 									<li><a href="worker.action"><i class="icon-user"></i> 同事</a></li>
 									<li><a href="group.action"><i class="icon-group"><img src="img/user_group.ico"></i> 组</a></li>
 								</c:if>
-								<li><a href="/settings"><i class="icon-cog"></i> 帐号管理</a></li>
-								<li class="divider"></li>
-								<li><a href="/profiles"><i class="icon-info-sign"></i> 个人信息</a></li>
+								<li><a href="useredit.action"><i class="icon-cog"></i> 帐号管理</a></li>
+								<!-- <li class="divider"></li>
+								<li><a href="/profiles"><i class="icon-info-sign"></i> 个人信息</a></li> -->
 								<li class="divider"></li>
 								<li><a href="loginout.action"><i class="icon-off"></i> 注销</a></li>
 							</ul>

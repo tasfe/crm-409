@@ -5,6 +5,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.stereotype.Controller;
 
 import com.kaishengit.core.BaseAction;
+import com.kaishengit.pojo.Chance;
 import com.kaishengit.pojo.Contact;
 import com.kaishengit.pojo.Event;
 import com.kaishengit.pojo.Product;
@@ -19,6 +20,9 @@ public class EventAction extends BaseAction{
 	private String month;
 	private String day;
 	private int cid;
+	private int chanceid;
+	private int eid;
+	
 	@Override
 	@Action(value="addEvent",results={
 			@Result(name="success",type="redirectAction",location="enterContact.action?cid=${cid}")
@@ -26,10 +30,10 @@ public class EventAction extends BaseAction{
 	public String execute() throws Exception {
 		String time = year + "年" + month + "月" + day + "日";
 		event.setCreatetime(time);
-		System.out.println(time);
-		System.out.println(cid);
+		/*System.out.println(time);
+		System.out.println(cid);*/
 		Contact c = getContactService().findByCid(cid);
-		System.out.println(c.getName());
+//		System.out.println(c.getName());
 		event.setContact(c);
 		event.setProduct((Product)getSession("product"));
 		event.setUser((User)getSession("user"));
@@ -43,6 +47,43 @@ public class EventAction extends BaseAction{
 		return Success;
 	}*/
 
+	@Action(value="addChanceEvent",results={
+			@Result(name="success",type="redirectAction",location="enterChance.action?id=${chanceid}")
+	})
+	public String addChanceEvent() {
+		String time = year + "年" + month + "月" + day + "日";
+		event.setCreatetime(time);
+		Chance chance = getChanceService().findById(chanceid);
+		if(chance != null) {
+			event.setContact(chance.getContact());
+		}
+		event.setChance(chance);
+		event.setProduct((Product)getSession("product"));
+		event.setUser((User)getSession("user"));
+		getEventService().saveOrUpdate(event);
+		return SUCCESS;
+	}
+	
+	@Action(value="eventDel",results={
+			@Result(name="success",type="redirectAction",location="enterContact.action?cid=${cid}")
+	})
+	public String eventDel() {
+		Event e = getEventService().findById(eid);
+		getEventNoteService().delByEvent(e);
+		getEventService().del(eid);
+		return SUCCESS;
+	}
+	
+	@Action(value="eventChaceDel",results={
+			@Result(name="success",type="redirectAction",location="enterChance.action?id=${cid}")
+	})
+	public String eventChaceDel() {
+		Event e = getEventService().findById(eid);
+		getEventNoteService().delByEvent(e);
+		getEventService().del(eid);
+		return SUCCESS;
+	}
+	
 	public Event getEvent() {
 		return event;
 	}
@@ -72,6 +113,18 @@ public class EventAction extends BaseAction{
 	}
 	public void setCid(int cid) {
 		this.cid = cid;
+	}
+	public int getChanceid() {
+		return chanceid;
+	}
+	public void setChanceid(int chanceid) {
+		this.chanceid = chanceid;
+	}
+	public int getEid() {
+		return eid;
+	}
+	public void setEid(int eid) {
+		this.eid = eid;
 	}
 	
 	

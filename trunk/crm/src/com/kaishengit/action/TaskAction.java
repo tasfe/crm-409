@@ -27,7 +27,7 @@ public class TaskAction extends BaseAction{
 	private List<Task> myTasks;
 	private List<Task> completeTasks;
 	private List<Task> passTasks;
-	
+	private int chanceid;
 	private int tid;
 	@Override
 	public String execute() throws Exception {
@@ -64,7 +64,53 @@ public class TaskAction extends BaseAction{
 		getTaskService().saveOrUpdate(task);
 		return SUCCESS;
 	}
-
+	@Action(value="addMsgTask",results={
+			@Result(name="success",type="redirectAction",location="message.action")
+	})
+	public String addMsgTask() {
+		TaskSort ts = getTaskSortService().findByTaskSortName(tasksort.getName());
+		if(ts == null) {
+			int id = getTaskSortService().saveOrUpdate(tasksort);
+			tasksort.setId(id);
+		} else {
+			tasksort.setId(ts.getId());
+		}
+		task.setTasksort(tasksort);
+		task.setCreatetime(TimeUtil.getNow());
+		task.setManagerid(managerid);
+		task.setProduct((Product)getSession("product"));
+		task.setState(1);
+		task.setUser((User)getSession("user"));
+		if("public".equals(show)) {
+			task.setEnableshow(true);
+		}
+		getTaskService().saveOrUpdate(task);
+		return SUCCESS;
+	}
+	
+	@Action(value="addChanceTask",results={
+			@Result(name="success",type="redirectAction",location="enterChance.action?id=${chanceid }")
+	})
+	public String addChanceTask() {
+		TaskSort ts = getTaskSortService().findByTaskSortName(tasksort.getName());
+		if(ts == null) {
+			int id = getTaskSortService().saveOrUpdate(tasksort);
+			tasksort.setId(id);
+		} else {
+			tasksort.setId(ts.getId());
+		}
+		task.setTasksort(tasksort);
+		task.setCreatetime(TimeUtil.getNow());
+		task.setManagerid(managerid);
+		task.setProduct((Product)getSession("product"));
+		task.setState(1);
+		task.setUser((User)getSession("user"));
+		if("public".equals(show)) {
+			task.setEnableshow(true);
+		}
+		getTaskService().saveOrUpdate(task);
+		return SUCCESS;
+	}
 	@Action("delTask")
 	public String del() {
 		System.out.println("你好.......");
@@ -92,100 +138,73 @@ public class TaskAction extends BaseAction{
 		sendJson(result);
 		return null;
 	}
+	
+	//get set
 	public Task getTask() {
 		return task;
 	}
-
 	public void setTask(Task task) {
 		this.task = task;
 	}
-
 	public TaskSort getTasksort() {
 		return tasksort;
 	}
-
 	public void setTasksort(TaskSort tasksort) {
 		this.tasksort = tasksort;
 	}
-
-
 	public List<UserProduct> getUserProducts() {
 		return userProducts;
 	}
-
-
 	public void setUserProducts(List<UserProduct> userProducts) {
 		this.userProducts = userProducts;
 	}
-
-
 	public int getManagerid() {
 		return managerid;
 	}
-
-
 	public void setManagerid(int managerid) {
 		this.managerid = managerid;
 	}
-
-
 	public String getShow() {
 		return show;
 	}
-
-
 	public void setShow(String show) {
 		this.show = show;
 	}
-
-
 	public List<Task> getTasks() {
 		return tasks;
 	}
-
-
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
-
-
 	public List<Task> getMyTasks() {
 		return myTasks;
 	}
-
-
 	public void setMyTasks(List<Task> myTasks) {
 		this.myTasks = myTasks;
 	}
-
-
 	public List<Task> getCompleteTasks() {
 		return completeTasks;
 	}
-
-
 	public void setCompleteTasks(List<Task> completeTasks) {
 		this.completeTasks = completeTasks;
 	}
-
-
 	public List<Task> getPassTasks() {
 		return passTasks;
 	}
-
-
 	public void setPassTasks(List<Task> passTasks) {
 		this.passTasks = passTasks;
 	}
-
-
 	public int getTid() {
 		return tid;
 	}
-
-
 	public void setTid(int tid) {
 		this.tid = tid;
+	}
+	public int getChanceid() {
+		return chanceid;
+	}
+	public void setChanceid(int chanceid) {
+		this.chanceid = chanceid;
 	}
 	
 	

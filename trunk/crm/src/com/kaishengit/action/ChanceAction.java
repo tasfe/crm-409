@@ -29,6 +29,8 @@ public class ChanceAction extends BaseAction{
 	private int managerid;
 	private String groupid;
 	private String userid;
+	private int chanceid;
+	private String state;
 	
 	private List<UserProduct> userProducts;
 	private List<Group> groups;
@@ -113,8 +115,22 @@ public class ChanceAction extends BaseAction{
 			getChanceService().saveOrUpdate(chance);
 			return SUCCESS;
 		}
-		
 	}
+	
+	@Action("modifyState")
+	public String modifyState() {
+		boolean result = true;
+		try {
+			getChanceService().findById(chanceid,state);
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		sendJson(result);
+		return null;
+	}
+	
+	//get set
 	public String getContact_name() {
 		return contact_name;
 	}
@@ -193,6 +209,18 @@ public class ChanceAction extends BaseAction{
 	}
 	public void setMoney(float money) {
 		this.money = money;
+	}
+	public int getChanceid() {
+		return chanceid;
+	}
+	public void setChanceid(int chanceid) {
+		this.chanceid = chanceid;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 }

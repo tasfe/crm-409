@@ -320,7 +320,7 @@
 									"tid":tid
 								},function(data){
 									if(data) {
-										$("#" + tid).hide(500);
+										$("#" + tid).parent().hide(500);
 									}
 								});
 							});
