@@ -166,7 +166,7 @@
 				</select>
 				
 				<ul class="nav nav-tabs nav-stacked">
-					<li class="active"><a href="#">所有同事</a></li>
+					<li class="active"><a href="message.action">所有同事</a></li>
 					
 					<div id="accordion2" class="accordion">
 					<div class="accordion-group">
@@ -177,9 +177,10 @@
 					  </div>
 					  <div class="accordion-body collapse" id="group" style="height: 0px;background-color:#fff">
 						<div class="accordion-inner">
-							<li><a href="">我的小组</a></li>
+							<c:forEach items="${groups }" var="group">
+							<li><a href="gmessage.action?gid=${group.id }">${group.name }</a></li>
 							<hr/>
-							<li><a href="#">测试小组</a></li>
+							</c:forEach>
 						</div>
 					  </div>
 					</div>
@@ -191,9 +192,10 @@
 					  </div>
 					  <div class="accordion-body collapse" id="user" style="height: 0px;background-color:#fff">
 						<div class="accordion-inner">
-							<li><a href="">张三</a></li>
+							<c:forEach items="${userProducts }" var="userProduct">
+							<li><a href="umessage.action?uid=${userProduct.user.id }">${userProduct.user.username }</a></li>
 							<hr/>
-							<li><a href="#">李四</a></li>
+							</c:forEach>
 						</div>
 					  </div>
 					</div>
@@ -201,6 +203,7 @@
 				</ul>
 			</div>
 		</div>
+		
 		<div class="right" style="width:65%">
 			<div class="right-top " style="margin-bottom:0px"><span style="float:left;font-size:24px;">最新消息</div>
 			<div id="main" class="main"  style="padding-top: 0px">
@@ -455,6 +458,7 @@
 					</script>
 			</div>			
 		</div>
+	</div>
 	</div>
 	</div>
 </body>
