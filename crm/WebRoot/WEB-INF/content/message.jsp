@@ -342,7 +342,7 @@
 				<div class="title">
 					<span><a href="#taskModal" data-toggle="modal">添加任务</a></span>
 						<div id="taskModal" class="modal hide in" style="display: none;">
-				<form  method="post" id="task_form"  class="simple_form new_task" action="addTask.action" >
+				<form  method="post" id="task_form"  class="simple_form new_task" action="addMsgTask.action" >
 					<div class="modal-header">
 						<a data-dismiss="modal" class="close">×</a>
 						<h3>添加一个任务</h3>

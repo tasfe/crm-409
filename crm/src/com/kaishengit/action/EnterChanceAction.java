@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import com.kaishengit.core.BaseAction;
 import com.kaishengit.pojo.Chance;
+import com.kaishengit.pojo.Event;
 import com.kaishengit.pojo.Task;
 import com.kaishengit.pojo.User;
 @Controller
@@ -18,12 +19,15 @@ public class EnterChanceAction extends BaseAction{
 	private List<Task> tasks;
 	private List<Task> passTasks;
 	private Chance chance;
+	private List<Event> events;
+	
 	@Override
 	@Action("enterChance")
 	public String execute() throws Exception {
 		tasks = getTaskService().findByMidAndTime(((User)getSession("user")).getId());
 		passTasks = getTaskService().findByTime(((User)getSession("user")).getId());
 		chance = getChanceService().findById(id);
+		events = getEventService().findByContact(chance);
 		return super.execute();
 	}
 	
@@ -53,4 +57,11 @@ public class EnterChanceAction extends BaseAction{
 	public void setChance(Chance chance) {
 		this.chance = chance;
 	}
+	public List<Event> getEvents() {
+		return events;
+	}
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+	
 }

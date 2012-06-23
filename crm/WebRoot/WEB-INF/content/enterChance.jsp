@@ -109,12 +109,12 @@
 			<div class="title">
 				<span><a class="pull-right" href="#taskModal" data-toggle="modal">添加任务</a></span>
 			<div id="taskModal" class="modal hide in" style="display: none;">
-				<form  method="post" id="task_form"  class="simple_form new_task" action="addTask.action" >
+				<form  method="post" id="task_form"  class="simple_form new_task" action="addChanceTask.action" >
 					<div class="modal-header">
 						<a data-dismiss="modal" class="close">×</a>
 						<h3>添加一个任务</h3>
 					</div>
-					
+				<input type="hidden" name="chanceid" value="${chance.id }">
 				<div class="modal-body">
 				<div class="control-group string required"><div class="controls">
 					<input type="text" size="50" name="task.name" id="task_name" class="string required span5"></div>
@@ -253,8 +253,8 @@
 							</a>
 						</td>
 						<td>
-							<h4><a href="">${chance.contact.name }</a></h4>
-							<a href="">${chance.contact.company.name }</a><br>
+							<h4><a href="enterContact.action?cid=${chance.contact.id }">${chance.contact.name }</a></h4>
+							<a href="enterCompany.action?cmid=${chance.contact.company.id}">${chance.contact.company.name }</a><br>
 							${chance.contact.position }
 						</td>
 						<td class="actions">
@@ -279,56 +279,238 @@
 				<div data-toggle="buttons-radio" class="btn-group state-switcher" style="width:300px;float:left; margin-top:40px;">
 					<c:choose >
 						<c:when test="${chance.state == 'a' }">
-							<button class="btn pending active">跟踪</button>
+							<button id="a" rel="${chance.id }" class="btn pending active">跟踪</button>
 						</c:when>
 						<c:otherwise>
-							<button class="btn pending">跟踪</button>
+							<button id="a" rel="${chance.id }" class="btn pending">跟踪</button>
 						</c:otherwise>
 					</c:choose>
 					<c:choose >
 						<c:when test="${chance.state == 'b' }">
-							<button state="won" class="btn success active">成功</button>
+							<button id="b" rel="${chance.id }" class="btn success active">成功</button>
 						</c:when>
 						<c:otherwise>
-							<button state="won" class="btn success ">成功</button>
+							<button  id="b" rel="${chance.id }" class="btn success ">成功</button>
 						</c:otherwise>
 					</c:choose>
 					<c:choose >
 						<c:when test="${chance.state == 'c' }">
-							<button state="lost" class="btn important active">失败</button>
+							<button id="c" rel="${chance.id }" class="btn important active">失败</button>
 						</c:when>
 						<c:otherwise>
-							<button state="lost" class="btn important">失败</button>
+							<button id="c" rel="${chance.id }" class="btn important">失败</button>
 						</c:otherwise>
 					</c:choose>
 				</div>
+				
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$("#a").click(function(){
+							if(confirm("确定要修改状态?")){
+									var rel = $(this).attr("rel");
+								$.post("modifyState.action",{
+									"state" : "a",
+									"chanceid" : rel
+								},function(data){
+									if(data) {
+										$("#a").attr("class","btn important active");
+										$("#b").attr("class","btn important");
+										$("#c").attr("class","btn important");
+									}
+								});
+							}
+						
+						});
+						$("#b").click(function(){
+							if(confirm("确定要修改状态?")){
+								var rel = $(this).attr("rel");
+							$.post("modifyState.action",{
+								"state" : "b",
+								"chanceid" : rel
+							},function(data){
+								if(data) {
+									$("#b").attr("class","btn important active");
+									$("#a").attr("class","btn important");
+									$("#c").attr("class","btn important");
+								}
+							});
+							} 
+						});
+						$("#c").click(function(){
+							if(confirm("确定要修改状态?")){
+							var rel = $(this).attr("rel");
+							$.post("modifyState.action",{
+								"state" : "c",
+								"chanceid" : rel
+							},function(data){
+								if(data) {
+									$("#c").attr("class","btn important active");
+									$("#b").attr("class","btn important");
+									$("#a").attr("class","btn important");
+								}
+							});
+							}
+						});
+					});
+				
+				</script>
 				<div class="pull-right">
 							由 <strong>${chance.user.username }</strong> 添加 |
 						<a rel="tooltip" href="editChance.action" data-original-title="修改机会"><i class="icon icon-edit"></i></a>
 				</div>
 			</div>
-			<div class="main">
-				<div class="controls">
-				<textarea rows="20" name="note[content]" id="note_content" cols="40" class="text required content"></textarea>
-				</div>
-				<div class="submit pull-right" style="margin-top:10px;">
-					<input type="submit" value="添加事件" name="commit" data-loading-text="处理中.." class="btn btn-primary">
-			</div>
-		<hr style="margin:50px 0px 10px 0px;">
-			
-			<table style="margin-bottom: 60px" class="table top no-hover" id="activities">
-				<tbody>
-					<tr>
-						<td class="icon"><span class="sprite chance"></span></td>
-						<td>
-								机会 求爱 的状态改为 '成功'
-								<span>岳金鹏 更新<span>
-							<span>于 06-07 星期四</span>
-						</span></span></td>
-					</tr>
-				</tbody>
-				</table>
-			
+		<div class="main">
+			  <form action="addChanceEvent.action" method="post">
+		            	<input type="hidden" name="chanceid" value="${chance.id }">
+			          		<div class="controls">
+				          		<textarea rows="20" name="event.content" id="" cols="40" class="text required content">
+				          		</textarea>
+			          		</div>
+			          		<div class="options" style="display:none">
+			          			<div class="control-group optional">
+			          			<label for="note_occurred_at_1i" class="optional control-label"> 什么时候发生的？</label>
+			          				<div class="controls">
+				          				<select name="year" id="" class="optional" style="width:15%">
+										<option value="2007">2007</option>
+										<option value="2008">2008</option>
+										<option value="2009">2009</option>
+										<option value="2010">2010</option>
+										<option value="2011">2011</option>
+										<option value="2012" selected="selected">2012</option>
+										<option value="2013">2013</option>
+										<option value="2014">2014</option>
+										<option value="2015">2015</option>
+										<option value="2016">2016</option>
+										<option value="2017">2017</option>
+										</select>
+									<select name="month" id="" class="optional" style="width:15%">
+										<option value="1">一月</option>
+										<option value="2">二月</option>
+										<option value="3">三月</option>
+										<option value="4">四月</option>
+										<option value="5">五月</option>
+										<option value="6" selected="selected">六月</option>
+										<option value="7">七月</option>
+										<option value="8">八月</option>
+										<option value="9">九月</option>
+										<option value="10">十月</option>
+										<option value="11">十一月</option>
+										<option value="12">十二月</option>
+									</select>
+									<select name="day" id="" class="optional" style="width:15%">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18" selected="selected">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+										<option value="25">25</option>
+										<option value="26">26</option>
+										<option value="27">27</option>
+										<option value="28">28</option>
+										<option value="29">29</option>
+										<option value="30">30</option>
+										<option value="31">31</option>
+									</select>
+									</div>
+								</div>
+							
+			          		</div>
+							<div class="new_note_form_basics" style="margin-top:8px;">
+								<div class="addevent" style="float: right;">
+									<input type="submit"  value="添加事件" id="" class="btn btn-primary">
+								</div>
+								<div class="action">
+									<a id="show_options_link" href="javascript:;">显示选项</a>
+								</div>
+							</div>
+		          		</form>
+	          		<table style="margin-bottom: 60px; margin-top: 10px;" class="table top no-hover" id="activities">
+							<tbody>
+							<!-- 事件列表 -->
+							<c:forEach items="${events }" var="event">
+							<tr class="note" data-from="Person" data="781881" id="note-781881">
+									<td style="width:30px;height:50px;">
+									<span ><img src="img/event.jpg"/></span>
+									</td>
+									<td>
+										<div class="note-header">
+											<div style="float:right">
+												 <ul class="nav nav-pills">
+												 	<li><a href="eventNote.action?eid=${event.id }">评论</a></li>
+													<li><a title="编辑" href="eventEdit.action?eid=${event.id}">编辑</a></li>
+										 			<li>
+													<a title="删除" href="eventChaceDel.action?eid=${ event.id}&cid=${chance.id }">删除</a>
+													</li>
+												 </ul>
+											</div>
+											<div class="subject">
+											<!-- 时间 -->
+											${event.createtime }
+											</div>
+											<div class="meta">
+													${event.user.username } 添加
+											</div>
+											<div class="meta">
+											</div>
+										</div>
+										<div class="content">
+											<p>${event.content }</p>
+										</div>
+									</td>
+								</tr>
+								</c:forEach>
+								<!-- 事件结束 -->
+							</tbody>
+						</table>
+					</div>
+					
+		            <script type="text/javascript">
+		            	$(document).ready(function() {
+						
+							$("#groupselect").click(function() {
+								$("#workername").hide();
+								$("#groupname").toggle();
+							});
+							
+							$("#workerselect").click(function() {
+								$("#groupname").hide();
+								$("#workername").toggle();
+							});
+							$("#all").click(function(){
+								$("#groupname").hide();
+								$("#workername").hide();
+							});
+							$("#me").click(function(){
+								$("#groupname").hide();
+								$("#workername").hide();
+							});
+							
+							$("#show_options_link").click(function(){
+								$(".options").show(500);
+								$("#show_options_link").hide();
+								$(".addevent").css("float","");
+							});
+						});
+					</script>
 		</div>
 		</div>
 	</div>

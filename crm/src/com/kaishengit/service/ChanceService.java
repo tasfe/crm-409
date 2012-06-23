@@ -55,6 +55,12 @@ public class ChanceService extends BaseService{
 		return chance;
 	}
 
+	public Chance findById(int chanceid, String state) {
+		Chance chance = getChancedao().findById(chanceid);
+		chance.setState(state);
+		return chance;
+	}
+
 	
 
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
@@ -103,16 +104,16 @@
 			</div>
 			<div class="sidebar">
 				<div class="well">
-					<div class="title">这件事情是关于</div>
+					<div class="title">这件事件是关于</div>
 					<table>
 						<thead>
 							<tr>
 								<td><img src="img/contact.ico" style="width:35px;height:35px;margin:5px;"/></td>
 								<td>
-									<a href="#">璐璐</a><br/>
-									<a href="#">凯盛科技</a><br/>
-									<span>软件工程师</span>
-									</td>
+									<a href="enterContact.action?cid=${event.contact.id }">${event.contact.name }</a><br/>
+									<a href="enterCompany.action?cmid=${event.contact.company.id}">${event.contact.company.name }</a><br/>
+									<span>${event.contact.name }</span>
+								</td>
 							</tr>
 						</thead>
 					</table>
@@ -121,31 +122,33 @@
 		</div>
 		<div class="right">
 			<div class="right-top ">
-				<span style="float:left;font-size:24px;">露露的事件</span>
-				<a href="message.action?pid=${productid }&i=2" style="float:right;" >删除</a><span style="float:right;margin:0px 5px">|</span>
-				<a href="message.action?pid=${productid }&i=2" style="float:right;" >编辑</a>
-				<div style="line-height:45px;margin-left:140px;">岳金鹏 添加 于 18:07</div>
+				<span style="float:left;font-size:24px;">${event.content }</span>
+				<a href="delEvent.action?eid=${event.id }" style="float:right;" >删除</a><span style="float:right;margin:0px 5px">|</span>
+				<a href="editEvent.action?eid=${event.id }" style="float:right;" >编辑</a>
+				<div style="line-height:45px;margin-left:150px;">${event.user.username } 添加 于 ${event.createtime }</div>
 				
 			</div>
-				<div style="padding:20px;"><p>事件的内容</p></div>
-				<div style="margin:8px 20px">2个评论</div>
+				<div style="padding:20px;"><p>${event.content }</p></div>
+				<div style="margin:8px 20px">${fn:length(event.eventnotes) }个评论</div>
 				<hr style="margin:0px;">
 			<table class="table">
 				<thead>
+					<c:forEach items="${event.eventnotes }" var="eventnote">
 					<tr style="line-height:20px;">
-						<td width="10%" ><img alt="" src="img/contact.ico" style="margin:10px;"></td>
-						<td width="70%"><span>20:08</span><br><span>tom</span><br><sapn>评论内容</sapn></td>
-						<td width="10%"  style="padding-top:33px;"><a class="icon-trash" href="#"></a></td>
+						<td width="10%" ><img alt="" src="img/head.action?id=${eventnote.user.id }" style="margin:10px;width:50px;height:50px"></td>
+						<td width="70%"><span>${eventnote.createtime }</span><br><span>${eventnote.user.username }</span><br><sapn>${eventnote.content }</sapn></td>
+						<td width="10%"  style="padding-top:33px;"><a class="icon-trash" href="delnote.action?enid=${eventnote.id }&eid=${event.id}"></a></td>
 					</tr>
-					
+					</c:forEach>
 				</thead>
 			</table>
-			<form action="#">
+			<form action="addnote.action" method="post">
 				<div class="well" >
-					<div style="width:40px;"><img src="img/contact.ico"/></div>
+					<div style="width:40px;"><img src="img/head.action?id=${user.id }"/></div>
 					
 						<div class="controls" >
-							<textarea rows="20" name="note[content]" id="note_content" cols="40" class="text required content"></textarea>
+							<input type="hidden" value="${event.id }" name="eid">
+							<textarea rows="20" name="eventnote.content" id="note_content" cols="40" class="text required content"></textarea>
 							<input type="submit" value="添加评论" class="pull-right btn  btn-primary" style="margin-top:20px;height:60px;">
 							</div>
 					<div>

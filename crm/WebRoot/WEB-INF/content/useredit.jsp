@@ -4,7 +4,7 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title>产品选择</title>
+	<title>账户设置</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<script type="text/javascript" src="js/jQuery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
