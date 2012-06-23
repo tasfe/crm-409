@@ -28,6 +28,8 @@ public class EventAction extends BaseAction{
 			@Result(name="success",type="redirectAction",location="enterContact.action?cid=${cid}")
 	})
 	public String execute() throws Exception {
+		User user = (User)getSession("user");
+		Product product = (Product)getSession("product");
 		String time = year + "年" + month + "月" + day + "日";
 		event.setCreatetime(time);
 		/*System.out.println(time);
@@ -39,7 +41,7 @@ public class EventAction extends BaseAction{
 		event.setUser((User)getSession("user"));
 		
 		//存入数据库中
-		getEventService().saveOrUpdate(event);
+		getEventService().saveOrUpdate(event,user,product);
 		return super.execute();
 	}
 	/*@Action("eventEdit")
@@ -51,6 +53,8 @@ public class EventAction extends BaseAction{
 			@Result(name="success",type="redirectAction",location="enterChance.action?id=${chanceid}")
 	})
 	public String addChanceEvent() {
+		User user = (User)getSession("user");
+		Product product = (Product)getSession("product");
 		String time = year + "年" + month + "月" + day + "日";
 		event.setCreatetime(time);
 		Chance chance = getChanceService().findById(chanceid);
@@ -60,7 +64,7 @@ public class EventAction extends BaseAction{
 		event.setChance(chance);
 		event.setProduct((Product)getSession("product"));
 		event.setUser((User)getSession("user"));
-		getEventService().saveOrUpdate(event);
+		getEventService().saveOrUpdateChance(event,user,product);
 		return SUCCESS;
 	}
 	

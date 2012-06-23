@@ -119,7 +119,7 @@
 					<div class="control-group select optional">
 						<label class="select optional control-label">分类</label>
 						<div class="controls">
-							<select onchange="window.location='/chances?filter=on&amp;page=1&amp;state=&amp;category_id=' + $(this).val()" name="category_id" id="category_id"><option value="">所有分类</option>
+							<select  name="category_id" id="category_id"><option value="">所有分类</option>
 							<option value="25178">爱</option>
 							<option value="none">--- 无 ---</option></select>
 						</div>

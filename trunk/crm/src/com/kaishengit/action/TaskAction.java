@@ -113,10 +113,13 @@ public class TaskAction extends BaseAction{
 	}
 	@Action("delTask")
 	public String del() {
-		System.out.println("你好.......");
+//		System.out.println("你好.......");
 		boolean result = true;
+		User user = (User)getSession("user");
+		Product product = (Product)getSession("product");
 		try {
-			getTaskService().del(tid);
+			Task t = getTaskService().findById(tid);
+			getTaskService().del(tid,user,product,t);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import com.kaishengit.core.BaseAction;
 import com.kaishengit.pojo.Event;
 import com.kaishengit.pojo.EventNote;
+import com.kaishengit.pojo.Product;
 import com.kaishengit.pojo.User;
 import com.kaishengit.util.TimeUtil;
 
@@ -31,11 +32,14 @@ public class EventNoteAction extends BaseAction{
 			@Result(name="success",type="redirectAction",location="eventNote.action?eid=${eid}")
 	})
 	public String addnote() {
+		User user = (User)getSession("user");
+		Product product = (Product)getSession("product");
+		
 		Event event = getEventService().findById(eid);
 		eventnote.setCreatetime(TimeUtil.getNow());
 		eventnote.setEvent(event);
 		eventnote.setUser(((User)getSession("user")));
-		int id = getEventNoteService().saveOrUpdate(eventnote);
+		int id = getEventNoteService().saveOrUpdate(eventnote,user,product);
 		
 		eventnote.setId(id);
 		return SUCCESS;

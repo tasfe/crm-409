@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import com.kaishengit.core.BaseAction;
 import com.kaishengit.pojo.Group;
+import com.kaishengit.pojo.Message;
 import com.kaishengit.pojo.Product;
 import com.kaishengit.pojo.Task;
 import com.kaishengit.pojo.User;
@@ -23,6 +24,7 @@ public class MessageAction extends BaseAction{
 	private List<Task> passTasks;
 	private List<Group> groups;
 	private List<UserProduct> userProducts;
+	private List<Message> messages;
 	@Action("message")
 	public String message() {
 		if(i == 2) {
@@ -32,6 +34,9 @@ public class MessageAction extends BaseAction{
 		passTasks = getTaskService().findByTime(((User)getSession("user")).getId());
 		groups = getGroupService().findByProduct(((Product)getSession("product")));
 		userProducts = getUserProductService().findByProduct(((Product)getSession("product")));
+		//获取所有message
+		messages = getMessageService().findByTime();
+		
 		return SUCCESS;
 	}
 	
@@ -81,5 +86,11 @@ public class MessageAction extends BaseAction{
 		this.userProducts = userProducts;
 	}
 
-	
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
 }
