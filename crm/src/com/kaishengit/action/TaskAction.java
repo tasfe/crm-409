@@ -131,8 +131,10 @@ public class TaskAction extends BaseAction{
 	@Action("editTask")
 	public String edit() {
 		boolean result = true;
+		User user = (User)getSession("user");
+		Product product = (Product)getSession("product");
 		try {
-			getTaskService().findById(tid);
+			getTaskService().findById(tid,user,product);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = false;

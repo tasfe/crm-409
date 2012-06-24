@@ -20,7 +20,6 @@ public class EnterContactAction extends BaseAction{
 	public String execute() throws Exception {
 		contact = getContactService().findByCid(cid);
 		events = getEventService().findByContact(contact);
-		
 		return super.execute();
 	}
 	//get set

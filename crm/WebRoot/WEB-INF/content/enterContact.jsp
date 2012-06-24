@@ -257,7 +257,7 @@
 						<td>
 							<div class="right-links">
 										由 <strong>${contact.user.username }</strong> 添加 |
-									<a data-original-title="修改联系人" rel="tooltip" href="modifyContact.action?cid=${contact.id }">
+									<a data-original-title="修改联系人" rel="tooltip" href="#">
 										<i class="icon icon-edit"></i>
 									</a>
 							</div>
@@ -393,7 +393,7 @@
 											<div style="float:right">
 												 <ul class="nav nav-pills">
 												 	<li><a href="eventNote.action?eid=${event.id }">评论</a></li>
-													<li><a title="编辑" href="eventEdit.action?eid=${event.id}">编辑</a></li>
+													<li><a title="编辑" href="#">编辑</a></li>
 										 			<li>
 													<a title="删除" href="eventDel.action?eid=${event.id}&cid=${contact.id}">删除</a>
 													</li>
@@ -455,28 +455,38 @@
 						<div id="chances" class="tab-pane active">
 						    <table id="chances" class="table table-striped crm-table">
 								<tbody>
+								<c:forEach items="${contact.chances}" var="chance">
 								<tr class="">
 									<td>
 										<h4>
-											<a href="/chances/4272">ddsafadsfad</a>
-											<a rel="tooltip" href="return false" data-original-title="只对我可见"><i class="icon icon-lock"></i></a>
+											<a href="enterChance.action?id=${chance.id }">${chance.name }</a>
 										</h4>
 									
-										<div class="description">asdfasdfasdf</div>
+										<div class="description">${chance.content }</div>
 										<div class="price">
-												<span class="label" style="background:#000000">fgfgh</span>
-												￥56464600.0
+												<span class="label" style="background:#000000">${chance.chancesorts.name }</span>
+												￥${chance.money }
 										</div>
-										<div class="owner">由 陈路 负责</div>
+										<div class="owner">由 ${chance.user.username } 创建</div>
 									</td>
 								<td class="actions date">
+									<c:if test="${chance.state == 'a'}">
 									<span class="label label-pending">跟踪</span>
+									</c:if>
+									<c:if test="${chance.state == 'b'}">
+									<span class="label label-pending">成功</span>
+									</c:if>
+									<c:if test="${chance.state == 'c'}">
+									<span class="label label-pending">失败</span>
+									</c:if>
+									
 								</td>
 							</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 						
-						<a class="btn btn-primary" href="">添加机会</a>
+						<a class="btn btn-primary" href="addchance.action">添加机会</a>
 						</div>
 		            </div>
 		            <!-- 重要日期 -->
@@ -494,7 +504,7 @@
 									<td>
 									</td>
 									<td class="actions">
-										<a  class="icon icon-trash" href="imporyDateDel.action?id=${imporyDate.id }"></a>
+										<a  class="icon icon-trash" href="imporyDateDel.action?id=${imporyDate.id }&cid=${contact.id}"></a>
 									</td>
 								</tr>
 								</c:forEach>
