@@ -36,7 +36,7 @@ public class InviteAction extends BaseAction{
 	})
 	public String sendMail() {
 		String c = UUIDUTil.getUUID();
-		String site = "http://127.0.0.1/crm/inviteback.action?code=" + c + "&pid="+((Product)getSession("product")).getId();
+		String site = "http://127.0.0.1:8080/crm/inviteback.action?code=" + c + "&pid="+((Product)getSession("product")).getId();
 		Email e = new Email();
 		e.setCode(c);
 		e.setEmail(email);
@@ -56,6 +56,7 @@ public class InviteAction extends BaseAction{
 			@Result(name="success",type="redirectAction",location="welcome.action?id=${pid}")
 	})
 	public String mailBack() {
+		System.out.println("...............");
 		Email e = getEmailSrvice().findByCode(code);
 		User user = getUserService().findByUsername(e.getEmail());
 		Product p = getProductService().findBypid(pid);
