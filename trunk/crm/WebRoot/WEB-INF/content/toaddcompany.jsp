@@ -133,8 +133,8 @@
 									
 									<div style="" class="contact_methods">
 										<input type="text" size="30" name="tel" id="tel" class="autofocus">
-											<select name="telType" id="telsort">
-												<option value="office">公司</option>
+											<select name="teltype" id="telsort" class="sssss">
+												<option value="company">公司</option>
 												<option value="work">工作</option>
 												<option value="mobile">手机</option>
 												<option value="fax">传真</option>
@@ -192,7 +192,7 @@
 											<div class="contact_method new_contact_method edit_phone" id="contact_email_3e6b5cd0-95a1-012f-f0bf-000c29568e7b">
 									
 												<input type="text" size="30" name="email" id="mail" >
-												<select name="emailType" id="mailsort">
+												<select name="emailtype" id="mailsort">
 													<option value="work">工作</option>
 													<option value="personal">个人</option>
 													<option value="other">其它</option>
@@ -294,7 +294,7 @@
 								<div class="contact_method new_contact_method edit_phone" id="">
 									<input type="text" size="30" name="site" id="site" class="site">
 									<select name="sitetype" id="site" style="width:90px">
-										<option value="office">公司</option>
+										<option value="company">公司</option>
 										<option value="personal">个人</option>
 										<option value="other">其它</option>
 									</select>
@@ -321,7 +321,7 @@
 								$("#contact_site_list_company").append(div);
 								$("<input type='text' size='30' name='site' id='site' >").appendTo(div);
 								var select = $("<select  id='sitesort' name='sitetype' style='width:90px'>");
-								select.append("<option value='office'>公司</option>");
+								select.append("<option value='company'>公司</option>");
 								select.append("<option value='personal'>个人</option>");
 								select.append("<option value='other'>其它</option>");
 								div.append(select);
@@ -342,7 +342,7 @@
 								<div class="contact_method new_contact_method edit_phone" id="contact_address_3e6f8b70-95a1-012f-f0c2-000c29568e7b">
 								<input type="text" size="30" name="address" id="add" class="add">
 									<select name="addresstype" id="add" style="width:90px">
-										<option value="office">公司</option>
+										<option value="company">公司</option>
 										<option value="home">住宅</option>
 										<option value="other">其它</option>
 									</select>
@@ -369,7 +369,7 @@
 								$("#contact_add_list_company").append(div);
 								$("<input type='text' size='30' name='address' id='add' >").appendTo(div);
 								var select = $("<select  id='addsort' name='addresstype' style='width:90px'>");
-								select.append("<option value='office'>公司</option>");
+								select.append("<option value='company'>公司</option>");
 								select.append("<option value='home'>住宅</option>");
 								select.append("<option value='other'>其它</option>");
 								div.append(select);
@@ -409,7 +409,7 @@
 							</div>
 							<div class="radio scope ">
 								<input type="radio" value="me" id="me" name="role" > 只有我能看见
-								<input type="hidden" value="5861" name="role" >
+								
 							</div>
 							<div class="radio scope ">
 								<input type="radio" value="group"name="role" id="groupselect"> 选择一个组...
@@ -423,7 +423,7 @@
 								</div>
 							</div>
 							<div class="radio scope  ">
-								<input type="radio" value="userid" name="role" id="workerselect"> 选择同事...
+								<input type="radio" value="user" name="role" id="workerselect"> 选择同事...
 								<div class="editor">
 									<select name="userid" id="workername" class="new_adhoc_group_member" style="width:100px;display:none">
 										<option selected="selected" value="">选择一个同事...</option>
@@ -440,7 +440,6 @@
 					</div>
 					<script type="text/javascript">
 						$(document).ready(function() {
-						
 							$("input:radio:eq(2)").click(function() {
 								$("#workername").hide();
 								$("#groupname").toggle();
@@ -463,7 +462,7 @@
 					<div class="form-actions">
 						<input type="submit" value="保存公司" name="commit" data-loading-text="处理中.." class="btn btn-primary">
 							<input type="submit" value="保存并继续添加公司" name="next_action" data-loading-text="处理中.." class="btn btn-success">
-							<a class="btn" href="contact.action">取消</a>
+							<a class="btn" href="contact.action"  >取消</a>
 					</div>
 				</form>
 			</div>	
