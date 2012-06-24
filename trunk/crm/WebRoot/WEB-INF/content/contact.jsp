@@ -424,46 +424,46 @@
 						<tr>
 							<td style="width:12px;"><strong>A</strong></td>
 							<td>
-									<a href="/contacts/tagged_with?id=1703" class="label">adsfdasfdsafd</a>
-									<a href="/contacts/tagged_with?id=1705" class="label">asdfsdafdsa</a>
-									<a href="/contacts/tagged_with?id=1706" class="label">asdfsdafsdfsdafsdafdsfffffffffffffffffffffffffffffffffffff</a>
+									<a href="#" class="label">adsfdasfdsafd</a>
+									<a href="#" class="label">asdfsdafdsa</a>
+									<a href="#" class="label">asdfsdafsdfsdafsdafdsfffffffffffffffffffffffffffffffffffff</a>
 							</td>
 						</tr>
 						<tr>
 							<td style="width:12px;"><strong>C</strong></td>
 							<td>
-									<a href="/contacts/tagged_with?id=1701" class="label">陈路自己</a>
+									<a href="#" class="label">陈路自己</a>
 							</td>
 						</tr>
 						<tr>
 							<td style="width:12px;"><strong>D</strong></td>
 							<td>
-									<a href="/contacts/tagged_with?id=1702" class="label">dsaf</a>
-									<a href="/contacts/tagged_with?id=1704" class="label">dsafdsaf</a>
+									<a href="#" class="label">dsaf</a>
+									<a href="#" class="label">dsafdsaf</a>
 							</td>
 						</tr>
 						<tr>
 							<td style="width:12px;"><strong>F</strong></td>
 							<td>
-									<a href="/contacts/tagged_with?id=1707" class="label">fdsafsdafsdaf</a>
+									<a href="#" class="label">fdsafsdafsdaf</a>
 							</td>
 						</tr>
 						<tr>
 							<td style="width:12px;"><strong>H</strong></td>
 							<td>
-									<a href="/contacts/tagged_with?id=1699" class="label">hehehe </a>
+									<a href="#" class="label">hehehe </a>
 							</td>
 						</tr>
 						<tr>
 							<td style="width:12px;"><strong>L</strong></td>
 							<td>
-									<a href="/contacts/tagged_with?id=286" class="label">老婆</a>
+									<a href="#" class="label">老婆</a>
 							</td>
 						</tr>
 						<tr>
 							<td style="width:12px;"><strong>W</strong></td>
 							<td>
-									<a href="/contacts/tagged_with?id=1700" class="label">我自己</a>
+									<a href="#" class="label">我自己</a>
 							</td>
 						</tr>
 					</tbody>
