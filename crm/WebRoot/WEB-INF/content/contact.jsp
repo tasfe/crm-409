@@ -366,9 +366,9 @@
 				<table id="contacts" class="table crm-table ">
 				<thead>
 				<c:forEach items="${contacts }" var="contact">
-					<tr class="">
-						<td width="20px"><input type="checkbox" value="485218" name="" id="id_"></td>
-							<td width="35px"><a class="quick-view" data-id="485215" href="javascript:;">
+					<tr >
+						<td width="2%"><input type="checkbox" value="485218" name="" id="id_"></td>
+							<td width="3%"><a class="quick-view" data-id="485215" href="javascript:;">
 							<span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat -112px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a>
 						</td>
 						<td width="50%">
@@ -390,8 +390,8 @@
 					
 					<c:forEach items="${companys }" var="company">
 					<tr class="">
-						<td width="20px"><input type="checkbox" value="480967" name="id[]" id="id_"></td>
-						<td width="35px"><a class="quick-view" data-id="480967" href="javascript">
+						<td width="2%"><input type="checkbox" value="480967" name="id[]" id="id_"></td>
+						<td width="3%"><a class="quick-view" data-id="480967" href="javascript">
 							<span style="display: inline-block;border:1px solid #CCCCCC;background: url('img/workxp_sprites.png') no-repeat 0px -148px transparent; width: 32px; padding-top: 32px;font-size:1px"></span></a>
 						</td>
 						<td width="50%">
