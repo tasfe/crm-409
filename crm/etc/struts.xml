@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 设置struts2一定要引入这个父包，否则报错 ，值不能更改，他是struts注解插件中的一个包 -->
+	<constant name="struts.convention.default.parent.package"
+		value="crud-default" />
+	<!-- 一定要继承自convention-default -->
+	<package name="crud-default" extends="convention-default">
+		<interceptors>
+			<!-- 你的拦截器 -->
+			<interceptor name="checklogin"
+				class="com.kaishengit.intercept.CheckLoginInterceptor"></interceptor>
+			
+
+			<!-- 基于paramsPrepareParamsStack, 增加store interceptor保证actionMessage在redirect后不会丢失 -->
+			<interceptor-stack name="crudStack">
+				<interceptor-ref name="store">
+					<param name="operationMode">AUTOMATIC</param>
+				</interceptor-ref>
+				<interceptor-ref name="paramsPrepareParamsStack" />
+				<!-- 在拦截器栈里引入你所加的拦截器 -->
+				<interceptor-ref name="checklogin">
+					<param name="loginUser">user</param>
+					<param name="exclude">tologin,logout,inviteback,login,regist</param>
+				</interceptor-ref>
+			</interceptor-stack>
+
+		</interceptors>
+		<default-interceptor-ref name="crudStack" />
+
+		<global-results>
+			<result name="loginfail" type="dispatcher">/WEB-INF/content/tologin.jsp
+			</result>
+			
+		</global-results>
+	</package>
+</struts>
