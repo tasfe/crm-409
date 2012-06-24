@@ -19,6 +19,14 @@ public class ImporyDateService extends BaseService{
 		getImporyDateDao().saveOrUpdate(imporyDate);
 	}
 
+	/**
+	 * 删除日期s
+	 * @param id
+	 */
+	public void delById(int id) {
+		getImporyDateDao().del(id);
+	}
+
 	
 	
 }

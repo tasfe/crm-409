@@ -87,8 +87,10 @@ public class ChanceAction extends BaseAction{
 		} else {
 			if(cm == null) {
 				chance.setContact(c);
+				chance.setCompany(null);
 			} else {
 				chance.setCompany(cm);
+				chance.setContact(null);
 			}
 			ChanceSort cs = getChanceSortService().findById(chancesortid);
 			chance.setChancesorts(cs);
@@ -107,6 +109,7 @@ public class ChanceAction extends BaseAction{
 			} else if("user".equals(role)) {
 				chance.setView("u:" + userid);
 			}
+			System.out.println("name" + chance.getName());
 			User user = (User)getSession("user");
 			Product product = (Product)getSession("product");
 			//保存

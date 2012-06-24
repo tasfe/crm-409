@@ -20,6 +20,8 @@ public class ChanceService extends BaseService{
 	public int saveOrUpdate(Chance chance, User user, Product product) {
 		System.out.println(chance.getId());
 		getChancedao().saveOrUpdate(chance);
+		
+		System.out.println("namechance 的name" + chance.getName());
 		//添加message信息
 		Message m = new Message();
 		m.setCreatetime(TimeUtil.getNow());
@@ -29,8 +31,7 @@ public class ChanceService extends BaseService{
 		StringBuilder sb = new StringBuilder();
 		sb.append("<strong><a href='enterChance.action?id=" + chance.getId() + "'>" + chance.getName() + "</a></strong>");
 		sb.append("<br>" + user.getUsername() + "创建了这个机会");	
-		m.setContent("<a href='enterChance.action?id=" + chance.getId() + "'></a>");
-		
+		m.setContent(sb.toString());
 		getMessageService().saveOrUpdate(m);
 		return chance.getId();
 	}

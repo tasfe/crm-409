@@ -123,8 +123,8 @@
 		<div class="right">
 			<div class="right-top ">
 				<span style="float:left;font-size:24px;">${event.content }</span>
-				<a href="delEvent.action?eid=${event.id }" style="float:right;" >删除</a><span style="float:right;margin:0px 5px">|</span>
-				<a href="editEvent.action?eid=${event.id }" style="float:right;" >编辑</a>
+				<a href="#" style="float:right;" >删除</a><span style="float:right;margin:0px 5px">|</span>
+				<a href="#" style="float:right;" >编辑</a>
 				<div style="line-height:45px;margin-left:150px;">${event.user.username } 添加 于 ${event.createtime }</div>
 				
 			</div>

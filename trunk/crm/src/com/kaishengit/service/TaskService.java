@@ -67,6 +67,23 @@ public class TaskService extends BaseService{
 		return tasks;
 	}
 
+	public void findById(int tid, User user, Product product) {
+		Task t = getTaskDao().findById(tid);
+		t.setState(2);
+		//Message添加
+		Message m = new Message();
+		m.setCreatetime(TimeUtil.getNow());
+		m.setProduct(product);
+		m.setUser(user);
+		m.setSort("task");
+		StringBuilder sb = new StringBuilder();
+		sb.append("<del>" + t.getName() + "</del>");
+		sb.append("<span class='author'> 由 " + user.getUsername() + " 完成</span>");
+		m.setContent(sb.toString());
+		getMessageService().saveOrUpdate(m);
+		
+	}
+
 	
 	
 }

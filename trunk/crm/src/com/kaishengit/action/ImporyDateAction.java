@@ -17,6 +17,8 @@ public class ImporyDateAction extends BaseAction{
 	private String day;
 	private String month;
 	private String year;
+	private int id;
+	private int cid;
 	
 	@Override
 	@Action(value="addImporyDate",results={
@@ -30,6 +32,16 @@ public class ImporyDateAction extends BaseAction{
 		getImproyImporyDateService().save(imporyDate);
 		return super.execute();
 	}
+	
+	@Action(value="imporyDateDel",results={
+			@Result(name="success",type="redirectAction",location="enterContact.action?cid=${cid}")
+	})
+	public String imporyDateDel() {
+		getImproyImporyDateService().delById(id);
+		return SUCCESS;
+	}
+	
+	//get set
 	public ImporyDate getImporyDate() {
 		return imporyDate;
 	}
@@ -60,6 +72,16 @@ public class ImporyDateAction extends BaseAction{
 	public void setYear(String year) {
 		this.year = year;
 	}
-	
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
 }

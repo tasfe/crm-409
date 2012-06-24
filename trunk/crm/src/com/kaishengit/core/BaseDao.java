@@ -16,7 +16,7 @@ public class BaseDao<T,PK extends Serializable> {
 	
 	private SessionFactory sessionFactory;
 	private Class<?> clazz;
-	//��ȡ��ǰ�������ķ��͵�class
+	//获取传入对象的class
 	public BaseDao() {
 		ParameterizedType  t = (ParameterizedType) this.getClass().getGenericSuperclass();
 		Type[] types = t.getActualTypeArguments();
@@ -24,7 +24,7 @@ public class BaseDao<T,PK extends Serializable> {
 	}
 	
 	/**
-	 * ��ȡsessionFactory
+	 *设置sessionFactory
 	 * @param sessionFactory
 	 */
 	@Resource
@@ -32,35 +32,35 @@ public class BaseDao<T,PK extends Serializable> {
 		this.sessionFactory = sessionFactory;
 	}
 	/**
-	 * ����Session
+	 * 获取Session
 	 * @return
 	 */
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
 	/**
-	 * ִ��saveOrUpdate����
+	 * ִ保存或者更新
 	 * @param t
 	 */
 	public void saveOrUpdate(T t) throws HibernateException {
 		getSession().saveOrUpdate(t);
 	}  
 	/**
-	 * ִ��ɾ�����
+	 * ִ根据对象删除
 	 * @param t
 	 */
 	public void del(T t) throws HibernateException {
 		getSession().delete(t);
 	}
 	/**
-	 * ���Idִ�в���
+	 * 根据id删除
 	 * @param id
 	 */
 	public void del(PK id) throws HibernateException {
 		getSession().delete(findById(id));
 	}
 	/**
-	 * ���Id���Ҷ���
+	 * 根据id查找
 	 * @param id
 	 * @return
 	 */
@@ -69,7 +69,7 @@ public class BaseDao<T,PK extends Serializable> {
 		return (T) getSession().get(clazz, id);
 	} 
 	/**
-	 * �������ж���ļ���
+	 * 查找所有
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
