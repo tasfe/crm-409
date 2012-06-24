@@ -21,7 +21,7 @@ public class ZxingUtil {
  @SuppressWarnings({ "unchecked", "rawtypes" })
 public static void zxing(String str,String code) throws IOException, WriterException {
 	 String picFormat = "png";
-	  System.out.println(str.length() + "|str==" + str);
+	//  System.out.println(str.length() + "|str==" + str);
 	  String path = "c:/2/" + code;
 	  Hashtable hints = new Hashtable();
 	  
