@@ -8,6 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<script type="text/javascript" src ="js/jQuery.js"></script>
 	<script type="text/javascript" src ="js/bootstrap.min.js"></script>
+	<script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="js/textarea.js"></script>    
+	<script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
 	<style type="text/css">
 		body{
 			margin-top:68px;
@@ -232,10 +235,8 @@
 				</div>
 				<ul class="nav nav-tabs nav-stacked">
 					<li ><a href="addTask.action">添加任务</a></li>
-					<li ><a href="addChance.action">添加机会</a></li>
-					<li><a href="addEvent.action" data-toggle="modal">添加事件</a></li>
-					<li><a href="addImporyDate.action" data-toggle="modal">添加重要日期</a></li>
-					<li ><a href="addContact.action">添加联系人</a></li>
+					<li ><a href="addchance.action">添加机会</a></li>
+					<li ><a href="toaddcontact.action">添加联系人</a></li>
 					
 				</ul>
 			</div>
@@ -300,7 +301,7 @@
 		            <form action="addEvent.action" method="post">
 		            	<input type="hidden" name="cid" value="${contact.id }">
 			          		<div class="controls">
-				          		<textarea rows="20" name="event.content" id="" cols="40" class="text required content">
+				          		<textarea rows="20" name="event.content" id="textarea" cols="40" class="text required content">
 				          		</textarea>
 			          		</div>
 			          		<div class="options" style="display:none">
@@ -673,6 +674,56 @@
 					<span><a data-backdrop="static" href="#taskModal" data-toggle="modal">添加任务</a></span>
 					待办任务
 				</div>
+				<div id="taskModal" class="modal hide in" style="display: none;">
+				<form  method="post" id="task_form"  class="simple_form new_task" action="addTask.action" >
+					<div class="modal-header">
+						<a data-dismiss="modal" class="close">×</a>
+						<h3>添加一个任务</h3>
+					</div>
+					
+				<div class="modal-body">
+				<div class="control-group string required"><div class="controls">
+					<input type="text" size="50" name="task.name" id="task_name" class="string required span5"></div>
+				</div>
+		
+				<div class="control-group string optional">
+					<label for="task_frame" class="string optional control-label"> 到期时间？</label>
+					<div class="controls">
+					<input type="text" class="input-xlarge Wdate" onclick="WdatePicker()" name="task.endtime">
+					</div>
+				</div>			
+			<div class="control-group integer optional"><label for="task_category_id" class="integer optional control-label"> 选择一个分类</label>
+				<div class="controls">
+					<input type="text" name="tasksort.name">				
+				</div>
+			</div>								
+				<div class="control-group select optional">
+					<label for="task_assigned_to_id" class="select optional control-label"> 谁负责？</label>
+					<div class="controls">
+					<select name="managerid" id="task_assigned_to_id" class="select optional">
+					<option selected="selected" value="${user.id }">我</option>
+					<c:forEach items="${userProducts }" var="userProduct">
+						<c:if test="${userProduct.user.id != user.id }">
+							<option value="${userProduct.user.id }">${userProduct.user.username }</option>
+						</c:if>
+					</c:forEach>						
+					</select>
+					</div>
+				</div>
+				
+					<div class="control-group string optional checkbox">
+						<div class="controls">
+							<input type="checkbox" value="public" name="show" id="task_privacy"> 同事可以看见这个任务
+						</div>
+					</div>		
+				</div>
+		
+			<div style="text-align:left;" class="modal-footer">
+				<input type="submit" value="添加这个任务" name="commit" class="btn btn-primary">
+				<a data-dismiss="modal" class="btn" href="#">取消</a>
+			</div>
+		</form>
+		</div>
 				<div id="upcoming_tasks">
 					<div id="screen_body"></div>
 				</div>

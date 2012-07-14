@@ -6,7 +6,6 @@ import org.apache.struts2.convention.annotation.Action;
 
 import com.kaishengit.core.BaseAction;
 import com.kaishengit.pojo.Company;
-import com.kaishengit.pojo.Contact;
 import com.kaishengit.pojo.Event;
 
 public class EnterCompanyAction extends BaseAction{

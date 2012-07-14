@@ -9,6 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<script type="text/javascript" src ="js/jQuery.js"></script>
 	<script type="text/javascript" src ="js/bootstrap.min.js"></script>
+	<script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="js/textarea.js"></script> 
+	<script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
 	<style type="text/css">
 		body{
 			margin-top:68px;
@@ -123,7 +126,7 @@
 				<div class="control-group string optional">
 					<label for="task_frame" class="string optional control-label"> 到期时间？</label>
 					<div class="controls">
-					<input type="text" name="task.endtime">
+					<input type="text" class="input-xlarge Wdate" onclick="WdatePicker()" name="task.endtime">
 					</div>
 				</div>			
 			<div class="control-group integer optional"><label for="task_category_id" class="integer optional control-label"> 选择一个分类</label>
@@ -363,7 +366,7 @@
 			  <form action="addChanceEvent.action" method="post">
 		            	<input type="hidden" name="chanceid" value="${chance.id }">
 			          		<div class="controls">
-				          		<textarea rows="20" name="event.content" id="" cols="40" class="text required content">
+				          		<textarea rows="20" name="event.content" id="textarea" cols="40" class="text required content">
 				          		</textarea>
 			          		</div>
 			          		<div class="options" style="display:none">

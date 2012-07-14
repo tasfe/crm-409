@@ -8,6 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<script type="text/javascript" src ="js/jQuery.js"></script>
 	<script type="text/javascript" src ="js/bootstrap.min.js"></script>
+	<script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="js/textarea.js"></script> 
 	<style type="text/css">
 		body{
 			margin-top:68px;
@@ -414,7 +416,7 @@
 					<div class="control-group text optional">
 						<label for="person_others" class="text optional control-label"> 背景信息</label>
 						<div class="controls">
-							<textarea rows="20" name="contact.content" cols="40" class="text optional content">
+							<textarea rows="20" name="contact.content" id="textarea" cols="40" class="text optional content">
 							</textarea><p class="help-block">简介，如何认识的等</p>
 						</div>
 					</div>
