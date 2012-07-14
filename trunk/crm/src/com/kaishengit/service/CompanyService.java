@@ -47,6 +47,10 @@ public class CompanyService extends BaseService{
 		return companys;
 	}
 
+	public Company findbyCmId(int cmid) {
+		return getCompanyDao().findById(cmid);
+	}
+
 	
 	
 	

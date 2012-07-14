@@ -8,6 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<script type="text/javascript" src ="js/jQuery.js"></script>
 	<script type="text/javascript" src ="js/bootstrap.min.js"></script>
+	<script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
+	<script type="text/javascript" src="js/textarea.js"></script> 
 	<style type="text/css">
 		body{
 			margin-top:68px;
@@ -147,7 +149,7 @@
 				<div class="control-group text optional">
 					<label for="chance_description" class="text optional control-label"> 机会描述或背景信息</label>
 					<div class="controls">
-						<textarea rows="20" name="chance.content" id="chance_description" cols="40" class="text optional content"></textarea>
+						<textarea rows="20" name="chance.content" id="textarea" cols="40" class="text optional content"></textarea>
 					</div>
 				</div>
 				

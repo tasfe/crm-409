@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
@@ -9,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<script type="text/javascript" src ="js/jQuery.js"></script>
 	<script type="text/javascript" src ="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
 	<style type="text/css">
 		body{
 			margin-top:68px;
@@ -206,7 +208,7 @@
 		
 		<div class="right" style="width:65%">
 			<div class="right-top " style="margin-bottom:0px"><span style="float:left;font-size:24px;">最新消息</div>
-			<div id="main" class="main"  style="padding-top: 0px">
+			<div id="main" class="main"  style="padding-top: 0px;">
 						
 					<table class="table crm-table dashboard">
 						<tbody>
@@ -258,7 +260,7 @@
 				<div class="control-group string optional">
 					<label for="task_frame" class="string optional control-label"> 到期时间？</label>
 					<div class="controls">
-					<input type="text" name="task.endtime">
+					<input type="text" class="input-xlarge Wdate" onclick="WdatePicker()" name="task.endtime">
 					</div>
 				</div>			
 			<div class="control-group integer optional"><label for="task_category_id" class="integer optional control-label"> 选择一个分类</label>
